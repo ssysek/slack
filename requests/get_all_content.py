@@ -1,7 +1,7 @@
 import json
 from config_handler import get_property
-import log
 import psycopg2
+import logging
 
 
 def get_all():
@@ -25,4 +25,4 @@ def get_all():
         return json.dumps(slack_users)
 
     except:
-        log.error("Database error during getting users")
+        logging.error("Database error during getting users")
