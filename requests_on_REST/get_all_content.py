@@ -11,7 +11,7 @@ def get_all():
                                       password=get_property('db', 'pass'),
                                       host=get_property('db', 'host'),
                                       port=get_property('db', 'port'),
-                                      database=get_property('db', 'users_dbname'))
+                                      database=get_property('db', 'dbname'))
         cursor = connection.cursor()
         sql = "SELECT * FROM slack.users;"
         cursor.execute(sql)
@@ -19,8 +19,8 @@ def get_all():
         slack_users = []
 
         for r in res:
-            users = {'user_id': r[0], 'user_name': r[1], 'user_surname': r[2]}
-            slack_users.append(users)
+            user = {'user_id': r[0], 'user_name': r[1], 'user_surname': r[2]}
+            slack_users.append(user)
 
         return json.dumps(slack_users)
 

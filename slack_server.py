@@ -1,15 +1,14 @@
 import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
-from requests.get_all_content import get_all
-from requests.get_user_by_id import get_user_by_id
+from requests_on_REST.get_all_content import get_all
+from requests_on_REST.get_user_by_id import get_user_by_id_param
 
-
-hostPort = 86
+hostPort = 85
 
 
 class MyServer(BaseHTTPRequestHandler):
-    def do_get(self):
+    def do_GET(self):
         full_path = urlparse(self.path)
         path = full_path.path
         qs = parse_qs(full_path.query)
@@ -28,7 +27,7 @@ class MyServer(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(bytes("Hello World!! - GET RECEIVED", "utf-8"))
 
-    def do_post(self):
+    def do_POST(self):
         full_path = urlparse(self.path)
         path = full_path.path
         qs = parse_qs(full_path.query)
@@ -37,11 +36,18 @@ class MyServer(BaseHTTPRequestHandler):
             '''http://localhost:86/user_id?user_id=10'''
             content_length = int(self.headers['Content-Length'])  # Gets the size of data
             post_data = self.rfile.read(content_length)  # Gets the data itself
-            result = get_user_by_id(post_data).to_json(orient='records', date_format='iso')
+            result = get_user_by_id_param(post_data)
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
             self.wfile.write(bytes(result, "utf-8"))
+
+        elif path == "/all_users":
+            '''http://localhost:86/all_users'''
+            self.send_response(200)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+            self.wfile.write(bytes(get_all(), "utf-8"))
 
         else:
             self.send_response(200)
