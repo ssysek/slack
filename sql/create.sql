@@ -1,6 +1,6 @@
 create table if not exists users
 (
-	user_id serial,
+	user_id serial, --serial = not null unique
 	user_name varchar(50),
 	user_surname varchar(50),
 	constraint user_id_pk primary key (user_id)
