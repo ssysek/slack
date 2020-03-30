@@ -9,10 +9,11 @@ def get_user_by_id_param(params):
                                   password=get_property('db', 'pass'),
                                   host=get_property('db', 'host'),
                                   port=get_property('db', 'port'),
-                                  database=get_property('db', 'users_dbname'))
+                                  database=get_property('db', 'db_name'))
+    print("Database connect successfully")
     cursor = connection.cursor()
 
-    sql = """SELECT * FROM slack_new.users where user_id = %s;"""
+    sql = """select * from users where user_id = %s;"""
     cursor.execute(sql, [user_id_param])
     res = cursor.fetchall()
     results = pd.DataFrame(res, columns=['user_id', 'user_name',

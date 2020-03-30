@@ -13,14 +13,11 @@ class MyServer(BaseHTTPRequestHandler):
         path = full_path.path
         qs = parse_qs(full_path.query)
 
-        '''example request'''
-        '''http://localhost:86/all_users'''
         if path == "/all_users":
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
             self.wfile.write(bytes(get_all_users(), "utf-8"))
-
         else:
             self.send_response(200)
             self.send_header("Content-type", "application/json")
@@ -32,15 +29,13 @@ class MyServer(BaseHTTPRequestHandler):
         path = full_path.path
         qs = parse_qs(full_path.query)
 
-        if path == '/user_id':
-            '''http://localhost:86/user_id?user_id=10'''
-            content_length = int(self.headers['Content-Length'])  # Gets the size of data
-            post_data = self.rfile.read(content_length)  # Gets the data itself
-            result = get_user_by_id_param(post_data)
+        if path == "/user_id":
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
-            self.wfile.write(bytes(result, "utf-8"))
+            self.wfile.write(bytes(get_user_by_id_param(qs).to_json(orient='records',
+                                                                    date_format='iso'),
+                                   "utf-8"))
 
         else:
             self.send_response(200)

@@ -11,7 +11,6 @@ def get_all_users():
                                 password=get_property('db', 'pass'),
                                 host=get_property('db', 'host'),
                                 port=get_property('db', 'port'))
-
         print("Database connect successfully")
 
         cur = conn.cursor()
@@ -25,7 +24,6 @@ def get_all_users():
             user = {'user_id': data[0], 'user_name': data[1], 'user_surname': data[2]}
             users.append(user)
 
-        print("Data selected succeed")
         conn.close()
         return json.dumps(users)
 
