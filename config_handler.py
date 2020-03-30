@@ -1,6 +1,6 @@
 import configparser
 
-PROPERTY_FILE = 'conf_files/properties.ini'
+PROPERTY_FILE = 'configuration_files/properties.ini'
 
 
 def get_property(section, property):

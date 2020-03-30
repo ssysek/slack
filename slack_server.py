@@ -1,10 +1,10 @@
 import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
-from requests_on_REST.get_all_content import get_all
+from requests_on_REST.get_all_users import get_all_users
 from requests_on_REST.get_user_by_id import get_user_by_id_param
 
-hostPort = 85
+hostPort = 86
 
 
 class MyServer(BaseHTTPRequestHandler):
@@ -14,12 +14,12 @@ class MyServer(BaseHTTPRequestHandler):
         qs = parse_qs(full_path.query)
 
         '''example request'''
+        '''http://localhost:86/all_users'''
         if path == "/all_users":
-            '''http://localhost:86/all_users'''
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
-            self.wfile.write(bytes(get_all(), "utf-8"))
+            self.wfile.write(bytes(get_all_users(), "utf-8"))
 
         else:
             self.send_response(200)
@@ -41,13 +41,6 @@ class MyServer(BaseHTTPRequestHandler):
             self.send_header("Content-type", "application/json")
             self.end_headers()
             self.wfile.write(bytes(result, "utf-8"))
-
-        elif path == "/all_users":
-            '''http://localhost:86/all_users'''
-            self.send_response(200)
-            self.send_header("Content-type", "application/json")
-            self.end_headers()
-            self.wfile.write(bytes(get_all(), "utf-8"))
 
         else:
             self.send_response(200)
