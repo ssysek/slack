@@ -1,0 +1,18 @@
+naj³atwiej tworzyæ wszystko przez designera, plik wynikowy z rozszerzeniem .ui
+
+konwetrsja na pyqt: pyuic -x nazwa_pliku_ui.ui -o nazwa_docelowa.py
+
+pyuic5 i designer s¹ czêœcia pyqt5-tools (pip install jak nie macie)
+
+ogólnie jak robiciê edycjê wersji interfejsu to pamiêtajcie, ¿e pyuic5 nadpisze ca³y plik, 
+wiêc jak macie ju¿ jak¹œ logikê wpisan¹ to proponuje sobie robiæ plik typu stara_nazwa_new.py
+i logikê kopiowaæ póŸniej ze starej wersji, myœlê ¿e nie ma co siê przejmowaæ œmieceniem gita 
+podwujnymi plikami, bo to siê póŸniej po prostu usunie
+
+Minimum zmian nazw -> Elementy u¿ywane przez logikê aplikacjyjn¹.
+Format nazw:
+[nazwa_komponentu]_[nazwa_akcji_z_nim_powi¹zanej]
+
+Konwencja pep8'owa
+nie camelCase
+tylko snake_case
