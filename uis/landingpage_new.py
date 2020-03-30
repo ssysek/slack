@@ -8,13 +8,14 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from features import Ui_FeaturesWindow
 
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
-        MainWindow.resize(1177, 560)
+        MainWindow.resize(1200, 600)
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
@@ -342,6 +343,11 @@ class Ui_MainWindow(object):
         self.button_log_in.clicked.connect(self.clicked_log_in)
         self.button_search.clicked.connect(self.clicked_search)
 
+        self.features_window = QtWidgets.QMainWindow()
+        self.features_window_ui = Ui_FeaturesWindow()
+        self.features_window_ui.setupUi(self.features_window)
+        
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -369,6 +375,8 @@ class Ui_MainWindow(object):
 
     def clicked_features(self):
         print("features")
+        self.features_window.show()
+
 
     def clicked_home(self):
         print("home")
