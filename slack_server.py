@@ -4,7 +4,7 @@ from urllib.parse import urlparse, parse_qs
 from requests_on_REST.get_all_users import get_all_users
 from requests_on_REST.get_user_by_id import get_user_by_id_param
 
-hostPort = 86
+HOST_PORT = 86
 
 
 class MyServer(BaseHTTPRequestHandler):
@@ -44,14 +44,20 @@ class MyServer(BaseHTTPRequestHandler):
             self.wfile.write(bytes("POST RECEIVED", "utf-8"))
 
 
-myServer = HTTPServer(('', hostPort), MyServer)
-print(time.asctime(), "Server Slack Starts - %s:%s" % ('', hostPort))
+def connection():
 
-try:
-    myServer.serve_forever()
+    my_server = HTTPServer(('', HOST_PORT), MyServer)
+    print(time.asctime(), "Server Slack Starts - %s:%s" % ('', HOST_PORT))
 
-except KeyboardInterrupt:
-    pass
+    try:
+        my_server.serve_forever()
 
-myServer.server_close()
-print(time.asctime(), "Server Stops - %s:%s" % ('', hostPort))
+    except KeyboardInterrupt:
+        pass
+
+    my_server.server_close()
+    print(time.asctime(), "Server Stops - %s:%s" % ('', HOST_PORT))
+
+
+if __name__ == '__main__':
+    connection()
