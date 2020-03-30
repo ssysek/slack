@@ -1,17 +1,17 @@
-naj³atwiej tworzyæ wszystko przez designera, plik wynikowy z rozszerzeniem .ui
+najÅ‚atwiej tworzyÄ‡ wszystko przez designera, plik wynikowy z rozszerzeniem .ui
 
 konwetrsja na pyqt: pyuic -x nazwa_pliku_ui.ui -o nazwa_docelowa.py
 
-pyuic5 i designer s¹ czêœcia pyqt5-tools (pip install jak nie macie)
+pyuic5 i designer sÄ… czÄ™Å›cia pyqt5-tools (pip install jak nie macie)
 
-ogólnie jak robiciê edycjê wersji interfejsu to pamiêtajcie, ¿e pyuic5 nadpisze ca³y plik, 
-wiêc jak macie ju¿ jak¹œ logikê wpisan¹ to proponuje sobie robiæ plik typu stara_nazwa_new.py
-i logikê kopiowaæ póŸniej ze starej wersji, myœlê ¿e nie ma co siê przejmowaæ œmieceniem gita 
-podwujnymi plikami, bo to siê póŸniej po prostu usunie
+ogÃ³lnie jak robiciÄ™ edycjÄ™ wersji interfejsu to pamiÄ™tajcie, Å¼e pyuic5 nadpisze caÅ‚y plik, 
+wiÄ™c jak macie juÅ¼ jakÄ…Å› logikÄ™ wpisanÄ… to proponuje sobie robiÄ‡ plik typu stara_nazwa_new.py
+i logikÄ™ kopiowaÄ‡ pÃ³Åºniej ze starej wersji, myÅ›lÄ™ Å¼e nie ma co siÄ™ przejmowaÄ‡ Å›mieceniem gita 
+podwÃ³jnymi plikami, bo to siÄ™ pÃ³Åºniej po prostu usunie
 
-Minimum zmian nazw -> Elementy u¿ywane przez logikê aplikacjyjn¹.
+Minimum zmian nazw -> Elementy uÅ¼ywane przez logikÄ™ aplikacjyjnÄ….
 Format nazw:
-[nazwa_komponentu]_[nazwa_akcji_z_nim_powi¹zanej]
+[nazwa_komponentu]_[nazwa_akcji_z_nim_powiÄ…zanej]
 
 Konwencja pep8'owa
 nie camelCase
