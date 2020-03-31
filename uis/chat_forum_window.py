@@ -94,6 +94,131 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.actual_box = None
+        self.messages = [('Adam1', 'Wiadomosc1'), ('Adam2', 'Wiadomosc2'), ('Adam3', 'Wiadomosc3'),
+                         ('Adam4', 'Wiadomosc4'), ('Adam5', 'Wiadomosc5')]
+
+
+    def doSomething(self):
+        self.changeForumButtons(self.listWidget_forums,
+                                [['test1', ['bla', 'ah', 'no']], ['haha', ['1', '2']], ['przycisk', ['a', 'b', 'c']]])
+        self.changeNotesButtons(self.listWidget_notes,['aa', 'note1', 'bored'])
+        self.changeChannelButtons(self.listWidget_chats, ['chat1', 'aga', 'bla', 'oj'])
+
+
+    def changeForumButtons(self, nameWidget, objects):
+        # Create widget
+        for object in objects:
+            itemN = QtWidgets.QListWidgetItem()
+            widget = QtWidgets.QWidget()
+            widgetButton = self.getForumWidgetButton(object)
+            widgetLayout = QtWidgets.QHBoxLayout()
+            widgetLayout.addWidget(widgetButton)
+            widgetLayout.addStretch()
+            widgetLayout.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
+            widget.setLayout(widgetLayout)
+            itemN.setSizeHint(widget.sizeHint())
+            # Add widget to QListWidget funList
+            nameWidget.addItem(itemN)
+            nameWidget.setItemWidget(itemN, widget)
+
+    def getForumWidgetButton(self, object):
+        widgetButton = QtWidgets.QPushButton(object[0])
+        widgetButton.clicked.connect(lambda: self.changeChannelButtons(self.listWidget_chanells, object[1]))
+        return widgetButton
+
+
+    def changeChannelButtons(self, nameWidget, list):
+        print(list)
+        nameWidget.clear()
+        for object in list:
+            itemN = QtWidgets.QListWidgetItem()
+            widget = QtWidgets.QWidget()
+            widgetButton = self.getChannelWidgetButton(object)
+            widgetLayout = QtWidgets.QHBoxLayout()
+            widgetLayout.addWidget(widgetButton)
+            widgetLayout.addStretch()
+            widgetLayout.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
+            widget.setLayout(widgetLayout)
+            itemN.setSizeHint(widget.sizeHint())
+            # Add widget to QListWidget funList
+            nameWidget.addItem(itemN)
+            nameWidget.setItemWidget(itemN, widget)
+
+    def getChannelWidgetButton(self, object):
+        widgetButton = QtWidgets.QPushButton(object)
+        print(object)
+        widgetButton.clicked.connect(lambda: self.setUpMessages(object, object))
+        return widgetButton
+
+
+    def changeNotesButtons(self, nameWidget, list):
+        print(list)
+        nameWidget.clear()
+        for object in list:
+            itemN = QtWidgets.QListWidgetItem()
+            widget = QtWidgets.QWidget()
+            widgetButton = self.getChannelWidgetButton(object)
+            widgetLayout = QtWidgets.QHBoxLayout()
+            widgetLayout.addWidget(widgetButton)
+            widgetLayout.addStretch()
+            widgetLayout.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
+            widget.setLayout(widgetLayout)
+            itemN.setSizeHint(widget.sizeHint())
+            # Add widget to QListWidget funList
+            nameWidget.addItem(itemN)
+            nameWidget.setItemWidget(itemN, widget)
+
+    def getNotesWidgetButton(self, object):
+        widgetButton = QtWidgets.QPushButton(object)
+        print(object)
+        widgetButton.clicked.connect(lambda: self.printSecond('1'))
+        return widgetButton
+
+
+
+    def setUpMessages(self, arg, id): #arg - name of channel, id - id channel
+        self.label_opened_box.setText(arg)
+        self.label_opened_box.adjustSize()
+        self.actual_box = id
+        try:
+            self.button_send_message.clicked.disconnect()
+        except \
+                Exception:pass
+        self.button_send_message.clicked.connect(lambda: self.saveMessageClicked())
+        self.loadMessages()
+
+    def loadMessages(self):
+        self.listWidget_opened_box.clear()
+        for mssg in self.messages:
+            itemN = QtWidgets.QListWidgetItem()
+            # Create widget
+            widget = QtWidgets.QWidget()
+            widgetAuthor = QtWidgets.QLabel(mssg[0]+": ")
+            widgetMssg = QtWidgets.QLabel(mssg[1])
+            widgetLayout = QtWidgets.QHBoxLayout()
+            widgetLayout.addWidget(widgetAuthor)
+            widgetLayout.addWidget(widgetMssg)
+            widgetLayout.addStretch()
+
+            widgetLayout.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
+            widget.setLayout(widgetLayout)
+            itemN.setSizeHint(widget.sizeHint())
+
+            # Add widget to QListWidget funList
+            self.listWidget_opened_box.addItem(itemN)
+            self.listWidget_opened_box.setItemWidget(itemN, widget)
+
+    def saveMessageClicked(self):
+        self.addMessage(self.lineEdit.text(), 'Autor Jakis')
+        self.lineEdit.clear()
+        self.loadMessages()
+
+    def addMessage(self, message, author): #channel id jest zmienną globalna, message - tresc wiadomosci
+        self.messages.append((author, message))
+
+
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -113,4 +238,5 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
+    ui.doSomething()
     sys.exit(app.exec_())
