@@ -73,7 +73,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0">
         <item>
-         <widget class="QTextBrowser" name="textBrowser_message_in"/>
+         <widget class="QLineEdit" name="lineEdit"/>
         </item>
         <item>
          <widget class="QPushButton" name="button_send_message">
@@ -86,6 +86,9 @@
          <spacer name="horizontalSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
