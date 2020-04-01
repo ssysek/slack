@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
+from chat_forum_window import Ui_MainWindow as Ui_ChatWindow
 
 class Ui_FeaturesWindow(object):
     def setupUi(self, FeaturesWindow):
@@ -20,14 +20,14 @@ class Ui_FeaturesWindow(object):
         self.gridLayout.setObjectName("gridLayout")
         self.gridLayout_2 = QtWidgets.QGridLayout()
         self.gridLayout_2.setObjectName("gridLayout_2")
-        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.button_store_notes = QtWidgets.QPushButton(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_2.sizePolicy().hasHeightForWidth())
-        self.pushButton_2.setSizePolicy(sizePolicy)
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.gridLayout_2.addWidget(self.pushButton_2, 3, 1, 1, 1)
+        sizePolicy.setHeightForWidth(self.button_store_notes.sizePolicy().hasHeightForWidth())
+        self.button_store_notes.setSizePolicy(sizePolicy)
+        self.button_store_notes.setObjectName("button_store_notes")
+        self.gridLayout_2.addWidget(self.button_store_notes, 3, 1, 1, 1)
         self.label = QtWidgets.QLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(24)
@@ -77,14 +77,14 @@ class Ui_FeaturesWindow(object):
         self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
         self.gridLayout_2.addWidget(self.label_3, 12, 2, 1, 3)
-        self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
+        self.button_chat_with_friends = QtWidgets.QPushButton(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_3.sizePolicy().hasHeightForWidth())
-        self.pushButton_3.setSizePolicy(sizePolicy)
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.gridLayout_2.addWidget(self.pushButton_3, 3, 5, 1, 1)
+        sizePolicy.setHeightForWidth(self.button_chat_with_friends.sizePolicy().hasHeightForWidth())
+        self.button_chat_with_friends.setSizePolicy(sizePolicy)
+        self.button_chat_with_friends.setObjectName("button_chat_with_friends")
+        self.gridLayout_2.addWidget(self.button_chat_with_friends, 3, 5, 1, 1)
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(14)
@@ -100,23 +100,23 @@ class Ui_FeaturesWindow(object):
         self.gridLayout_2.addWidget(self.label_6, 6, 0, 1, 3)
         spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout_2.addItem(spacerItem7, 3, 2, 1, 1)
-        self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
+        self.button_return = QtWidgets.QPushButton(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton_4.sizePolicy().hasHeightForWidth())
-        self.pushButton_4.setSizePolicy(sizePolicy)
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.gridLayout_2.addWidget(self.pushButton_4, 0, 0, 1, 1)
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        sizePolicy.setHeightForWidth(self.button_return.sizePolicy().hasHeightForWidth())
+        self.button_return.setSizePolicy(sizePolicy)
+        self.button_return.setObjectName("button_return")
+        self.gridLayout_2.addWidget(self.button_return, 0, 0, 1, 1)
+        self.button_create_groups = QtWidgets.QPushButton(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.pushButton.sizePolicy().hasHeightForWidth())
-        self.pushButton.setSizePolicy(sizePolicy)
-        self.pushButton.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.pushButton.setObjectName("pushButton")
-        self.gridLayout_2.addWidget(self.pushButton, 9, 3, 1, 1)
+        sizePolicy.setHeightForWidth(self.button_create_groups.sizePolicy().hasHeightForWidth())
+        self.button_create_groups.setSizePolicy(sizePolicy)
+        self.button_create_groups.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.button_create_groups.setObjectName("button_create_groups")
+        self.gridLayout_2.addWidget(self.button_create_groups, 9, 3, 1, 1)
         spacerItem8 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.gridLayout_2.addItem(spacerItem8, 7, 3, 1, 1)
         spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -134,21 +134,34 @@ class Ui_FeaturesWindow(object):
         self.retranslateUi(FeaturesWindow)
         QtCore.QMetaObject.connectSlotsByName(FeaturesWindow)
 
+
+        self.button_chat_with_friends.clicked.connect(self.clicked_chat_with_friends)
+        self.button_return.clicked.connect(self.clicked_return)
+
     def retranslateUi(self, FeaturesWindow):
         _translate = QtCore.QCoreApplication.translate
         FeaturesWindow.setWindowTitle(_translate("FeaturesWindow", "MainWindow"))
-        self.pushButton_2.setText(_translate("FeaturesWindow", "Store notes"))
+        self.button_store_notes.setText(_translate("FeaturesWindow", "Store notes"))
         self.label.setText(_translate("FeaturesWindow", "<html><head/><body><p>A full ecosystem of tools</p><p>within a single web app.</p></body></html>"))
         self.label_5.setText(_translate("FeaturesWindow", "Chat with your friends"))
         self.label_7.setText(_translate("FeaturesWindow", "<html><head/><body><p>contact with them individually</p><p>or within groupchats</p></body></html>"))
         self.label_2.setText(_translate("FeaturesWindow", "Create groups"))
         self.label_3.setText(_translate("FeaturesWindow", "<html><head/><body><p>collaborate and communicate </p><p>easier with your team</p></body></html>"))
-        self.pushButton_3.setText(_translate("FeaturesWindow", "Chat with your friends"))
+        self.button_chat_with_friends.setText(_translate("FeaturesWindow", "Chat with your friends"))
         self.label_4.setText(_translate("FeaturesWindow", "Store notes"))
         self.label_6.setText(_translate("FeaturesWindow", "<html><head/><body><p>keep all your important</p><p>documents in one place</p></body></html>"))
-        self.pushButton_4.setText(_translate("FeaturesWindow", "Return"))
-        self.pushButton.setText(_translate("FeaturesWindow", "Create groups"))
+        self.button_return.setText(_translate("FeaturesWindow", "Return"))
+        self.button_create_groups.setText(_translate("FeaturesWindow", "Create groups"))
 
+    def clicked_chat_with_friends(self):
+        self.main_window = QtWidgets.QMainWindow()
+        self.main_window_ui = Ui_ChatWindow()
+        self.main_window_ui.setupUi(self.main_window)
+        self.main_window.show()
+        self.main_window_ui.doSomething()
+
+    def clicked_return(self):
+        self.hide()
 
 if __name__ == "__main__":
     import sys

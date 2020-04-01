@@ -9,6 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from features import Ui_FeaturesWindow
+from chat_forum_window import Ui_MainWindow as Ui_ChatWindow
 
 
 class Ui_MainWindow(object):
@@ -346,6 +347,8 @@ class Ui_MainWindow(object):
         self.features_window = QtWidgets.QMainWindow()
         self.features_window_ui = Ui_FeaturesWindow()
         self.features_window_ui.setupUi(self.features_window)
+
+
         
 
     def retranslateUi(self, MainWindow):
@@ -383,6 +386,11 @@ class Ui_MainWindow(object):
 
     def clicked_log_in(self):
         print("login")
+        self.main_window = QtWidgets.QMainWindow()
+        self.main_window_ui = Ui_ChatWindow()
+        self.main_window_ui.setupUi(self.main_window)
+        self.main_window.show()
+        self.main_window_ui.doSomething()
 
     def clicked_search(self):
         print("search")
