@@ -13,11 +13,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_RegistrationWindow(object):
     def setupUi(self, RegistrationWindow):
         RegistrationWindow.setObjectName("RegistrationWindow")
-        RegistrationWindow.resize(1201, 641)
+        RegistrationWindow.resize(552, 358)
         self.centralwidget = QtWidgets.QWidget(RegistrationWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
-        self.gridLayoutWidget_2.setGeometry(QtCore.QRect(10, 10, 1181, 581))
+        self.gridLayoutWidget_2.setGeometry(QtCore.QRect(30, 20, 491, 301))
         self.gridLayoutWidget_2.setObjectName("gridLayoutWidget_2")
         self.gridLayout_2 = QtWidgets.QGridLayout(self.gridLayoutWidget_2)
         self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -82,7 +82,7 @@ class Ui_RegistrationWindow(object):
         self.gridLayout_2.addItem(spacerItem3, 2, 1, 1, 1)
         RegistrationWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(RegistrationWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1201, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 552, 21))
         self.menubar.setObjectName("menubar")
         RegistrationWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(RegistrationWindow)

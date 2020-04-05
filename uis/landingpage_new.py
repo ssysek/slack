@@ -9,7 +9,10 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from features import Ui_FeaturesWindow
-from chat_forum_window import Ui_MainWindow as Ui_ChatWindow
+from contactpage import Ui_ContactWindow
+from loginpage_new import Ui_LoginpageWindow
+from registrationpage import Ui_RegistrationWindow
+
 
 
 class Ui_MainWindow(object):
@@ -348,8 +351,14 @@ class Ui_MainWindow(object):
         self.features_window_ui = Ui_FeaturesWindow()
         self.features_window_ui.setupUi(self.features_window)
 
+        self.contact_window = QtWidgets.QMainWindow()
+        self.contact_window_ui = Ui_ContactWindow()
+        self.contact_window_ui.setupUi(self.contact_window)
 
-        
+        self.register_window = QtWidgets.QMainWindow()
+        self.register_window_ui = Ui_RegistrationWindow()
+        self.register_window_ui.setupUi(self.register_window)
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -365,6 +374,7 @@ class Ui_MainWindow(object):
         self.button_create_account.setText(_translate("MainWindow", "Create a FREE account"))
     
 
+
     # tu wstawić logikę do klikania przycisków
     
     def clicked_about(self):
@@ -372,9 +382,11 @@ class Ui_MainWindow(object):
 
     def clicked_contact(self):
         print("contact")
+        self.contact_window.show()
 
     def clicked_create_account(self):
         print("create account")
+        self.register_window.show()
 
     def clicked_features(self):
         print("features")
@@ -386,11 +398,10 @@ class Ui_MainWindow(object):
 
     def clicked_log_in(self):
         print("login")
-        self.main_window = QtWidgets.QMainWindow()
-        self.main_window_ui = Ui_ChatWindow()
-        self.main_window_ui.setupUi(self.main_window)
-        self.main_window.show()
-        self.main_window_ui.doSomething()
+        self.login_window = QtWidgets.QMainWindow()
+        self.login_window_ui = Ui_LoginpageWindow()
+        self.login_window_ui.setupUi(self.login_window)
+        self.login_window.show()
 
     def clicked_search(self):
         print("search")

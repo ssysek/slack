@@ -8,6 +8,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication
+from chat_forum_window import Ui_MainWindow as Ui_ChatWindow
+from registrationpage import Ui_RegistrationWindow
 
 
 class Ui_LoginpageWindow(object):
@@ -85,6 +88,16 @@ class Ui_LoginpageWindow(object):
         self.retranslateUi(LoginpageWindow)
         QtCore.QMetaObject.connectSlotsByName(LoginpageWindow)
 
+        # tu wstawić logikę strony
+        self.button_cancel.clicked.connect(self.clicked_cancel)
+        self.button_login.clicked.connect(self.clicked_login)
+        self.button_sign_up.clicked.connect(self.clicked_sign_up)
+
+        self.register_window = QtWidgets.QMainWindow()
+        self.register_window_ui = Ui_RegistrationWindow()
+        self.register_window_ui.setupUi(self.register_window)
+
+
     def retranslateUi(self, LoginpageWindow):
         _translate = QtCore.QCoreApplication.translate
         LoginpageWindow.setWindowTitle(_translate("LoginpageWindow", "MainWindow"))
@@ -93,6 +106,22 @@ class Ui_LoginpageWindow(object):
         self.button_sign_up.setText(_translate("LoginpageWindow", "Sign Up"))
         self.label_username.setText(_translate("LoginpageWindow", "Username"))
         self.label__password.setText(_translate("LoginpageWindow", "Password"))
+
+
+    def clicked_cancel(self):
+        print("cancel")
+
+    def clicked_sign_up(self):
+        print("sign up")
+        self.register_window.show()
+
+    def clicked_login(self):
+        print("login")
+        self.main_window = QtWidgets.QMainWindow()
+        self.main_window_ui = Ui_ChatWindow()
+        self.main_window_ui.setupUi(self.main_window)
+        self.main_window.show()
+        self.main_window_ui.doSomething()
 
 
 if __name__ == "__main__":
