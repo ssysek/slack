@@ -21,7 +21,7 @@ def get_all_users():
         users = []
 
         for data in rows:
-            user = {'user_id': data[0], 'user_name': data[1], 'user_surname': data[2]}
+            user = {'user_id': data[0], 'user_name': data[1], 'user_surname': data[2], 'login':data[3]}
             users.append(user)
 
         conn.close()

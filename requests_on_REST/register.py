@@ -1,10 +1,10 @@
 import psycopg2
 from config_handler import get_property
 import pandas as pd
+import json
 
 
-def get_user_by_id_param(params):
-    user_id_param = params['user_id'][0]
+def register(body):
     connection = psycopg2.connect(user=get_property('db', 'user'),
                                   password=get_property('db', 'pass'),
                                   host=get_property('db', 'host'),
@@ -13,10 +13,8 @@ def get_user_by_id_param(params):
     print("Database connect successfully")
     cursor = connection.cursor()
 
-    sql = """select user_id, user_name, user_surname, login from users where user_id = %s;"""
-    cursor.execute(sql, [user_id_param])
-    res = cursor.fetchall()
-    results = pd.DataFrame(res, columns=['user_id', 'user_name',
-                                         'user_surname','login'])
-
-    return results
+    loaded_json = json.loads(body)
+    sql= """insert into users (user_id, user_name, user_surname, login, password) values (%s,%s,%s,%s,%s)"""
+    new_user=(loaded_json[0]['user_id'],loaded_json[0]['user_name'],loaded_json[0]['user_surname'],loaded_json[0]['login'],loaded_json[0]['password'])
+    cursor.execute(sql,new_user)
+    connection.commit()

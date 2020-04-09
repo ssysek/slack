@@ -3,6 +3,9 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
 from requests_on_REST.get_all_users import get_all_users
 from requests_on_REST.get_user_by_id import get_user_by_id_param
+from io import BytesIO
+
+from requests_on_REST.register import register
 
 HOST_PORT = 86
 
@@ -37,6 +40,14 @@ class MyServer(BaseHTTPRequestHandler):
                                                                     date_format='iso'),
                                    "utf-8"))
 
+        if path == "/register":
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length)
+            self.send_response(200)
+            self.end_headers()
+            register(body)
+            response = BytesIO()
+            self.wfile.write(response.getvalue())
         else:
             self.send_response(200)
             self.send_header("Content-type", "application/json")
