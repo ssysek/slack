@@ -25,6 +25,7 @@ def get_all_users():
             users.append(user)
 
         conn.close()
+        print(json.dumps(users))
         return json.dumps(users)
 
     except:
