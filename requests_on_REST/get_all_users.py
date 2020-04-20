@@ -14,14 +14,13 @@ def get_all_users():
         print("Database connect successfully")
 
         cur = conn.cursor()
-        cur.execute("""
-        select * from users;""")
+        cur.execute("""select * from users;""")
         rows = cur.fetchall()
 
         users = []
 
         for data in rows:
-            user = {'user_id': data[0], 'user_name': data[1], 'user_surname': data[2], 'login':data[3]}
+            user = {'user_id': data[0], 'user_name': data[1], 'user_surname': data[2], 'login':data[3], 'password': data[4]}
             users.append(user)
 
         conn.close()
@@ -30,3 +29,4 @@ def get_all_users():
 
     except:
         print(logging.error("Failure"))
+

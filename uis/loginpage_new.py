@@ -11,6 +11,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication
 from chat_forum_window import Ui_MainWindow as Ui_ChatWindow
 from registrationpage import Ui_RegistrationWindow
+import psycopg2
+import requests
 
 
 class Ui_LoginpageWindow(object):
@@ -115,13 +117,35 @@ class Ui_LoginpageWindow(object):
         print("sign up")
         self.register_window.show()
 
+    def warning(self, title, message):
+        warning_message = QtWidgets.QMessageBox()
+        warning_message.setWindowTitle(title)
+        warning_message.setText(message)
+        warning_message.setStandardButtons(QtWidgets.QMessageBox.Ok)
+        warning_message.exec_()
+
     def clicked_login(self):
-        print("login")
-        self.main_window = QtWidgets.QMainWindow()
-        self.main_window_ui = Ui_ChatWindow()
-        self.main_window_ui.setupUi(self.main_window)
-        self.main_window.show()
-        self.main_window_ui.doSomething()
+        username = self.edit_username.text()
+        password = self.edit_password.text()
+        logged = False
+        r = requests.get("http://localhost:86/all_users")
+        if r.json():
+            for record in r.json():
+                if record['login']==username:
+                    if record['password']==password:
+                        logged = True
+                        print("YOU SUCCESSFULLY LOGGED IN")
+                        break
+
+        if logged:
+            self.main_window = QtWidgets.QMainWindow()
+            self.main_window_ui = Ui_ChatWindow()
+            self.main_window_ui.setupUi(self.main_window)
+            self.main_window.show()
+            self.main_window_ui.doSomething()
+        else:
+            self.warning("error","Wrong username or password!")
+
 
 
 if __name__ == "__main__":
@@ -132,3 +156,12 @@ if __name__ == "__main__":
     ui.setupUi(LoginpageWindow)
     LoginpageWindow.show()
     sys.exit(app.exec_())
+
+
+def list_to_string(mlist):
+    if type(mlist)==list:
+        mstring =",".join(mlist)
+        return mstring
+    else:
+        return mlist
+
