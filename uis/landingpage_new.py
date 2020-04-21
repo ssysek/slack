@@ -8,10 +8,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from features import Ui_FeaturesWindow
-from contactpage import Ui_ContactWindow
-from loginpage_new import Ui_LoginpageWindow
-from registrationpage import Ui_RegistrationWindow
+from uis.features import Ui_FeaturesWindow
+from uis.contactpage import Ui_ContactWindow
+from uis.loginpage_new import Ui_LoginpageWindow
+from uis.registrationpage import Ui_RegistrationWindow
 
 
 

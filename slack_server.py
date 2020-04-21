@@ -1,6 +1,8 @@
 import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
+
+from requests_on_REST.delete_user import delete_user
 from requests_on_REST.get_all_users import get_all_users
 from requests_on_REST.get_user_by_id import get_user_by_id_param
 from io import BytesIO
@@ -46,6 +48,14 @@ class MyServer(BaseHTTPRequestHandler):
             self.send_response(200)
             self.end_headers()
             register(body)
+            response = BytesIO()
+            self.wfile.write(response.getvalue())
+        if path == "/delete_user":
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length)
+            self.send_response(200)
+            self.end_headers()
+            delete_user(body)
             response = BytesIO()
             self.wfile.write(response.getvalue())
         else:
