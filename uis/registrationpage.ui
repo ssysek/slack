@@ -53,7 +53,7 @@
          <property name="verticalSpacing">
           <number>20</number>
          </property>
-         <item row="0" column="0">
+         <item row="2" column="0">
           <widget class="QLabel" name="label_username">
            <property name="font">
             <font>
@@ -61,18 +61,18 @@
             </font>
            </property>
            <property name="text">
-            <string>Username</string>
+            <string>Login</string>
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="edit_username">
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="edit_login">
            <property name="enabled">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-         <item row="1" column="0">
+         <item row="3" column="0">
           <widget class="QLabel" name="label__password">
            <property name="font">
             <font>
@@ -84,14 +84,14 @@
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
+         <item row="3" column="1">
           <widget class="QLineEdit" name="edit_password">
            <property name="echoMode">
             <enum>QLineEdit::Password</enum>
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
+         <item row="4" column="0">
           <widget class="QLabel" name="label__confirm_password">
            <property name="font">
             <font>
@@ -103,12 +103,42 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="1">
+         <item row="4" column="1">
           <widget class="QLineEdit" name="label_confirm_password">
            <property name="echoMode">
             <enum>QLineEdit::Password</enum>
            </property>
           </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="edit_surname"/>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_surname">
+           <property name="font">
+            <font>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Surname</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_name">
+           <property name="font">
+            <font>
+             <pointsize>13</pointsize>
+            </font>
+           </property>
+           <property name="text">
+            <string>Name</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="edit_name"/>
          </item>
         </layout>
        </item>
