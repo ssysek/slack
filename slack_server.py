@@ -50,6 +50,7 @@ class MyServer(BaseHTTPRequestHandler):
             register(body)
             response = BytesIO()
             self.wfile.write(response.getvalue())
+
         if path == "/delete_user":
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
