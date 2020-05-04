@@ -11,7 +11,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_ContactWindow(object):
+    def __init__(self, parent = None):
+        self.patent = parent
+
     def setupUi(self, ContactWindow):
+        self.window = ContactWindow
+
         ContactWindow.setObjectName("ContactWindow")
         ContactWindow.resize(1201, 641)
         self.centralwidget = QtWidgets.QWidget(ContactWindow)
@@ -101,6 +106,9 @@ class Ui_ContactWindow(object):
         self.retranslateUi(ContactWindow)
         QtCore.QMetaObject.connectSlotsByName(ContactWindow)
 
+        self.button_cancel.clicked.connect(self.clicked_cancel)
+        self.button_submit.clicked.connect(self.clicked_submit)
+
     def retranslateUi(self, ContactWindow):
         _translate = QtCore.QCoreApplication.translate
         ContactWindow.setWindowTitle(_translate("ContactWindow", "MainWindow"))
@@ -110,6 +118,21 @@ class Ui_ContactWindow(object):
         self.label__message.setText(_translate("ContactWindow", "Message"))
         self.button_cancel.setText(_translate("ContactWindow", "Cancel"))
         self.button_submit.setText(_translate("ContactWindow", "Submit"))
+
+
+    def clicked_cancel(self):
+        self.patent.window.show()
+        self.window.hide()
+
+    def clicked_submit(self):
+        print(self.edit_email.text())
+        print(self.edit_name.text())
+        print(self.edit_phone.text())
+        print(self.edit_message.toPlainText())
+        self.patent.window.show()
+        self.window.hide()
+
+
 
 
 if __name__ == "__main__":

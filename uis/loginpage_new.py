@@ -11,12 +11,18 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication
 from chat_forum_window import Ui_MainWindow as Ui_ChatWindow
 from registrationpage import Ui_RegistrationWindow
-import psycopg2
+#import psycopg2
 import requests
 
 
 class Ui_LoginpageWindow(object):
+    def __init__(self, parent=None):
+        self.parent = parent
+
+
     def setupUi(self, LoginpageWindow):
+        self.window = LoginpageWindow
+
         LoginpageWindow.setObjectName("LoginpageWindow")
         LoginpageWindow.resize(552, 358)
         self.centralwidget = QtWidgets.QWidget(LoginpageWindow)

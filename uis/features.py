@@ -11,7 +11,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from chat_forum_window import Ui_MainWindow as Ui_ChatWindow
 
 class Ui_FeaturesWindow(object):
+    def __init__(self, parent=None):
+        self.parent = parent
+
+
     def setupUi(self, FeaturesWindow):
+        self.window = FeaturesWindow
+
         FeaturesWindow.setObjectName("FeaturesWindow")
         FeaturesWindow.resize(1200, 600)
         self.centralwidget = QtWidgets.QWidget(FeaturesWindow)
@@ -137,6 +143,8 @@ class Ui_FeaturesWindow(object):
 
         self.button_chat_with_friends.clicked.connect(self.clicked_chat_with_friends)
         self.button_return.clicked.connect(self.clicked_return)
+        self.button_create_groups.clicked.connect(self.clicked_create_groups)
+        self.button_store_notes.clicked.connect(self.clicked_store_notes)
 
     def retranslateUi(self, FeaturesWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -155,13 +163,21 @@ class Ui_FeaturesWindow(object):
 
     def clicked_chat_with_friends(self):
         self.main_window = QtWidgets.QMainWindow()
-        self.main_window_ui = Ui_ChatWindow()
+        self.main_window_ui = Ui_ChatWindow(self)
         self.main_window_ui.setupUi(self.main_window)
         self.main_window.show()
+        self.window.hide()
         self.main_window_ui.doSomething()
 
     def clicked_return(self):
-        self.hide()
+        self.parent.window.show()
+        self.window.hide()
+
+    def clicked_create_groups(self):
+        print("create groups")
+
+    def clicked_store_notes(self):
+        print("store notes")
 
 if __name__ == "__main__":
     import sys

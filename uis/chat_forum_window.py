@@ -11,7 +11,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MainWindow(object):
+    def __init__(self, parent=None):
+        self.parent = parent
+
     def setupUi(self, MainWindow):
+        self.window = MainWindow
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1200, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -93,6 +98,10 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+
+        self.button_log_out.clicked.connect(self.clicked_log_out)
+
 
         self.actual_box = None
         self.messages = [('Adam1', 'Wiadomosc1'), ('Adam2', 'Wiadomosc2'), ('Adam3', 'Wiadomosc3'),
@@ -217,6 +226,22 @@ class Ui_MainWindow(object):
     def addMessage(self, message, author): #channel id jest zmienną globalna, message - tresc wiadomosci
         self.messages.append((author, message))
 
+
+
+    def clicked_return(self):
+        self.parent.window.show()
+        self.window.hide()
+
+
+    #iterates back to the begining of program to show first window
+    def clicked_log_out(self):
+        self.show_site = self.parent
+        print(self.parent.parent.parent)
+        while(self.show_site.parent != None):
+            self.show_site = self.show_site.parent
+
+        self.show_site.window.show()
+        self.window.hide()
 
 
     def retranslateUi(self, MainWindow):

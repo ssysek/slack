@@ -11,7 +11,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_RegistrationWindow(object):
+    def __init__(self, parent = None):
+        self.parent = parent
+
     def setupUi(self, RegistrationWindow):
+        self.window = RegistrationWindow
+
         RegistrationWindow.setObjectName("RegistrationWindow")
         RegistrationWindow.resize(552, 358)
         self.centralwidget = QtWidgets.QWidget(RegistrationWindow)

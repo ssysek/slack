@@ -16,7 +16,13 @@ from uis.registrationpage import Ui_RegistrationWindow
 
 
 class Ui_MainWindow(object):
+    def __init__(self, parent=None):
+        self.parent = parent
+
+
     def setupUi(self, MainWindow):
+        self.window = MainWindow
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
         MainWindow.resize(1200, 600)
@@ -347,19 +353,6 @@ class Ui_MainWindow(object):
         self.button_log_in.clicked.connect(self.clicked_log_in)
         self.button_search.clicked.connect(self.clicked_search)
 
-        self.features_window = QtWidgets.QMainWindow()
-        self.features_window_ui = Ui_FeaturesWindow()
-        self.features_window_ui.setupUi(self.features_window)
-
-        self.contact_window = QtWidgets.QMainWindow()
-        self.contact_window_ui = Ui_ContactWindow()
-        self.contact_window_ui.setupUi(self.contact_window)
-
-        self.register_window = QtWidgets.QMainWindow()
-        self.register_window_ui = Ui_RegistrationWindow()
-        self.register_window_ui.setupUi(self.register_window)
-
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -376,20 +369,34 @@ class Ui_MainWindow(object):
 
 
     # tu wstawić logikę do klikania przycisków
-    
+
     def clicked_about(self):
         print("about clicked")
 
     def clicked_contact(self):
         print("contact")
+        self.contact_window = QtWidgets.QMainWindow()
+        self.contact_window_ui = Ui_ContactWindow(self)
+        self.contact_window_ui.setupUi(self.contact_window)
+
+        self.window.hide()
         self.contact_window.show()
 
     def clicked_create_account(self):
         print("create account")
+        self.register_window = QtWidgets.QMainWindow()
+        self.register_window_ui = Ui_RegistrationWindow(self)
+        self.register_window_ui.setupUi(self.register_window)
+
         self.register_window.show()
 
     def clicked_features(self):
         print("features")
+        self.features_window = QtWidgets.QMainWindow()
+        self.features_window_ui = Ui_FeaturesWindow(self)
+        self.features_window_ui.setupUi(self.features_window)
+
+        self.window.hide()
         self.features_window.show()
 
 
@@ -399,9 +406,12 @@ class Ui_MainWindow(object):
     def clicked_log_in(self):
         print("login")
         self.login_window = QtWidgets.QMainWindow()
-        self.login_window_ui = Ui_LoginpageWindow()
+        self.login_window_ui = Ui_LoginpageWindow(self)
         self.login_window_ui.setupUi(self.login_window)
+
+
         self.login_window.show()
+
 
     def clicked_search(self):
         print("search")
