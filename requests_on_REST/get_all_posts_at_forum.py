@@ -3,8 +3,8 @@ from config_handler import get_property
 import pandas as pd
 
 
-def get_all_posts_at_forum(params):
-    forum_id_param = params['forum_id'][0]
+def get_all_posts_at_chat(params):
+    forum_id_param = params['chat_id'][0]
     connection = psycopg2.connect(user=get_property('db', 'user'),
                                   password=get_property('db', 'pass'),
                                   host=get_property('db', 'host'),
@@ -13,10 +13,10 @@ def get_all_posts_at_forum(params):
     print("Database connect successfully")
     cursor = connection.cursor()
 
-    sql = """select * from posts where forum_id = %s;"""
+    sql = """select * from posts where chat_id = %s;"""
     cursor.execute(sql, [forum_id_param])
     res = cursor.fetchall()
     results = pd.DataFrame(res, columns=['post_id', 'user_id',
-                                         'forum_id', 'post_content'])
+                                         'chat_id', 'post_content'])
 
     return results
