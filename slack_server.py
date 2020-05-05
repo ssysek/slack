@@ -5,6 +5,7 @@ from urllib.parse import urlparse, parse_qs
 from requests_on_REST.delete_user import delete_user
 from requests_on_REST.get_all_users import get_all_users
 from requests_on_REST.get_user_by_id import get_user_by_id_param
+from requests_on_REST.get_all_posts_at_forum import get_all_posts_at_forum
 from io import BytesIO
 
 from requests_on_REST.register import register
@@ -38,11 +39,17 @@ class MyServer(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
-            self.wfile.write(bytes(get_user_by_id_param(qs).to_json(orient='records',
-                                                                    date_format='iso'),
-                                   "utf-8"))
+            self.wfile.write(bytes(get_user_by_id_param(qs).to_json(
+                orient='records', date_format='iso'), "utf-8"))
 
-        if path == "/register":
+        if path == "/get_all_posts_at_forum":
+            self.send_response(200)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+            self.wfile.write(bytes(get_all_posts_at_forum(qs).to_json(
+                orient='records', date_format='iso'), "utf-8"))
+
+        elif path == "/register":
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
             self.send_response(200)
@@ -51,7 +58,7 @@ class MyServer(BaseHTTPRequestHandler):
             response = BytesIO()
             self.wfile.write(response.getvalue())
 
-        if path == "/delete_user":
+        elif path == "/delete_user":
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
             self.send_response(200)
@@ -67,7 +74,6 @@ class MyServer(BaseHTTPRequestHandler):
 
 
 def connection():
-
     my_server = HTTPServer(('', HOST_PORT), MyServer)
     print(time.asctime(), "Server Slack Starts - %s:%s" % ('', HOST_PORT))
 

@@ -17,6 +17,6 @@ def get_user_by_id_param(params):
     cursor.execute(sql, [user_id_param])
     res = cursor.fetchall()
     results = pd.DataFrame(res, columns=['user_id', 'user_name',
-                                         'user_surname', 'login'])
+                                         'user_surname', 'password', 'login'])
 
     return results
