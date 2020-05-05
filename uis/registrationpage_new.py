@@ -8,10 +8,18 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QApplication
+from uis.loginpage_new import Ui_LoginpageWindow
+#import psycopg2
+import requests
 
 
 class Ui_RegistrationWindow(object):
+    def __init__(self, parent=None):
+        self.parent = parent
+
     def setupUi(self, RegistrationWindow):
+        self.window = RegistrationWindow
         RegistrationWindow.setObjectName("RegistrationWindow")
         RegistrationWindow.resize(552, 358)
         self.centralwidget = QtWidgets.QWidget(RegistrationWindow)
@@ -57,10 +65,10 @@ class Ui_RegistrationWindow(object):
         self.label__confirm_password.setFont(font)
         self.label__confirm_password.setObjectName("label__confirm_password")
         self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.label__confirm_password)
-        self.label_confirm_password = QtWidgets.QLineEdit(self.gridLayoutWidget_2)
-        self.label_confirm_password.setEchoMode(QtWidgets.QLineEdit.Password)
-        self.label_confirm_password.setObjectName("label_confirm_password")
-        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.label_confirm_password)
+        self.edit_confirm_password = QtWidgets.QLineEdit(self.gridLayoutWidget_2)
+        self.edit_confirm_password.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.edit_confirm_password.setObjectName("edit_confirm_password")
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.edit_confirm_password)
         self.edit_surname = QtWidgets.QLineEdit(self.gridLayoutWidget_2)
         self.edit_surname.setObjectName("edit_surname")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.edit_surname)
@@ -126,13 +134,43 @@ class Ui_RegistrationWindow(object):
         self.button_cancel.setText(_translate("RegistrationWindow", "Cancel"))
         self.button_sign_up.setText(_translate("RegistrationWindow", "Sign Up"))
 
+    def warning(self, title, message):
+        warning_message = QtWidgets.QMessageBox()
+        warning_message.setWindowTitle(title)
+        warning_message.setText(message)
+        warning_message.setStandardButtons(QtWidgets.QMessageBox.Ok)
+        warning_message.exec_()
 
 
     def clicked_sign_up(self):
-        print("sign up")
+        name = self.edit_name.text()
+        surname = self.edit_surname.text()
+        login = self.edit_login.text()
+        password = self.edit_password.text()
+        confirmed_password = self.edit_confirm_password.text()
+        to_register = True
+        all_users_request = requests.get("http://localhost:86/all_users")
+        if all_users_request.json():
+            for record in all_users_request.json():
+                if record['login']==login:
+                    self.warning("error", "Login already taken!")
+                    to_register = False
+                    break
+        if confirmed_password!=password:
+            self.warning("error", "Password confirmation is not correct!")
+            to_register = False
+        if to_register:
+            register_request = requests.post('http://localhost:86/register', json={"user_name":name,"user_surname":surname,"login":login,"password":password})
+            print("Success - now log in")
+            self.main_window = QtWidgets.QMainWindow()
+            self.main_window_ui = Ui_LoginpageWindow()
+            self.main_window_ui.setupUi(self.main_window)
+            self.main_window.show()
+
 
     def clicked_cancel(self):
         print("cancel")
+
 
 if __name__ == "__main__":
     import sys
