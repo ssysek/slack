@@ -9,8 +9,8 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication
-from chat_forum_window import Ui_MainWindow as Ui_ChatWindow
-from registrationpage import Ui_RegistrationWindow
+from uis.chatforumpage import Ui_MainWindow as Ui_ChatWindow
+from uis.registrationpage import Ui_RegistrationWindow
 #import psycopg2
 import requests
 

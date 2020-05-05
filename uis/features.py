@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from chat_forum_window import Ui_MainWindow as Ui_ChatWindow
+from uis.chatforumpage import Ui_MainWindow as Ui_ChatWindow
 
 class Ui_FeaturesWindow(object):
     def __init__(self, parent=None):

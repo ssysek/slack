@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'chat_forum_window.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.0
+# Created by: PyQt5 UI code generator 5.14.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -11,8 +11,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MainWindow(object):
-    def __init__(self, parent=None):
-        self.parent = parent
+    def __init__(self, patent=None):
+        self.parent = patent
 
     def setupUi(self, MainWindow):
         self.window = MainWindow
@@ -73,6 +73,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_4.setSpacing(6)
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.button_return = QtWidgets.QPushButton(self.centralwidget)
+        self.button_return.setObjectName("button_return")
+        self.horizontalLayout_4.addWidget(self.button_return)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem1)
         self.button_log_out = QtWidgets.QPushButton(self.centralwidget)
@@ -89,7 +92,7 @@ class Ui_MainWindow(object):
         self.gridLayout.setColumnStretch(2, 10)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1200, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1200, 26))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -99,13 +102,26 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-
         self.button_log_out.clicked.connect(self.clicked_log_out)
+        self.button_return.clicked.connect(self.clicked_return)
 
 
         self.actual_box = None
         self.messages = [('Adam1', 'Wiadomosc1'), ('Adam2', 'Wiadomosc2'), ('Adam3', 'Wiadomosc3'),
                          ('Adam4', 'Wiadomosc4'), ('Adam5', 'Wiadomosc5')]
+
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.label.setText(_translate("MainWindow", "Forums"))
+        self.label_4.setText(_translate("MainWindow", "Channels"))
+        self.label_2.setText(_translate("MainWindow", "Notes"))
+        self.label_3.setText(_translate("MainWindow", "Chats"))
+        self.label_opened_box.setText(_translate("MainWindow", "opened box"))
+        self.button_send_message.setText(_translate("MainWindow", "send message"))
+        self.button_return.setText(_translate("MainWindow", "Return"))
+        self.button_log_out.setText(_translate("MainWindow", "LogOut"))
 
 
     def doSomething(self):
@@ -236,24 +252,11 @@ class Ui_MainWindow(object):
     #iterates back to the begining of program to show first window
     def clicked_log_out(self):
         self.show_site = self.parent
-        print(self.parent.parent.parent)
         while(self.show_site.parent != None):
             self.show_site = self.show_site.parent
 
         self.show_site.window.show()
         self.window.hide()
-
-
-    def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label.setText(_translate("MainWindow", "Forums"))
-        self.label_4.setText(_translate("MainWindow", "Channels"))
-        self.label_2.setText(_translate("MainWindow", "Notes"))
-        self.label_3.setText(_translate("MainWindow", "Chats"))
-        self.label_opened_box.setText(_translate("MainWindow", "opened box"))
-        self.button_send_message.setText(_translate("MainWindow", "send message"))
-        self.button_log_out.setText(_translate("MainWindow", "log out"))
 
 
 if __name__ == "__main__":

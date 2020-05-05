@@ -8,10 +8,21 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from uis.features import Ui_FeaturesWindow
+from uis.contactpage import Ui_ContactWindow
+from uis.loginpage_new import Ui_LoginpageWindow
+from uis.registrationpage import Ui_RegistrationWindow
+from uis.chatforumpage import Ui_MainWindow as Ui_ChatWindow
+from uis.landingpage_new import Ui_MainWindow as Ui_LoggedOutWindow
 
 
 class Ui_MainWindow(object):
+    def __init__(self, parent=None):
+        self.parent = parent
+
     def setupUi(self, MainWindow):
+        self.window = MainWindow
+
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
         MainWindow.resize(1200, 600)
@@ -195,6 +206,16 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.button_about.clicked.connect(self.clicked_about)
+        self.button_contact.clicked.connect(self.clicked_contact)
+        self.button_features.clicked.connect(self.clicked_features)
+        self.button_home.clicked.connect(self.clicked_home)
+        self.button_search.clicked.connect(self.clicked_search)
+        self.button_log_out.clicked.connect(self.clicked_log_out)
+        self.button_open_chats.clicked.connect(self.clicked_open_chats)
+        self.button_open_groups.clicked.connect(self.clicked_open_groups)
+        self.butto_open_notes.clicked.connect(self.clicked_open_notes)
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
@@ -211,3 +232,81 @@ class Ui_MainWindow(object):
         self.button_open_chats.setText(_translate("MainWindow", "Open chats"))
         self.button_open_groups.setText(_translate("MainWindow", "Open groups"))
         self.butto_open_notes.setText(_translate("MainWindow", "Open notes"))
+
+
+    def clicked_about(self):
+        print("about clicked")
+
+    def clicked_contact(self):
+        print("contact")
+        self.contact_window = QtWidgets.QMainWindow()
+        self.contact_window_ui = Ui_ContactWindow(self)
+        self.contact_window_ui.setupUi(self.contact_window)
+
+        self.window.hide()
+        self.contact_window.show()
+
+    def clicked_create_account(self):
+        print("create account")
+        self.register_window = QtWidgets.QMainWindow()
+        self.register_window_ui = Ui_RegistrationWindow(self)
+        self.register_window_ui.setupUi(self.register_window)
+
+        self.register_window.show()
+
+    def clicked_features(self):
+        print("features")
+        self.features_window = QtWidgets.QMainWindow()
+        self.features_window_ui = Ui_FeaturesWindow(self)
+        self.features_window_ui.setupUi(self.features_window)
+
+        self.window.hide()
+        self.features_window.show()
+
+
+    def clicked_home(self):
+        print("home")
+
+    def clicked_log_out(self):
+        print("logout")
+        self.logged_out_window = QtWidgets.QMainWindow()
+        self.logged_out_window_ui = Ui_LoggedOutWindow(self)
+        self.logged_out_window_ui.setupUi(self.logged_out_window)
+
+        self.window.hide()
+        self.logged_out_window.show()
+
+
+    def clicked_search(self):
+        print("search")
+        self.change_username("MaciekMaciekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkMaciekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkMaciekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkMaciekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkMaciekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkMaciekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
+
+    def clicked_open_chats(self):
+        print("open chats")
+        self.main_window = QtWidgets.QMainWindow()
+        self.main_window_ui = Ui_ChatWindow(self)
+        self.main_window_ui.setupUi(self.main_window)
+        self.main_window.show()
+        self.window.hide()
+        self.main_window_ui.doSomething()
+
+    def clicked_open_notes(self):
+        print("open notes")
+
+    def clicked_open_groups(self):
+        print("open groups")
+
+    #funkcja do wywołania przez login lub register, aktualizuje label_username
+    def change_username(self, name):
+        #resize label_username, żeby nie powiększało okna dla długich nazw
+        self.label_username.setMaximumWidth(int(self.window.geometry().width()/4))
+        self.label_username.setText(name)
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    LoginpageWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(LoginpageWindow)
+    LoginpageWindow.show()
+    sys.exit(app.exec_())
