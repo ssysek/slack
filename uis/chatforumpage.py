@@ -5,8 +5,7 @@
 # Created by: PyQt5 UI code generator 5.14.2
 #
 # WARNING! All changes made in this file will be lost!
-
-
+import requests
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -131,6 +130,12 @@ class Ui_MainWindow(object):
         self.changeChannelButtons(self.listWidget_chats, ['chat1', 'aga', 'bla', 'oj'])
 
 
+        # statycznie załadowane messages z chatu nr 1
+        self.loadMessagesFromDataBase(2)
+
+
+
+
     def changeForumButtons(self, nameWidget, objects):
         # Create widget
         for object in objects:
@@ -154,7 +159,6 @@ class Ui_MainWindow(object):
 
 
     def changeChannelButtons(self, nameWidget, list):
-        print(list)
         nameWidget.clear()
         for object in list:
             itemN = QtWidgets.QListWidgetItem()
@@ -172,13 +176,11 @@ class Ui_MainWindow(object):
 
     def getChannelWidgetButton(self, object):
         widgetButton = QtWidgets.QPushButton(object)
-        print(object)
         widgetButton.clicked.connect(lambda: self.setUpMessages(object, object))
         return widgetButton
 
 
     def changeNotesButtons(self, nameWidget, list):
-        print(list)
         nameWidget.clear()
         for object in list:
             itemN = QtWidgets.QListWidgetItem()
@@ -196,13 +198,16 @@ class Ui_MainWindow(object):
 
     def getNotesWidgetButton(self, object):
         widgetButton = QtWidgets.QPushButton(object)
-        print(object)
         widgetButton.clicked.connect(lambda: self.printSecond('1'))
         return widgetButton
 
 
 
     def setUpMessages(self, arg, id): #arg - name of channel, id - id channel
+
+        #TODO: podmienić na konkretne channels, nie jeden statyczny
+        self.loadMessagesFromDataBase(2)
+
         self.label_opened_box.setText(arg)
         self.label_opened_box.adjustSize()
         self.actual_box = id
@@ -259,6 +264,25 @@ class Ui_MainWindow(object):
         self.window.hide()
 
 
+    def loadMessagesFromDataBase(self, chat_id):
+        url = "http://localhost:86/get_all_posts_at_chats?chat_id="
+        url +=str(chat_id)
+        messages = requests.post(url)
+        users = requests.get("http://localhost:86/all_users")
+        user_ids = [(i["user_id"], str(i["user_name"]) + " " + str(i["user_surname"])) for i in users.json()]
+        messages_to_print = []
+        for i in messages.json():
+            message_has_owner = False
+            for j in user_ids:
+                if (j[0] == i["user_id"]):
+                    messages_to_print.append((j[1], i["post_content"]))
+                    message_has_owner = True
+                    break
+            if (not message_has_owner):
+                messages_to_print.append(("Unkown", i["post_content"]))
+        self.messages = messages_to_print
+
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
@@ -267,4 +291,5 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     ui.doSomething()
+    ui.loadMessagesFromDataBase(2)
     sys.exit(app.exec_())
