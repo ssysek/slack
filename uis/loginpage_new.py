@@ -15,6 +15,8 @@ from uis.registrationpage import Ui_RegistrationWindow
 import requests
 
 logged_id = -1
+logged_name = ""
+logged_surname=""
 
 class Ui_LoginpageWindow(object):
     def __init__(self, parent=None):
@@ -135,7 +137,9 @@ class Ui_LoginpageWindow(object):
         username = self.edit_username.text()
         password = self.edit_password.text()
         logged = False
-        global logged_id
+        logged_id = -1
+        logged_name = ""
+        logged_surname = ""
         r = requests.get("http://localhost:86/all_users")
         if r.json():
             for record in r.json():
@@ -143,6 +147,8 @@ class Ui_LoginpageWindow(object):
                     if record['password']==password:
                         logged = True
                         logged_id = record['user_id']
+                        logged_name = record['user_name']
+                        logged_surname = record['user_surname']
                         print("YOU SUCCESSFULLY LOGGED IN")
                         break
 
