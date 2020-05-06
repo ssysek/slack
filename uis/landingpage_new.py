@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from uis.features import Ui_FeaturesWindow
 from uis.contactpage import Ui_ContactWindow
 from uis.loginpage_new import Ui_LoginpageWindow
-from uis.registrationpage import Ui_RegistrationWindow
+from uis.registrationpage_new import Ui_RegistrationWindow
 
 
 

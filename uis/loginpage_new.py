@@ -10,8 +10,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QApplication
 from uis.chatforumpage import Ui_MainWindow as Ui_ChatWindow
-from uis.registrationpage import Ui_RegistrationWindow
-#import psycopg2
 import requests
 
 logged_id = -1
@@ -104,10 +102,6 @@ class Ui_LoginpageWindow(object):
         self.button_login.clicked.connect(self.clicked_login)
         self.button_sign_up.clicked.connect(self.clicked_sign_up)
 
-        self.register_window = QtWidgets.QMainWindow()
-        self.register_window_ui = Ui_RegistrationWindow()
-        self.register_window_ui.setupUi(self.register_window)
-
 
     def retranslateUi(self, LoginpageWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -123,7 +117,11 @@ class Ui_LoginpageWindow(object):
         print("cancel")
 
     def clicked_sign_up(self):
+        from uis.registrationpage_new import Ui_RegistrationWindow
         print("sign up")
+        self.register_window = QtWidgets.QMainWindow()
+        self.register_window_ui = Ui_RegistrationWindow()
+        self.register_window_ui.setupUi(self.register_window)
         self.register_window.show()
 
     def warning(self, title, message):
