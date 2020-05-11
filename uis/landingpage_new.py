@@ -12,12 +12,13 @@ from uis.features import Ui_FeaturesWindow
 from uis.contactpage import Ui_ContactWindow
 from uis.loginpage_new import Ui_LoginpageWindow
 from uis.registrationpage_new import Ui_RegistrationWindow
-
+from uis.loggedinlandingpage import Ui_MainWindow as Ui_LoggedInWindow
 
 
 class Ui_MainWindow(object):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, logged_in_user = None):
         self.parent = parent
+        self.loged_in_user = logged_in_user
 
 
     def setupUi(self, MainWindow):
@@ -385,7 +386,7 @@ class Ui_MainWindow(object):
     def clicked_create_account(self):
         print("create account")
         self.register_window = QtWidgets.QMainWindow()
-        self.register_window_ui = Ui_RegistrationWindow(self)
+        self.register_window_ui = Ui_RegistrationWindow(self, self.loged_in_user)
         self.register_window_ui.setupUi(self.register_window)
 
         self.register_window.show()
@@ -393,7 +394,7 @@ class Ui_MainWindow(object):
     def clicked_features(self):
         print("features")
         self.features_window = QtWidgets.QMainWindow()
-        self.features_window_ui = Ui_FeaturesWindow(self)
+        self.features_window_ui = Ui_FeaturesWindow(self, self.loged_in_user)
         self.features_window_ui.setupUi(self.features_window)
 
         self.window.hide()
@@ -415,6 +416,16 @@ class Ui_MainWindow(object):
 
     def clicked_search(self):
         print("search")
+
+    def login(self, id, name, surname):
+        self.loged_in_user = (id, name, surname)
+        self.loged_in_window = QtWidgets.QMainWindow()
+        self.loged_in_window_ui = Ui_LoggedInWindow(self, self.loged_in_user)
+        self.loged_in_window_ui.setupUi(self.loged_in_window)
+        self.loged_in_window_ui.change_username(name)
+
+        self.loged_in_window.show()
+        self.window.hide()
 
 if __name__ == "__main__":
     import sys

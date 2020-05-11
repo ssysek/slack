@@ -10,8 +10,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MainWindow(object):
-    def __init__(self, patent=None):
-        self.parent = patent
+    def __init__(self, parent=None, logged_in_user = None):
+        self.parent = parent
+        self.loged_in_user = logged_in_user
 
     def setupUi(self, MainWindow):
         self.window = MainWindow
