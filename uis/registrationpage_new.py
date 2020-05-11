@@ -15,8 +15,10 @@ import requests
 
 
 class Ui_RegistrationWindow(object):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, user=None):
         self.parent = parent
+        self.loged_in_user = user
+
 
     def setupUi(self, RegistrationWindow):
         self.window = RegistrationWindow
@@ -162,13 +164,12 @@ class Ui_RegistrationWindow(object):
         if to_register:
             register_request = requests.post('http://localhost:86/register', json={"user_name":name,"user_surname":surname,"login":login,"password":password})
             print("Success - now log in")
-            self.main_window = QtWidgets.QMainWindow()
-            self.main_window_ui = Ui_LoginpageWindow()
-            self.main_window_ui.setupUi(self.main_window)
-            self.main_window.show()
+            self.window.hide()
+            self.parent.clicked_log_in()
 
 
     def clicked_cancel(self):
+        self.window.hide()
         print("cancel")
 
 

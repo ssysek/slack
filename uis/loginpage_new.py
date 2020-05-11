@@ -114,15 +114,17 @@ class Ui_LoginpageWindow(object):
 
 
     def clicked_cancel(self):
+        self.window.hide()
         print("cancel")
 
     def clicked_sign_up(self):
         from uis.registrationpage_new import Ui_RegistrationWindow
         print("sign up")
         self.register_window = QtWidgets.QMainWindow()
-        self.register_window_ui = Ui_RegistrationWindow()
+        self.register_window_ui = Ui_RegistrationWindow(self.parent)
         self.register_window_ui.setupUi(self.register_window)
         self.register_window.show()
+        self.window.hide()
 
     def warning(self, title, message):
         warning_message = QtWidgets.QMessageBox()
@@ -151,11 +153,8 @@ class Ui_LoginpageWindow(object):
                         break
 
         if logged:
-            self.main_window = QtWidgets.QMainWindow()
-            self.main_window_ui = Ui_ChatWindow()
-            self.main_window_ui.setupUi(self.main_window)
-            self.main_window.show()
-            self.main_window_ui.doSomething()
+            self.parent.login(logged_id, logged_name, logged_surname)
+            self.window.hide()
         else:
             self.warning("error","Wrong username or password!")
 

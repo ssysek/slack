@@ -11,9 +11,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from uis.chatforumpage import Ui_MainWindow as Ui_ChatWindow
 
 class Ui_FeaturesWindow(object):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, user=None):
         self.parent = parent
-
+        self.loged_in_user = user
 
     def setupUi(self, FeaturesWindow):
         self.window = FeaturesWindow

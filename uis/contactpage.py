@@ -11,8 +11,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_ContactWindow(object):
-    def __init__(self, parent = None):
+    def __init__(self, parent = None, user = None):
         self.patent = parent
+        self.loged_in_user = user
 
     def setupUi(self, ContactWindow):
         self.window = ContactWindow

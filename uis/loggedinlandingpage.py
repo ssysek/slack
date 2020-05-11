@@ -10,15 +10,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from uis.features import Ui_FeaturesWindow
 from uis.contactpage import Ui_ContactWindow
-from uis.loginpage_new import Ui_LoginpageWindow
 from uis.registrationpage import Ui_RegistrationWindow
 from uis.chatforumpage import Ui_MainWindow as Ui_ChatWindow
-from uis.landingpage_new import Ui_MainWindow as Ui_LoggedOutWindow
 
 
 class Ui_MainWindow(object):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, user=None):
         self.parent = parent
+        self.logged_in_user = user
 
     def setupUi(self, MainWindow):
         self.window = MainWindow
@@ -223,7 +222,7 @@ class Ui_MainWindow(object):
         self.button_contact.setText(_translate("MainWindow", "Contact"))
         self.button_about.setText(_translate("MainWindow", "About"))
         self.button_features.setText(_translate("MainWindow", "Features"))
-        self.label.setText(_translate("MainWindow", "User: "))
+        self.label.setText(_translate("MainWindow", "Hello: "))
         self.label_username.setText(_translate("MainWindow", "username"))
         self.button_search.setText(_translate("MainWindow", "Search"))
         self.button_log_out.setText(_translate("MainWindow", "LogOut"))
@@ -240,7 +239,7 @@ class Ui_MainWindow(object):
     def clicked_contact(self):
         print("contact")
         self.contact_window = QtWidgets.QMainWindow()
-        self.contact_window_ui = Ui_ContactWindow(self)
+        self.contact_window_ui = Ui_ContactWindow(self, self.logged_in_user)
         self.contact_window_ui.setupUi(self.contact_window)
 
         self.window.hide()
@@ -269,13 +268,8 @@ class Ui_MainWindow(object):
 
     def clicked_log_out(self):
         print("logout")
-        self.logged_out_window = QtWidgets.QMainWindow()
-        self.logged_out_window_ui = Ui_LoggedOutWindow(self)
-        self.logged_out_window_ui.setupUi(self.logged_out_window)
-
         self.window.hide()
-        self.logged_out_window.show()
-
+        self.parent.window.show()
 
     def clicked_search(self):
         print("search")
