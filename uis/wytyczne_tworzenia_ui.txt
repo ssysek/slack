@@ -1,6 +1,6 @@
 najłatwiej tworzyć wszystko przez designera, plik wynikowy z rozszerzeniem .ui
 
-konwetrsja na pyqt: pyuic -x nazwa_pliku_ui.ui -o nazwa_docelowa.py
+konwetrsja na pyqt: pyuic5 -x nazwa_pliku_ui.ui -o nazwa_docelowa.py
 
 pyuic5 i designer są częścia pyqt5-tools (pip install jak nie macie)
 
