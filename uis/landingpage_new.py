@@ -8,12 +8,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from uis.features import Ui_FeaturesWindow
-from uis.contactpage import Ui_ContactWindow
-from uis.loginpage_new import Ui_LoginpageWindow
-from uis.registrationpage_new import Ui_RegistrationWindow
-from uis.loggedinlandingpage import Ui_MainWindow as Ui_LoggedInWindow
-from uis.resources.stylesheets import *
+from features import Ui_FeaturesWindow
+from contactpage import Ui_ContactWindow
+from loginpage_new import Ui_LoginpageWindow
+from registrationpage_new import Ui_RegistrationWindow
+from loggedinlandingpage import Ui_MainWindow as Ui_LoggedInWindow
+from resources.stylesheets import *
 
 QtGui.QFontDatabase.addApplicationFont(":/resources/OpenSans-Regular.ttf")
 
@@ -45,7 +45,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.button_home = QtWidgets.QPushButton(self.centralwidget)
         self.button_home.setObjectName("button_home")
-        self.home_pixmap = QtGui.QPixmap("resources/home.png")
+        self.home_pixmap = QtGui.QPixmap("resources/icons8-home-256.png")
         self.home_pixmap = self.home_pixmap.scaled(QtCore.QSize(32,32))
         self.icon = QtGui.QIcon(self.home_pixmap)
         self.button_home.setIcon(self.icon)
@@ -101,7 +101,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.button_search = QtWidgets.QPushButton(self.centralwidget)
         self.button_search.setObjectName("button_search")
-        self.pixmap = QtGui.QPixmap("resources/search.png")
+        self.pixmap = QtGui.QPixmap("resources/icons8-search-192.png")
         self.pixmap = self.pixmap.scaled(QtCore.QSize(32,32))
         self.icon = QtGui.QIcon(self.pixmap)
         self.button_search.setIcon(self.icon)
