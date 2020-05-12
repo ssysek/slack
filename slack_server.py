@@ -9,6 +9,7 @@ from requests_on_REST.get_all_posts_at_forum import get_all_posts_at_chat
 from requests_on_REST.add_new_post import add_new_post
 from requests_on_REST.register import register
 from requests_on_REST.chats_inside_forum import chats_inside_forum
+from requests_on_REST.chats_for_user_without_forums import chats_for_user_without_forums
 
 
 HOST_PORT = 86
@@ -48,6 +49,13 @@ class MyServer(BaseHTTPRequestHandler):
             self.send_header("Content-type", "application/json")
             self.end_headers()
             self.wfile.write(bytes(chats_inside_forum(qs).to_json(
+                orient='records', date_format='iso'), "utf-8"))
+
+        elif path == "/user_chats":
+            self.send_response(200)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+            self.wfile.write(bytes(chats_for_user_without_forums(qs).to_json(
                 orient='records', date_format='iso'), "utf-8"))
 
         elif path == "/get_all_posts_at_chats":
