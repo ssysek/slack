@@ -1,14 +1,14 @@
 import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
-
+from io import BytesIO
 from requests_on_REST.delete_user import delete_user
 from requests_on_REST.get_all_users import get_all_users
 from requests_on_REST.get_user_by_id import get_user_by_id_param
 from requests_on_REST.get_all_posts_at_forum import get_all_posts_at_chat
-from io import BytesIO
-
+from requests_on_REST.add_new_post import add_new_post
 from requests_on_REST.register import register
+
 
 HOST_PORT = 86
 
@@ -42,12 +42,21 @@ class MyServer(BaseHTTPRequestHandler):
             self.wfile.write(bytes(get_user_by_id_param(qs).to_json(
                 orient='records', date_format='iso'), "utf-8"))
 
-        if path == "/get_all_posts_at_chats":
+        elif path == "/get_all_posts_at_chats":
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
             self.wfile.write(bytes(get_all_posts_at_chat(qs).to_json(
                 orient='records', date_format='iso'), "utf-8"))
+
+        elif path == "/add_new_post":
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length)
+            self.send_response(200)
+            self.end_headers()
+            add_new_post(body)
+            response = BytesIO()
+            self.wfile.write(response.getvalue())
 
         elif path == "/register":
             content_length = int(self.headers['Content-Length'])
