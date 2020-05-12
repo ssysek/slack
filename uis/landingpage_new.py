@@ -13,7 +13,9 @@ from uis.contactpage import Ui_ContactWindow
 from uis.loginpage_new import Ui_LoginpageWindow
 from uis.registrationpage_new import Ui_RegistrationWindow
 from uis.loggedinlandingpage import Ui_MainWindow as Ui_LoggedInWindow
+from uis.resources.stylesheets import *
 
+QtGui.QFontDatabase.addApplicationFont(":/resources/OpenSans-Regular.ttf")
 
 class Ui_MainWindow(object):
     def __init__(self, parent=None, logged_in_user = None):
@@ -38,11 +40,18 @@ class Ui_MainWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_3.setContentsMargins(-1, -1, 0, -1)
+        self.horizontalLayout_3.setContentsMargins(30, -1, 0, -1)
         self.horizontalLayout_3.setSpacing(0)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.button_home = QtWidgets.QPushButton(self.centralwidget)
         self.button_home.setObjectName("button_home")
+        self.home_pixmap = QtGui.QPixmap("resources/home.png")
+        self.home_pixmap = self.home_pixmap.scaled(QtCore.QSize(32,32))
+        self.icon = QtGui.QIcon(self.home_pixmap)
+        self.button_home.setIcon(self.icon)
+        self.button_home.setIconSize(QtCore.QSize(32, 32))
+        self.button_home.setStyleSheet(button_with_image_style_sheet)
+
         self.horizontalLayout_3.addWidget(self.button_home)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem)
@@ -75,23 +84,30 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.button_features.sizePolicy().hasHeightForWidth())
         self.button_features.setSizePolicy(sizePolicy)
         self.button_features.setObjectName("button_features")
+        self.button_features.setAttribute(QtCore.Qt.WA_TranslucentBackground, True)
         self.horizontalLayout.addWidget(self.button_features)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(360, 20, QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem2)
         self.horizontalLayout_3.addLayout(self.horizontalLayout)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setSpacing(20)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.button_search = QtWidgets.QPushButton(self.centralwidget)
-        self.button_search.setObjectName("button_search")
-        self.horizontalLayout_2.addWidget(self.button_search)
         self.button_log_in = QtWidgets.QPushButton(self.centralwidget)
         self.button_log_in.setObjectName("button_log_in")
+        self.button_log_in.setStyleSheet(button_log_in_style_sheet)
         self.horizontalLayout_2.addWidget(self.button_log_in)
         self.horizontalLayout_3.addLayout(self.horizontalLayout_2)
         self.horizontalLayout_3.setStretch(2, 15)
         self.horizontalLayout_3.setStretch(3, 5)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
+        self.button_search = QtWidgets.QPushButton(self.centralwidget)
+        self.button_search.setObjectName("button_search")
+        self.pixmap = QtGui.QPixmap("resources/search.png")
+        self.pixmap = self.pixmap.scaled(QtCore.QSize(32,32))
+        self.icon = QtGui.QIcon(self.pixmap)
+        self.button_search.setIcon(self.icon)
+        self.button_search.setIconSize(QtCore.QSize(32, 32))
+        self.button_search.setStyleSheet(button_with_image_style_sheet)
+        self.horizontalLayout_2.addWidget(self.button_search)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setHorizontalSpacing(20)
         self.gridLayout.setVerticalSpacing(0)
@@ -156,6 +172,7 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.button_create_account.sizePolicy().hasHeightForWidth())
         self.button_create_account.setSizePolicy(sizePolicy)
+        self.button_create_account.setStyleSheet(button_create_account_style_sheet)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -357,12 +374,10 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.button_home.setText(_translate("MainWindow", "Home"))
         self.button_contact.setText(_translate("MainWindow", "Contact"))
         self.button_about.setText(_translate("MainWindow", "About"))
         self.button_features.setText(_translate("MainWindow", "Features"))
-        self.button_search.setText(_translate("MainWindow", "Search"))
-        self.button_log_in.setText(_translate("MainWindow", "LogIn"))
+        self.button_log_in.setText(_translate("MainWindow", "Log In"))
         self.label_main_text.setText(_translate("MainWindow", "<html><head/><body><p>Communicate and </p><p>learn easier.</p></body></html>"))
         self.label_description.setText(_translate("MainWindow", "<html><head/><body><p>A web app that makes communication simpler and</p><p>work more productive.</p></body></html>"))
         self.button_create_account.setText(_translate("MainWindow", "Create a FREE account"))
@@ -430,6 +445,7 @@ class Ui_MainWindow(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
+
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
