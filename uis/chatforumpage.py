@@ -7,6 +7,9 @@
 # WARNING! All changes made in this file will be lost!
 import requests
 from PyQt5 import QtCore, QtGui, QtWidgets
+from resources.stylesheets import *
+
+from uis.notesmainpage import Ui_MainNotesWindow
 
 
 class Ui_MainWindow(object):
@@ -41,9 +44,13 @@ class Ui_MainWindow(object):
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setObjectName("label_2")
         self.gridLayout.addWidget(self.label_2, 3, 0, 1, 1)
-        self.listWidget_notes = QtWidgets.QListWidget(self.centralwidget)
-        self.listWidget_notes.setObjectName("listWidget_notes")
-        self.gridLayout.addWidget(self.listWidget_notes, 4, 0, 1, 1)
+        self.button_notes = QtWidgets.QPushButton(self.centralwidget)
+        self.button_notes.setObjectName("button_go_to_notes")
+        self.gridLayout.addWidget(self.button_notes, 4, 0, 1, 1)
+        self.button_notes.setIcon(QtGui.QIcon('resources/notes.png'))
+        self.button_notes.setIconSize(QtCore.QSize(100, 100))
+        self.button_notes.setStyleSheet(button_with_image_style_sheet)
+        self.button_notes.clicked.connect(self.goToNotes)
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 3, 1, 1, 1)
@@ -102,6 +109,11 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        self.button_notes.setIcon(QtGui.QIcon('resources/notes.png'))
+        self.button_notes.setIconSize(QtCore.QSize(100, 100))
+        self.button_notes.setStyleSheet(button_with_image_style_sheet)
+        self.button_notes.clicked.connect(self.goToNotes)
+
         self.button_log_out.clicked.connect(self.clicked_log_out)
         self.button_return.clicked.connect(self.clicked_return)
 
@@ -127,7 +139,6 @@ class Ui_MainWindow(object):
     def doSomething(self):
         self.changeForumButtons(self.listWidget_forums,
                                 [['test1', ['bla', 'ah', 'no']], ['haha', ['1', '2']], ['przycisk', ['a', 'b', 'c']]])
-        self.changeNotesButtons(self.listWidget_notes,['aa', 'note1', 'bored'])
         self.changeChannelButtons(self.listWidget_chats, ['chat1', 'aga', 'bla', 'oj'])
 
 
@@ -180,29 +191,20 @@ class Ui_MainWindow(object):
         widgetButton.clicked.connect(lambda: self.setUpMessages(object, object))
         return widgetButton
 
-
-    def changeNotesButtons(self, nameWidget, list):
-        nameWidget.clear()
-        for object in list:
-            itemN = QtWidgets.QListWidgetItem()
-            widget = QtWidgets.QWidget()
-            widgetButton = self.getChannelWidgetButton(object)
-            widgetLayout = QtWidgets.QHBoxLayout()
-            widgetLayout.addWidget(widgetButton)
-            widgetLayout.addStretch()
-            widgetLayout.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
-            widget.setLayout(widgetLayout)
-            itemN.setSizeHint(widget.sizeHint())
-            # Add widget to QListWidget funList
-            nameWidget.addItem(itemN)
-            nameWidget.setItemWidget(itemN, widget)
-
     def getNotesWidgetButton(self, object):
         widgetButton = QtWidgets.QPushButton(object)
         widgetButton.clicked.connect(lambda: self.printSecond('1'))
         return widgetButton
 
 
+    def goToNotes(self):
+        print("Go to notes")
+        self.notes_window = QtWidgets.QMainWindow()
+        self.notes_window_ui = Ui_MainNotesWindow(self, self.loged_in_user)
+        self.notes_window_ui.setupUi(self.notes_window)
+
+        self.window.hide()
+        self.notes_window.show()
 
     def setUpMessages(self, arg, id): #arg - name of channel, id - id channel
 
