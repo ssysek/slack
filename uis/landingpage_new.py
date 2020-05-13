@@ -30,6 +30,7 @@ class Ui_MainWindow(object):
         MainWindow.setEnabled(True)
         MainWindow.resize(1200, 600)
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
+        MainWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -37,6 +38,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
         self.centralwidget.setSizePolicy(sizePolicy)
         self.centralwidget.setObjectName("centralwidget")
+        self.centralwidget.setStyleSheet(transparent_background_style_sheet)
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
@@ -51,7 +53,6 @@ class Ui_MainWindow(object):
         self.button_home.setIcon(self.icon)
         self.button_home.setIconSize(QtCore.QSize(32, 32))
         self.button_home.setStyleSheet(button_with_image_style_sheet)
-
         self.horizontalLayout_3.addWidget(self.button_home)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem)
