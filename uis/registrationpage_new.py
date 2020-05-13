@@ -22,100 +22,160 @@ class Ui_RegistrationWindow(object):
 
     def setupUi(self, RegistrationWindow):
         self.window = RegistrationWindow
-        RegistrationWindow.setObjectName("RegistrationWindow")
-        RegistrationWindow.resize(552, 358)
+        RegistrationWindow.resize(592, 372)
+        RegistrationWindow.setAutoFillBackground(False)
+        RegistrationWindow.setStyleSheet("background-color: rgb(247, 248, 255);")
         self.centralwidget = QtWidgets.QWidget(RegistrationWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.gridLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
-        self.gridLayoutWidget_2.setGeometry(QtCore.QRect(30, 20, 491, 301))
-        self.gridLayoutWidget_2.setObjectName("gridLayoutWidget_2")
-        self.gridLayout_2 = QtWidgets.QGridLayout(self.gridLayoutWidget_2)
-        self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.gridLayout_2.setObjectName("gridLayout_2")
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_2.addItem(spacerItem, 0, 1, 1, 1)
-        self.gridLayout = QtWidgets.QGridLayout()
-        self.gridLayout.setHorizontalSpacing(6)
-        self.gridLayout.setVerticalSpacing(30)
-        self.gridLayout.setObjectName("gridLayout")
-        self.formLayout = QtWidgets.QFormLayout()
-        self.formLayout.setSpacing(20)
-        self.formLayout.setObjectName("formLayout")
-        self.label_username = QtWidgets.QLabel(self.gridLayoutWidget_2)
-        font = QtGui.QFont()
-        font.setPointSize(13)
-        self.label_username.setFont(font)
-        self.label_username.setObjectName("label_username")
-        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label_username)
-        self.edit_login = QtWidgets.QLineEdit(self.gridLayoutWidget_2)
-        self.edit_login.setEnabled(True)
+        self.formLayoutWidget = QtWidgets.QWidget(self.centralwidget)
+        self.formLayoutWidget.setGeometry(QtCore.QRect(90, 82, 408, 171))
+        self.formLayoutWidget.setObjectName("formLayoutWidget")
+        self.formLayout_2 = QtWidgets.QFormLayout(self.formLayoutWidget)
+        self.formLayout_2.setFieldGrowthPolicy(QtWidgets.QFormLayout.AllNonFixedFieldsGrow)
+        self.formLayout_2.setLabelAlignment(QtCore.Qt.AlignJustify | QtCore.Qt.AlignVCenter)
+        self.formLayout_2.setFormAlignment(QtCore.Qt.AlignJustify | QtCore.Qt.AlignTop)
+        self.formLayout_2.setContentsMargins(0, 0, 0, 0)
+        self.formLayout_2.setObjectName("formLayout_2")
+        self.edit_surname = QtWidgets.QLineEdit(self.formLayoutWidget)
+        self.edit_surname.setMinimumSize(QtCore.QSize(200, 40))
+        self.edit_surname.setStyleSheet("background-color:rgb(230, 230, 230);\n"
+                                        "color:rgb(188, 188, 188);\n"
+                                        "font: 75 8pt \"SansSerif\";\n"
+                                        "border-style:solid;\n"
+                                        "border-width:2px;\n"
+                                        "border-radius:11px;\n"
+                                        "border-color:rgb(225, 225, 225);\n"
+                                        "")
+        self.edit_surname.setText("")
+        self.edit_surname.setCursorPosition(0)
+        self.edit_surname.setObjectName("edit_surname")
+        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.edit_surname)
+        self.edit_email = QtWidgets.QLineEdit(self.formLayoutWidget)
+        self.edit_email.setMinimumSize(QtCore.QSize(200, 40))
+        self.edit_email.setStyleSheet("background-color:rgb(230, 230, 230);\n"
+                                      "color:rgb(188, 188, 188);\n"
+                                      "font: 75 8pt \"SansSerif\";\n"
+                                      "border-style:solid;\n"
+                                      "border-width:2px;\n"
+                                      "border-radius:11px;\n"
+                                      "border-color:rgb(225, 225, 225);")
+        self.edit_email.setText("")
+        self.edit_email.setObjectName("edit_email")
+        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.edit_email)
+        self.edit_login = QtWidgets.QLineEdit(self.formLayoutWidget)
+        self.edit_login.setMinimumSize(QtCore.QSize(200, 40))
+        self.edit_login.setStyleSheet("background-color:rgb(230, 230, 230);\n"
+                                      "color:rgb(188, 188, 188);\n"
+                                      "font: 75 8pt \"SansSerif\";\n"
+                                      "border-style:solid;\n"
+                                      "border-width:2px;\n"
+                                      "border-radius:11px;\n"
+                                      "border-color:rgb(225, 225, 225);")
+        self.edit_login.setText("")
         self.edit_login.setObjectName("edit_login")
-        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.edit_login)
-        self.label__password = QtWidgets.QLabel(self.gridLayoutWidget_2)
-        font = QtGui.QFont()
-        font.setPointSize(13)
-        self.label__password.setFont(font)
-        self.label__password.setObjectName("label__password")
-        self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.label__password)
-        self.edit_password = QtWidgets.QLineEdit(self.gridLayoutWidget_2)
+        self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.edit_login)
+        self.edit_password = QtWidgets.QLineEdit(self.formLayoutWidget)
+        self.edit_password.setMinimumSize(QtCore.QSize(200, 40))
+        self.edit_password.setStyleSheet("background-color:rgb(230, 230, 230);\n"
+                                         "color:rgb(188, 188, 188);\n"
+                                         "font: 75 8pt \"SansSerif\";\n"
+                                         "border-style:solid;\n"
+                                         "border-width:2px;\n"
+                                         "border-radius:11px;\n"
+                                         "border-color:rgb(225, 225, 225);")
+        self.edit_password.setText("")
         self.edit_password.setEchoMode(QtWidgets.QLineEdit.Password)
         self.edit_password.setObjectName("edit_password")
-        self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.edit_password)
-        self.label__confirm_password = QtWidgets.QLabel(self.gridLayoutWidget_2)
-        font = QtGui.QFont()
-        font.setPointSize(13)
-        self.label__confirm_password.setFont(font)
-        self.label__confirm_password.setObjectName("label__confirm_password")
-        self.formLayout.setWidget(4, QtWidgets.QFormLayout.LabelRole, self.label__confirm_password)
-        self.edit_confirm_password = QtWidgets.QLineEdit(self.gridLayoutWidget_2)
+        self.formLayout_2.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.edit_password)
+        self.edit_confirm_password = QtWidgets.QLineEdit(self.formLayoutWidget)
+        self.edit_confirm_password.setMinimumSize(QtCore.QSize(200, 40))
+        self.edit_confirm_password.setStyleSheet("background-color:rgb(230, 230, 230);\n"
+                                                 "color:rgb(188, 188, 188);\n"
+                                                 "font: 75 8pt \"SansSerif\";\n"
+                                                 "border-style:solid;\n"
+                                                 "border-width:2px;\n"
+                                                 "border-radius:11px;\n"
+                                                 "border-color:rgb(225, 225, 225);")
+        self.edit_confirm_password.setText("")
         self.edit_confirm_password.setEchoMode(QtWidgets.QLineEdit.Password)
         self.edit_confirm_password.setObjectName("edit_confirm_password")
-        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.edit_confirm_password)
-        self.edit_surname = QtWidgets.QLineEdit(self.gridLayoutWidget_2)
-        self.edit_surname.setObjectName("edit_surname")
-        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.edit_surname)
-        self.label_surname = QtWidgets.QLabel(self.gridLayoutWidget_2)
-        font = QtGui.QFont()
-        font.setPointSize(13)
-        self.label_surname.setFont(font)
-        self.label_surname.setObjectName("label_surname")
-        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.label_surname)
-        self.label_name = QtWidgets.QLabel(self.gridLayoutWidget_2)
-        font = QtGui.QFont()
-        font.setPointSize(13)
-        self.label_name.setFont(font)
-        self.label_name.setObjectName("label_name")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_name)
-        self.edit_name = QtWidgets.QLineEdit(self.gridLayoutWidget_2)
+        self.formLayout_2.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.edit_confirm_password)
+        self.edit_name = QtWidgets.QLineEdit(self.formLayoutWidget)
+        self.edit_name.setMinimumSize(QtCore.QSize(200, 40))
+        self.edit_name.setStyleSheet("background-color:rgb(230, 230, 230);\n"
+                                     "color:rgb(188, 188, 188);\n"
+                                     "font: 75 8pt \"SansSerif\";\n"
+                                     "border-style:solid;\n"
+                                     "border-width:2px;\n"
+                                     "border-radius:11px;\n"
+                                     "border-color:rgb(225, 225, 225);")
+        self.edit_name.setText("")
+        self.edit_name.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.edit_name.setObjectName("edit_name")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.edit_name)
-        self.gridLayout.addLayout(self.formLayout, 0, 0, 1, 1)
-        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_3.setContentsMargins(155, -1, 0, -1)
-        self.horizontalLayout_3.setSpacing(20)
-        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.button_cancel = QtWidgets.QPushButton(self.gridLayoutWidget_2)
-        self.button_cancel.setObjectName("button_cancel")
-        self.horizontalLayout_3.addWidget(self.button_cancel)
-        self.button_sign_up = QtWidgets.QPushButton(self.gridLayoutWidget_2)
+        self.formLayout_2.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.edit_name)
+        self.label_password_error = QtWidgets.QLabel(self.formLayoutWidget)
+        font = QtGui.QFont()
+        font.setFamily("Sans Serif")
+        font.setPointSize(8)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_password_error.setFont(font)
+        self.label_password_error.setStyleSheet("font: 8pt \"Sans Serif\";\n"
+                                                "color: rgb(255, 47, 57);")
+        self.label_password_error.setText("")
+        self.label_password_error.setObjectName("label_password_error")
+        self.formLayout_2.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.label_password_error)
+        self.button_sign_up = QtWidgets.QPushButton(self.centralwidget)
+        self.button_sign_up.setGeometry(QtCore.QRect(243, 262, 110, 40))
+        self.button_sign_up.setStyleSheet("background-color:rgb(1, 107, 229);\n"
+                                          "color:white;\n"
+                                          "font: 75 10pt \"SansSerif\";\n"
+                                          "border-style:outset;\n"
+                                          "border-width:2px;\n"
+                                          "border-radius:10px;\n"
+                                          "border-color:white;")
         self.button_sign_up.setObjectName("button_sign_up")
-        self.horizontalLayout_3.addWidget(self.button_sign_up)
-        self.gridLayout.addLayout(self.horizontalLayout_3, 1, 0, 1, 1)
-        self.gridLayout_2.addLayout(self.gridLayout, 1, 1, 1, 1)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_2.addItem(spacerItem1, 1, 2, 1, 1)
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.gridLayout_2.addItem(spacerItem2, 1, 0, 1, 1)
-        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_2.addItem(spacerItem3, 2, 1, 1, 1)
+        self.button_cancel = QtWidgets.QPushButton(self.centralwidget)
+        self.button_cancel.setGeometry(QtCore.QRect(243, 312, 110, 23))
+        self.button_cancel.setStyleSheet("background: transparent;\n"
+                                         "font: 75 8pt \"SansSerif\";")
+        self.button_cancel.setObjectName("button_cancel")
+        self.label_registration = QtWidgets.QLabel(self.centralwidget)
+        self.label_registration.setGeometry(QtCore.QRect(243, 22, 115, 30))
+        font = QtGui.QFont()
+        font.setFamily("SansSerif")
+        font.setPointSize(16)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(9)
+        self.label_registration.setFont(font)
+        self.label_registration.setStyleSheet("font: 75 16pt \"SansSerif\";")
+        self.label_registration.setObjectName("label_registration")
+        self.label_nickname_error = QtWidgets.QLabel(self.centralwidget)
+        self.label_nickname_error.setGeometry(QtCore.QRect(505, 140, 71, 20))
+        font = QtGui.QFont()
+        font.setFamily("Sans Serif")
+        font.setPointSize(8)
+        font.setBold(False)
+        font.setItalic(False)
+        font.setWeight(50)
+        self.label_nickname_error.setFont(font)
+        self.label_nickname_error.setStyleSheet("font: 8pt \"Sans Serif\";\n"
+                                                "color: rgb(255, 47, 57);\n"
+                                                "")
+        self.label_nickname_error.setText("")
+        self.label_nickname_error.setObjectName("label_nickname_error")
         RegistrationWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(RegistrationWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 552, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 592, 21))
         self.menubar.setObjectName("menubar")
         RegistrationWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(RegistrationWindow)
         self.statusbar.setObjectName("statusbar")
         RegistrationWindow.setStatusBar(self.statusbar)
+
+
 
         self.retranslateUi(RegistrationWindow)
         QtCore.QMetaObject.connectSlotsByName(RegistrationWindow)
@@ -128,20 +188,15 @@ class Ui_RegistrationWindow(object):
     def retranslateUi(self, RegistrationWindow):
         _translate = QtCore.QCoreApplication.translate
         RegistrationWindow.setWindowTitle(_translate("RegistrationWindow", "MainWindow"))
-        self.label_username.setText(_translate("RegistrationWindow", "Login"))
-        self.label__password.setText(_translate("RegistrationWindow", "Password"))
-        self.label__confirm_password.setText(_translate("RegistrationWindow", "Confirm password"))
-        self.label_surname.setText(_translate("RegistrationWindow", "Surname"))
-        self.label_name.setText(_translate("RegistrationWindow", "Name"))
+        self.edit_surname.setPlaceholderText(_translate("RegistrationWindow", "Last Name"))
+        self.edit_email.setPlaceholderText(_translate("RegistrationWindow", "Email"))
+        self.edit_login.setPlaceholderText(_translate("RegistrationWindow", "Nickname"))
+        self.edit_password.setPlaceholderText(_translate("RegistrationWindow", "Password"))
+        self.edit_confirm_password.setPlaceholderText(_translate("RegistrationWindow", "Confirm Password"))
+        self.edit_name.setPlaceholderText(_translate("RegistrationWindow", "First Name"))
+        self.button_sign_up.setText(_translate("RegistrationWindow", "Create Account"))
         self.button_cancel.setText(_translate("RegistrationWindow", "Cancel"))
-        self.button_sign_up.setText(_translate("RegistrationWindow", "Sign Up"))
-
-    def warning(self, title, message):
-        warning_message = QtWidgets.QMessageBox()
-        warning_message.setWindowTitle(title)
-        warning_message.setText(message)
-        warning_message.setStandardButtons(QtWidgets.QMessageBox.Ok)
-        warning_message.exec_()
+        self.label_registration.setText(_translate("RegistrationWindow", "Registration"))
 
 
     def clicked_sign_up(self):
@@ -154,13 +209,16 @@ class Ui_RegistrationWindow(object):
         all_users_request = requests.get("http://localhost:86/all_users")
         if all_users_request.json():
             for record in all_users_request.json():
-                if record['login']==login:
-                    self.warning("error", "Login already taken!")
+                self.label_nickname_error.setText("")
+                if record['login']==login or login=="":
+                    self.label_nickname_error.setText("change")
                     to_register = False
                     break
-        if confirmed_password!=password:
-            self.warning("error", "Password confirmation is not correct!")
+        if confirmed_password!=password or password=="":
+            self.label_password_error.setText("unset password or incorrect confirmation")
             to_register = False
+        else:
+            self.label_password_error.setText("")
         if to_register:
             register_request = requests.post('http://localhost:86/register', json={"user_name":name,"user_surname":surname,"login":login,"password":password})
             print("Success - now log in")

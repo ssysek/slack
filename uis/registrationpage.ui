@@ -6,211 +6,314 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>552</width>
-    <height>358</height>
+    <width>592</width>
+    <height>372</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(247, 248, 255);</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="gridLayoutWidget_2">
+   <widget class="QWidget" name="formLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>20</y>
-      <width>491</width>
-      <height>301</height>
+      <x>90</x>
+      <y>82</y>
+      <width>408</width>
+      <height>171</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout_2">
+    <layout class="QFormLayout" name="formLayout_2">
+     <property name="fieldGrowthPolicy">
+      <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+     </property>
+     <property name="labelAlignment">
+      <set>Qt::AlignJustify|Qt::AlignVCenter</set>
+     </property>
+     <property name="formAlignment">
+      <set>Qt::AlignJustify|Qt::AlignTop</set>
+     </property>
      <item row="0" column="1">
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
+      <widget class="QLineEdit" name="edit_surname">
+       <property name="minimumSize">
         <size>
-         <width>20</width>
+         <width>200</width>
          <height>40</height>
         </size>
        </property>
-      </spacer>
-     </item>
-     <item row="1" column="1">
-      <layout class="QGridLayout" name="gridLayout">
-       <property name="horizontalSpacing">
-        <number>6</number>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(230, 230, 230);
+color:rgb(188, 188, 188);
+font: 75 8pt &quot;SansSerif&quot;;
+border-style:solid;
+border-width:2px;
+border-radius:11px;
+border-color:rgb(225, 225, 225);
+</string>
        </property>
-       <property name="verticalSpacing">
-        <number>30</number>
+       <property name="text">
+        <string/>
        </property>
-       <item row="0" column="0">
-        <layout class="QFormLayout" name="formLayout">
-         <property name="horizontalSpacing">
-          <number>20</number>
-         </property>
-         <property name="verticalSpacing">
-          <number>20</number>
-         </property>
-         <item row="2" column="0">
-          <widget class="QLabel" name="label_username">
-           <property name="font">
-            <font>
-             <pointsize>13</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Login</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QLineEdit" name="edit_login">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="label__password">
-           <property name="font">
-            <font>
-             <pointsize>13</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Password</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="edit_password">
-           <property name="echoMode">
-            <enum>QLineEdit::Password</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="label__confirm_password">
-           <property name="font">
-            <font>
-             <pointsize>13</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Confirm password</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QLineEdit" name="label_confirm_password">
-           <property name="echoMode">
-            <enum>QLineEdit::Password</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QLineEdit" name="edit_surname"/>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_surname">
-           <property name="font">
-            <font>
-             <pointsize>13</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Surname</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_name">
-           <property name="font">
-            <font>
-             <pointsize>13</pointsize>
-            </font>
-           </property>
-           <property name="text">
-            <string>Name</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="edit_name"/>
-         </item>
-        </layout>
-       </item>
-       <item row="1" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout_3">
-         <property name="spacing">
-          <number>20</number>
-         </property>
-         <property name="leftMargin">
-          <number>155</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QPushButton" name="button_cancel">
-           <property name="text">
-            <string>Cancel</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="button_sign_up">
-           <property name="text">
-            <string>Sign Up</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </item>
-     <item row="1" column="2">
-      <spacer name="horizontalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+       <property name="cursorPosition">
+        <number>0</number>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
+       <property name="placeholderText">
+        <string>Last Name</string>
        </property>
-      </spacer>
+      </widget>
      </item>
      <item row="1" column="0">
-      <spacer name="horizontalSpacer_5">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
+      <widget class="QLineEdit" name="edit_email">
+       <property name="minimumSize">
         <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="2" column="1">
-      <spacer name="verticalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
+         <width>200</width>
          <height>40</height>
         </size>
        </property>
-      </spacer>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(230, 230, 230);
+color:rgb(188, 188, 188);
+font: 75 8pt &quot;SansSerif&quot;;
+border-style:solid;
+border-width:2px;
+border-radius:11px;
+border-color:rgb(225, 225, 225);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Email</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="edit_login">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(230, 230, 230);
+color:rgb(188, 188, 188);
+font: 75 8pt &quot;SansSerif&quot;;
+border-style:solid;
+border-width:2px;
+border-radius:11px;
+border-color:rgb(225, 225, 225);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="placeholderText">
+        <string>Nickname</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLineEdit" name="edit_password">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(230, 230, 230);
+color:rgb(188, 188, 188);
+font: 75 8pt &quot;SansSerif&quot;;
+border-style:solid;
+border-width:2px;
+border-radius:11px;
+border-color:rgb(225, 225, 225);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
+       <property name="placeholderText">
+        <string>Password</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="edit_confirm_password">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(230, 230, 230);
+color:rgb(188, 188, 188);
+font: 75 8pt &quot;SansSerif&quot;;
+border-style:solid;
+border-width:2px;
+border-radius:11px;
+border-color:rgb(225, 225, 225);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
+       <property name="placeholderText">
+        <string>Confirm Password</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLineEdit" name="edit_name">
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color:rgb(230, 230, 230);
+color:rgb(188, 188, 188);
+font: 75 8pt &quot;SansSerif&quot;;
+border-style:solid;
+border-width:2px;
+border-radius:11px;
+border-color:rgb(225, 225, 225);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+       <property name="placeholderText">
+        <string>First Name</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLabel" name="label_password_error">
+       <property name="font">
+        <font>
+         <family>Sans Serif</family>
+         <pointsize>8</pointsize>
+         <weight>50</weight>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 8pt &quot;Sans Serif&quot;;
+color: rgb(255, 47, 57);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
      </item>
     </layout>
+   </widget>
+   <widget class="QPushButton" name="button_sign_up">
+    <property name="geometry">
+     <rect>
+      <x>243</x>
+      <y>262</y>
+      <width>110</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:rgb(1, 107, 229);
+color:white;
+font: 75 10pt &quot;SansSerif&quot;;
+border-style:outset;
+border-width:2px;
+border-radius:10px;
+border-color:white;</string>
+    </property>
+    <property name="text">
+     <string>Create Account</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_cancel">
+    <property name="geometry">
+     <rect>
+      <x>243</x>
+      <y>312</y>
+      <width>110</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: transparent;
+font: 75 8pt &quot;SansSerif&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Cancel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_registration">
+    <property name="geometry">
+     <rect>
+      <x>243</x>
+      <y>22</y>
+      <width>115</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SansSerif</family>
+      <pointsize>16</pointsize>
+      <weight>9</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 16pt &quot;SansSerif&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Registration</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_nickname_error">
+    <property name="geometry">
+     <rect>
+      <x>505</x>
+      <y>140</y>
+      <width>71</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Sans Serif</family>
+      <pointsize>8</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 8pt &quot;Sans Serif&quot;;
+color: rgb(255, 47, 57);
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -218,7 +321,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>552</width>
+     <width>592</width>
      <height>21</height>
     </rect>
    </property>
