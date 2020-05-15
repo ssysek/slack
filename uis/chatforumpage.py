@@ -8,6 +8,7 @@
 import requests
 from PyQt5 import QtCore, QtGui, QtWidgets
 from resources.stylesheets import *
+from uis.resources.stylesheets import *
 
 from uis.notesmainpage import Ui_MainNotesWindow
 
@@ -29,8 +30,10 @@ class Ui_MainWindow(object):
         self.listWidget_chanells = QtWidgets.QListWidget(self.centralwidget)
         self.listWidget_chanells.setObjectName("listWidget_chanells")
         self.gridLayout.addWidget(self.listWidget_chanells, 2, 1, 1, 1)
+
         self.listWidget_chats = QtWidgets.QListWidget(self.centralwidget)
         self.listWidget_chats.setObjectName("listWidget_chats")
+
         self.gridLayout.addWidget(self.listWidget_chats, 4, 1, 1, 1)
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setObjectName("label")
@@ -47,19 +50,14 @@ class Ui_MainWindow(object):
         self.button_notes = QtWidgets.QPushButton(self.centralwidget)
         self.button_notes.setObjectName("button_go_to_notes")
         self.gridLayout.addWidget(self.button_notes, 4, 0, 1, 1)
-        self.button_notes.setIcon(QtGui.QIcon('resources/notes.png'))
-        self.button_notes.setIconSize(QtCore.QSize(100, 100))
-        self.button_notes.setStyleSheet(button_with_image_style_sheet)
-        self.button_notes.clicked.connect(self.goToNotes)
+
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setObjectName("label_3")
         self.gridLayout.addWidget(self.label_3, 3, 1, 1, 1)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
         self.verticalLayout_3.setSpacing(6)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.label_opened_box = QtWidgets.QLabel(self.centralwidget)
-        self.label_opened_box.setObjectName("label_opened_box")
-        self.verticalLayout_3.addWidget(self.label_opened_box)
+
         self.listWidget_opened_box = QtWidgets.QListWidget(self.centralwidget)
         self.listWidget_opened_box.setObjectName("listWidget_opened_box")
         self.verticalLayout_3.addWidget(self.listWidget_opened_box)
@@ -83,6 +81,11 @@ class Ui_MainWindow(object):
         self.button_return = QtWidgets.QPushButton(self.centralwidget)
         self.button_return.setObjectName("button_return")
         self.horizontalLayout_4.addWidget(self.button_return)
+        spacerItem = QtWidgets.QSpacerItem(140, 10, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem)
+        self.label_opened_box = QtWidgets.QLabel(self.centralwidget)
+        self.label_opened_box.setObjectName("label_opened_box")
+        self.horizontalLayout_4.addWidget(self.label_opened_box)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem1)
         self.button_log_out = QtWidgets.QPushButton(self.centralwidget)
@@ -109,10 +112,34 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+
+        MainWindow.setStyleSheet(gradient_style_sheet)
+        self.centralwidget.setStyleSheet(transparent_background_style_sheet)
+
+        self.button_log_out.setStyleSheet(button_for_logging_style_sheet)
+        self.button_send_message.setStyleSheet(button_for_logging_style_sheet)
+        self.lineEdit.setStyleSheet(colored_line_edit_style_sheet)
+        self.label.setStyleSheet(pretty_small_label_style_sheet)
+        self.label_2.setStyleSheet(pretty_small_label_style_sheet)
+        self.label_3.setStyleSheet(pretty_small_label_style_sheet)
+        self.label_4.setStyleSheet(pretty_small_label_style_sheet)
+        self.label_opened_box.setStyleSheet(pretty_big_label_style_sheet)
+
+
+        self.return_pixmap = QtGui.QPixmap("resources/return.png")
+        self.return_pixmap = self.return_pixmap.scaled(QtCore.QSize(32,32))
+        self.icon = QtGui.QIcon(self.return_pixmap)
+        self.button_return.setIcon(self.icon)
+        self.button_return.setIconSize(QtCore.QSize(32, 32))
+        self.button_return.setStyleSheet(button_with_image_style_sheet)
+
+
         self.button_notes.setIcon(QtGui.QIcon('resources/notes.png'))
         self.button_notes.setIconSize(QtCore.QSize(100, 100))
         self.button_notes.setStyleSheet(button_with_image_style_sheet)
         self.button_notes.clicked.connect(self.goToNotes)
+
+
 
         self.button_log_out.clicked.connect(self.clicked_log_out)
         self.button_return.clicked.connect(self.clicked_return)
@@ -130,9 +157,8 @@ class Ui_MainWindow(object):
         self.label_4.setText(_translate("MainWindow", "Channels"))
         self.label_2.setText(_translate("MainWindow", "Notes"))
         self.label_3.setText(_translate("MainWindow", "Chats"))
-        self.label_opened_box.setText(_translate("MainWindow", "opened box"))
+        self.label_opened_box.setText(_translate("MainWindow", "Open chat:"))
         self.button_send_message.setText(_translate("MainWindow", "send message"))
-        self.button_return.setText(_translate("MainWindow", "Return"))
         self.button_log_out.setText(_translate("MainWindow", "LogOut"))
 
 
@@ -166,6 +192,9 @@ class Ui_MainWindow(object):
 
     def getForumWidgetButton(self, object):
         widgetButton = QtWidgets.QPushButton(object[0])
+
+        widgetButton.setStyleSheet(button_small_blue_style_sheet)
+
         widgetButton.clicked.connect(lambda: self.changeChannelButtons(self.listWidget_chanells, object[1]))
         return widgetButton
 
@@ -188,11 +217,13 @@ class Ui_MainWindow(object):
 
     def getChannelWidgetButton(self, object):
         widgetButton = QtWidgets.QPushButton(object)
+        widgetButton.setStyleSheet(button_small_blue_style_sheet)
         widgetButton.clicked.connect(lambda: self.setUpMessages(object, object))
         return widgetButton
 
     def getNotesWidgetButton(self, object):
         widgetButton = QtWidgets.QPushButton(object)
+
         widgetButton.clicked.connect(lambda: self.printSecond('1'))
         return widgetButton
 
@@ -211,7 +242,7 @@ class Ui_MainWindow(object):
         #TODO: podmienić na konkretne channels, nie jeden statyczny
         self.loadMessagesFromDataBase(2)
 
-        self.label_opened_box.setText(arg)
+        self.label_opened_box.setText(arg+ ":")
         self.label_opened_box.adjustSize()
         self.actual_box = id
         try:

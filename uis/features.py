@@ -9,6 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from uis.chatforumpage import Ui_MainWindow as Ui_ChatWindow
+from uis.resources.stylesheets import *
 
 class Ui_FeaturesWindow(object):
     def __init__(self, parent=None, user=None):
@@ -141,6 +142,36 @@ class Ui_FeaturesWindow(object):
         QtCore.QMetaObject.connectSlotsByName(FeaturesWindow)
 
 
+        FeaturesWindow.setStyleSheet(gradient_style_sheet)
+        self.centralwidget.setStyleSheet(transparent_background_style_sheet)
+
+
+
+        self.return_pixmap = QtGui.QPixmap("resources/return.png")
+        self.return_pixmap = self.return_pixmap.scaled(QtCore.QSize(32,32))
+        self.icon = QtGui.QIcon(self.return_pixmap)
+        self.button_return.setIcon(self.icon)
+        self.button_return.setIconSize(QtCore.QSize(32, 32))
+
+        self.store_notes_pixmap = QtGui.QPixmap("resources/notes.png")
+        self.store_notes_pixmap = self.store_notes_pixmap.scaled(QtCore.QSize(64,64))
+        self.store_notes_icon = QtGui.QIcon(self.store_notes_pixmap)
+        self.button_store_notes.setIcon(self.store_notes_icon)
+        self.button_store_notes.setIconSize(QtCore.QSize(64,64))
+
+        self.chat_with_friends_pixmap = QtGui.QPixmap("resources/messages.png")
+        self.chat_with_friends_pixmap = self.chat_with_friends_pixmap.scaled(QtCore.QSize(64,64))
+        self.chat_with_friends_icon = QtGui.QIcon(self.chat_with_friends_pixmap)
+        self.button_chat_with_friends.setIcon(self.chat_with_friends_icon)
+        self.button_chat_with_friends.setIconSize(QtCore.QSize(64,64))
+
+        self.create_groups_pixmap = QtGui.QPixmap("resources/groups.png")
+        self.create_groups_pixmap = self.create_groups_pixmap.scaled(QtCore.QSize(64,64))
+        self.create_groups_icon = QtGui.QIcon(self.create_groups_pixmap)
+        self.button_create_groups.setIcon(self.create_groups_icon)
+        self.button_create_groups.setIconSize(QtCore.QSize(64,64))
+
+
         self.button_chat_with_friends.clicked.connect(self.clicked_chat_with_friends)
         self.button_return.clicked.connect(self.clicked_return)
         self.button_create_groups.clicked.connect(self.clicked_create_groups)
@@ -149,17 +180,13 @@ class Ui_FeaturesWindow(object):
     def retranslateUi(self, FeaturesWindow):
         _translate = QtCore.QCoreApplication.translate
         FeaturesWindow.setWindowTitle(_translate("FeaturesWindow", "MainWindow"))
-        self.button_store_notes.setText(_translate("FeaturesWindow", "Store notes"))
         self.label.setText(_translate("FeaturesWindow", "<html><head/><body><p>A full ecosystem of tools</p><p>within a single web app.</p></body></html>"))
         self.label_5.setText(_translate("FeaturesWindow", "Chat with your friends"))
         self.label_7.setText(_translate("FeaturesWindow", "<html><head/><body><p>contact with them individually</p><p>or within groupchats</p></body></html>"))
         self.label_2.setText(_translate("FeaturesWindow", "Create groups"))
         self.label_3.setText(_translate("FeaturesWindow", "<html><head/><body><p>collaborate and communicate </p><p>easier with your team</p></body></html>"))
-        self.button_chat_with_friends.setText(_translate("FeaturesWindow", "Chat with your friends"))
         self.label_4.setText(_translate("FeaturesWindow", "Store notes"))
         self.label_6.setText(_translate("FeaturesWindow", "<html><head/><body><p>keep all your important</p><p>documents in one place</p></body></html>"))
-        self.button_return.setText(_translate("FeaturesWindow", "Return"))
-        self.button_create_groups.setText(_translate("FeaturesWindow", "Create groups"))
 
     def clicked_chat_with_friends(self):
         self.main_window = QtWidgets.QMainWindow()

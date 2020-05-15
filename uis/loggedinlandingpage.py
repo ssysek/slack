@@ -12,6 +12,7 @@ from uis.features import Ui_FeaturesWindow
 from uis.contactpage import Ui_ContactWindow
 from uis.registrationpage import Ui_RegistrationWindow
 from uis.chatforumpage import Ui_MainWindow as Ui_ChatWindow
+from uis.resources.stylesheets import *
 
 
 class Ui_MainWindow(object):
@@ -86,11 +87,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout.addItem(spacerItem3)
         self.horizontalLayout_3.addLayout(self.horizontalLayout)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_2.setSpacing(20)
-        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.button_search = QtWidgets.QPushButton(self.centralwidget)
-        self.button_search.setObjectName("button_search")
-        self.horizontalLayout_2.addWidget(self.button_search)
         self.button_log_out = QtWidgets.QPushButton(self.centralwidget)
         self.button_log_out.setObjectName("button_log_out")
         self.horizontalLayout_2.addWidget(self.button_log_out)
@@ -98,6 +94,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.setStretch(2, 15)
         self.horizontalLayout_3.setStretch(3, 5)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
+        self.horizontalLayout_2.setSpacing(20)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        self.button_search = QtWidgets.QPushButton(self.centralwidget)
+        self.button_search.setObjectName("button_search")
+        self.horizontalLayout_2.addWidget(self.button_search)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setHorizontalSpacing(20)
         self.gridLayout.setVerticalSpacing(0)
@@ -205,6 +206,30 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+
+        MainWindow.setStyleSheet(gradient_style_sheet)
+        self.centralwidget.setStyleSheet(transparent_background_style_sheet)
+
+        self.button_home.setStyleSheet(button_with_image_style_sheet)
+        self.button_log_out.setStyleSheet(button_for_logging_style_sheet)
+        self.button_search.setStyleSheet(button_with_image_style_sheet)
+        self.butto_open_notes.setStyleSheet(button_big_blue_style_sheet)
+        self.button_open_groups.setStyleSheet(button_big_blue_style_sheet)
+        self.button_open_chats.setStyleSheet(button_big_blue_style_sheet)
+
+        self.home_pixmap = QtGui.QPixmap("resources/home.png")
+        self.home_pixmap = self.home_pixmap.scaled(QtCore.QSize(32,32))
+        self.icon = QtGui.QIcon(self.home_pixmap)
+        self.button_home.setIcon(self.icon)
+        self.button_home.setIconSize(QtCore.QSize(32, 32))
+
+        self.pixmap = QtGui.QPixmap("resources/search.png")
+        self.pixmap = self.pixmap.scaled(QtCore.QSize(32,32))
+        self.icon = QtGui.QIcon(self.pixmap)
+        self.button_search.setIcon(self.icon)
+        self.button_search.setIconSize(QtCore.QSize(32, 32))
+
+
         self.button_about.clicked.connect(self.clicked_about)
         self.button_contact.clicked.connect(self.clicked_contact)
         self.button_features.clicked.connect(self.clicked_features)
@@ -218,13 +243,11 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.button_home.setText(_translate("MainWindow", "Home"))
         self.button_contact.setText(_translate("MainWindow", "Contact"))
         self.button_about.setText(_translate("MainWindow", "About"))
         self.button_features.setText(_translate("MainWindow", "Features"))
         self.label.setText(_translate("MainWindow", "Hello: "))
         self.label_username.setText(_translate("MainWindow", "username"))
-        self.button_search.setText(_translate("MainWindow", "Search"))
         self.button_log_out.setText(_translate("MainWindow", "LogOut"))
         self.label_main_text.setText(_translate("MainWindow", "<html><head/><body><p>Communicate and </p><p>learn easier.</p></body></html>"))
         self.label_description.setText(_translate("MainWindow", "<html><head/><body><p>A web app that makes communication simpler and</p><p>work more productive.</p></body></html>"))

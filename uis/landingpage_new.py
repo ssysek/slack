@@ -30,7 +30,6 @@ class Ui_MainWindow(object):
         MainWindow.setEnabled(True)
         MainWindow.resize(1200, 600)
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
-        MainWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -38,7 +37,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
         self.centralwidget.setSizePolicy(sizePolicy)
         self.centralwidget.setObjectName("centralwidget")
-        self.centralwidget.setStyleSheet(transparent_background_style_sheet)
+
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
@@ -47,12 +46,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.button_home = QtWidgets.QPushButton(self.centralwidget)
         self.button_home.setObjectName("button_home")
-        self.home_pixmap = QtGui.QPixmap("resources/icons8-home-256.png")
-        self.home_pixmap = self.home_pixmap.scaled(QtCore.QSize(32,32))
-        self.icon = QtGui.QIcon(self.home_pixmap)
-        self.button_home.setIcon(self.icon)
-        self.button_home.setIconSize(QtCore.QSize(32, 32))
-        self.button_home.setStyleSheet(button_with_image_style_sheet)
         self.horizontalLayout_3.addWidget(self.button_home)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem)
@@ -94,7 +87,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.button_log_in = QtWidgets.QPushButton(self.centralwidget)
         self.button_log_in.setObjectName("button_log_in")
-        self.button_log_in.setStyleSheet(button_log_in_style_sheet)
+
         self.horizontalLayout_2.addWidget(self.button_log_in)
         self.horizontalLayout_3.addLayout(self.horizontalLayout_2)
         self.horizontalLayout_3.setStretch(2, 15)
@@ -102,12 +95,8 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.button_search = QtWidgets.QPushButton(self.centralwidget)
         self.button_search.setObjectName("button_search")
-        self.pixmap = QtGui.QPixmap("resources/icons8-search-192.png")
-        self.pixmap = self.pixmap.scaled(QtCore.QSize(32,32))
-        self.icon = QtGui.QIcon(self.pixmap)
-        self.button_search.setIcon(self.icon)
-        self.button_search.setIconSize(QtCore.QSize(32, 32))
-        self.button_search.setStyleSheet(button_with_image_style_sheet)
+
+
         self.horizontalLayout_2.addWidget(self.button_search)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setHorizontalSpacing(20)
@@ -173,7 +162,6 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.button_create_account.sizePolicy().hasHeightForWidth())
         self.button_create_account.setSizePolicy(sizePolicy)
-        self.button_create_account.setStyleSheet(button_create_account_style_sheet)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -362,7 +350,28 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        
+
+
+        # stylesheets
+        MainWindow.setStyleSheet(gradient_style_sheet)
+        self.centralwidget.setStyleSheet(transparent_background_style_sheet)
+        self.button_home.setStyleSheet(button_with_image_style_sheet)
+        self.button_log_in.setStyleSheet(button_for_logging_style_sheet)
+        self.button_search.setStyleSheet(button_with_image_style_sheet)
+        self.button_create_account.setStyleSheet(button_big_blue_style_sheet)
+
+        self.home_pixmap = QtGui.QPixmap("resources/home.png")
+        self.home_pixmap = self.home_pixmap.scaled(QtCore.QSize(32,32))
+        self.icon = QtGui.QIcon(self.home_pixmap)
+        self.button_home.setIcon(self.icon)
+        self.button_home.setIconSize(QtCore.QSize(32, 32))
+
+        self.pixmap = QtGui.QPixmap("resources/search.png")
+        self.pixmap = self.pixmap.scaled(QtCore.QSize(32,32))
+        self.icon = QtGui.QIcon(self.pixmap)
+        self.button_search.setIcon(self.icon)
+        self.button_search.setIconSize(QtCore.QSize(32, 32))
+
         # tu wstawić logikę strony
         self.button_about.clicked.connect(self.clicked_about)
         self.button_contact.clicked.connect(self.clicked_contact)
