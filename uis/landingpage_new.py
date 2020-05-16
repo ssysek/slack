@@ -8,12 +8,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from features import Ui_FeaturesWindow
-from contactpage import Ui_ContactWindow
-from loginpage_new import Ui_LoginpageWindow
-from registrationpage_new import Ui_RegistrationWindow
-from loggedinlandingpage import Ui_MainWindow as Ui_LoggedInWindow
-from resources.stylesheets import *
+from uis.features import Ui_FeaturesWindow
+from uis.contactpage import Ui_ContactWindow
+from uis.loginpage_new import Ui_LoginpageWindow
+from uis.registrationpage_new import Ui_RegistrationWindow
+from uis.loggedinlandingpage import Ui_MainWindow as Ui_LoggedInWindow
+from uis.resources.stylesheets import *
 
 QtGui.QFontDatabase.addApplicationFont(":/resources/OpenSans-Regular.ttf")
 
@@ -402,7 +402,7 @@ class Ui_MainWindow(object):
     def clicked_contact(self):
         print("contact")
         self.contact_window = QtWidgets.QMainWindow()
-        self.contact_window_ui = Ui_ContactWindow(self)
+        self.contact_window_ui = Ui_ContactWindow()
         self.contact_window_ui.setupUi(self.contact_window)
 
         self.window.hide()
