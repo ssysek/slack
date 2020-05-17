@@ -24,6 +24,7 @@ create table if not exists forum_names
 (
     forum_id serial,
     forum_name varchar(100),
+    image integer,
     constraint forum_id_pk primary key (forum_id)
 );
 
@@ -38,6 +39,7 @@ create table if not exists permissions
 create table if not exists chats
 (
     chat_id serial,
+    chat_name varchar(100),
     upper_forum_id integer,
     constraint chat_id_pk primary key (chat_id),
     constraint upper_forum_id_fk foreign key (upper_forum_id) references forum_names(forum_id)
