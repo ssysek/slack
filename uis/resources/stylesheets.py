@@ -72,3 +72,13 @@ button_small_blue_style_sheet = \
     + "border-color:rgb(1, 107, 229);\n" \
     + "padding: 2px 3px;\n" \
     + "}"
+
+border_style_sheet = \
+    "* {" \
+    + "border-style:outset;\n" \
+    + "font: 75 10pt \"OpenSans\";\n" \
+    + "border-width:2px;\n" \
+    + "border-radius:9px;\n" \
+    + "border-color:rgb(199, 181, 245);\n" \
+    + "padding: 2px 3px;\n" \
+    + "}"

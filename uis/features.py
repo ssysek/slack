@@ -9,6 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from uis.chatforumpage import Ui_MainWindow as Ui_ChatWindow
+from uis.notesmainpage import Ui_MainNotesWindow
 from uis.resources.stylesheets import *
 
 class Ui_FeaturesWindow(object):
@@ -205,6 +206,12 @@ class Ui_FeaturesWindow(object):
 
     def clicked_store_notes(self):
         print("store notes")
+        self.notes_window = QtWidgets.QMainWindow()
+        self.notes_window_ui = Ui_MainNotesWindow(self, self.loged_in_user)
+        self.notes_window_ui.setupUi(self.notes_window)
+
+        self.window.hide()
+        self.notes_window.show()
 
 if __name__ == "__main__":
     import sys
