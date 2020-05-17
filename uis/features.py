@@ -190,7 +190,7 @@ class Ui_FeaturesWindow(object):
 
     def clicked_chat_with_friends(self):
         self.main_window = QtWidgets.QMainWindow()
-        self.main_window_ui = Ui_ChatWindow(self)
+        self.main_window_ui = Ui_ChatWindow(self, self.loged_in_user)
         self.main_window_ui.setupUi(self.main_window)
         self.main_window.show()
         self.window.hide()

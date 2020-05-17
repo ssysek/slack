@@ -7,7 +7,6 @@
 # WARNING! All changes made in this file will be lost!
 import requests
 from PyQt5 import QtCore, QtGui, QtWidgets
-from resources.stylesheets import *
 from uis.resources.stylesheets import *
 
 from uis.notesmainpage import Ui_MainNotesWindow
@@ -17,6 +16,8 @@ class Ui_MainWindow(object):
     def __init__(self, parent=None, logged_in_user = None):
         self.parent = parent
         self.loged_in_user = logged_in_user
+        self.forums = []
+        self.chats = []
 
     def setupUi(self, MainWindow):
         self.window = MainWindow
@@ -146,8 +147,7 @@ class Ui_MainWindow(object):
 
 
         self.actual_box = None
-        self.messages = [('Adam1', 'Wiadomosc1'), ('Adam2', 'Wiadomosc2'), ('Adam3', 'Wiadomosc3'),
-                         ('Adam4', 'Wiadomosc4'), ('Adam5', 'Wiadomosc5')]
+        self.messages = []
 
 
     def retranslateUi(self, MainWindow):
@@ -161,11 +161,29 @@ class Ui_MainWindow(object):
         self.button_send_message.setText(_translate("MainWindow", "send message"))
         self.button_log_out.setText(_translate("MainWindow", "LogOut"))
 
+    def loadPrivateChatsForUser(self):
+        url = "http://localhost:86/user_chats?user_id="
+        url +=str(1)
+        messages = requests.post(url).json()
+        res = []
+        for i in messages:
+            res.append(str(i["chat_id"]))
+        return res
+
+#    insert    into    posts    values(1, 1, 1, 'Lorem ipsum');
+# TODO: podmienić hard coded chat_id na aktualny chat_id
+    def sendNewMessage(self):
+        url = "http://localhost:86/add_new_post"
+        if(self.lineEdit.text()!=""):
+            register_request = requests.post(url,
+                                             json={"owner_id": self.loged_in_user[0], "chat_id": 2, "post_content": self.lineEdit.text()})
 
     def doSomething(self):
-        self.changeForumButtons(self.listWidget_forums,
-                                [['test1', ['bla', 'ah', 'no']], ['haha', ['1', '2']], ['przycisk', ['a', 'b', 'c']]])
-        self.changeChannelButtons(self.listWidget_chats, ['chat1', 'aga', 'bla', 'oj'])
+        self.forums = self.loadForumsFromDataBase()
+        self.changeForumButtons(self.listWidget_forums, self.forums)
+
+        self.chats = self.loadPrivateChatsForUser()
+        self.changeChannelButtons(self.listWidget_chats, self.chats)
 
 
         # statycznie załadowane messages z chatu nr 1
@@ -192,9 +210,9 @@ class Ui_MainWindow(object):
 
     def getForumWidgetButton(self, object):
         widgetButton = QtWidgets.QPushButton(object[0])
-
         widgetButton.setStyleSheet(button_small_blue_style_sheet)
 
+        # TODO podmienić na ładowanie z bazy
         widgetButton.clicked.connect(lambda: self.changeChannelButtons(self.listWidget_chanells, object[1]))
         return widgetButton
 
@@ -274,7 +292,7 @@ class Ui_MainWindow(object):
             self.listWidget_opened_box.setItemWidget(itemN, widget)
 
     def saveMessageClicked(self):
-        self.addMessage(self.lineEdit.text(), 'Autor Jakis')
+        self.sendNewMessage()
         self.lineEdit.clear()
         self.loadMessages()
 
@@ -316,6 +334,26 @@ class Ui_MainWindow(object):
                 messages_to_print.append(("Unkown", i["post_content"]))
         self.messages = messages_to_print
 
+    def loadForumsFromDataBase(self):
+        url = "http://localhost:86/user_forums?permitted_user="
+        url += str(self.loged_in_user[0])
+        result = []
+        forums = requests.post(url).json()
+        print(forums)
+        for i in forums:
+            chats = self.loadChatsForForum(i["forum_id"])
+            print(chats)
+            result.append([i["forum_name"], chats])
+        return result
+
+    def loadChatsForForum(self, forum_id):
+        url = "http://localhost:86/chats_inside_forum?upper_forum_id="
+        url += str(forum_id)
+        message = requests.post(url).json()
+        res = []
+        for i in message:
+            res.append(str(i["chat_id"]))
+        return res
 
 if __name__ == "__main__":
     import sys
