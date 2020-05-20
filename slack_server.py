@@ -11,6 +11,8 @@ from requests_on_REST.register import register
 from requests_on_REST.chats_inside_forum import chats_inside_forum
 from requests_on_REST.chats_for_user_without_forums import chats_for_user_without_forums
 from requests_on_REST.user_forums import user_forums
+from requests_on_REST.add_user_to_chat import add_user_to_chat
+from requests_on_REST.add_user_to_forum import add_user_to_forum
 
 
 HOST_PORT = 86
@@ -39,6 +41,7 @@ class MyServer(BaseHTTPRequestHandler):
         qs = parse_qs(full_path.query)
 
         if path == "/user_id":
+            '''example path: http://localhost:86/user_id?user_id=1'''
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
@@ -46,6 +49,7 @@ class MyServer(BaseHTTPRequestHandler):
                 orient='records', date_format='iso'), "utf-8"))
 
         elif path == "/chats_inside_forum":
+            '''example path: http://localhost:86/chats_inside_forum?upper_forum_id=1'''
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
@@ -53,6 +57,7 @@ class MyServer(BaseHTTPRequestHandler):
                 orient='records', date_format='iso'), "utf-8"))
 
         elif path == "/user_chats":
+            '''example path: http://localhost:86/user_chats?user_id=1'''
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
@@ -60,6 +65,7 @@ class MyServer(BaseHTTPRequestHandler):
                 orient='records', date_format='iso'), "utf-8"))
 
         elif path == "/user_forums":
+            '''example path: http://localhost:86/user_forums?permitted_user=1'''
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
@@ -67,6 +73,7 @@ class MyServer(BaseHTTPRequestHandler):
                 orient='records', date_format='iso'), "utf-8"))
 
         elif path == "/get_all_posts_at_chats":
+            '''example path: http://localhost:86/get_all_posts_at_chats?chat_id=2'''
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
@@ -74,11 +81,32 @@ class MyServer(BaseHTTPRequestHandler):
                 orient='records', date_format='iso'), "utf-8"))
 
         elif path == "/add_new_post":
+            '''Body example: {"owner_id": "2", "chat_id": "2", "post_content": "testowy post"}'''
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
             self.send_response(200)
             self.end_headers()
             add_new_post(body)
+            response = BytesIO()
+            self.wfile.write(response.getvalue())
+
+        elif path == "/add_user_to_chat":
+            '''Body example: {"chat_id": "2", "permitted_user": "2"}'''
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length)
+            self.send_response(200)
+            self.end_headers()
+            add_user_to_chat(body)
+            response = BytesIO()
+            self.wfile.write(response.getvalue())
+
+        elif path == "/add_user_to_forum":
+            '''Body example: {"forum_id": "2", "permitted_user": "2"}'''
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length)
+            self.send_response(200)
+            self.end_headers()
+            add_user_to_forum(body)
             response = BytesIO()
             self.wfile.write(response.getvalue())
 
