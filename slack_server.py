@@ -13,6 +13,7 @@ from requests_on_REST.chats_for_user_without_forums import chats_for_user_withou
 from requests_on_REST.user_forums import user_forums
 from requests_on_REST.add_user_to_chat import add_user_to_chat
 from requests_on_REST.add_user_to_forum import add_user_to_forum
+from requests_on_REST.create_note import create_note
 
 
 HOST_PORT = 86
@@ -107,6 +108,17 @@ class MyServer(BaseHTTPRequestHandler):
             self.send_response(200)
             self.end_headers()
             add_user_to_forum(body)
+            response = BytesIO()
+            self.wfile.write(response.getvalue())
+
+        elif path == "/create_note":
+            '''Body example: {"title": "druga próba",
+            "notes_content": "Ziomki są na pierwszym miejscu.", "owner_id": 2}'''
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length)
+            self.send_response(200)
+            self.end_headers()
+            create_note(body)
             response = BytesIO()
             self.wfile.write(response.getvalue())
 

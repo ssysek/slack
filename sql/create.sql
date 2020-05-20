@@ -53,6 +53,15 @@ create table if not exists chat_permissions
     constraint chat_fk foreign key (permitted_user) references users(user_id)
 );
 
+create table if not exists notes
+(
+    note_id serial,
+    title varchar(50),
+    notes_content varchar(500),
+    owner_id integer not null,
+    constraint notes_fk foreign key (owner_id) references users(user_id)
+);
+
 
 --insert into users values (1, 'Jan', Nowak', 'janek', 'Nowaczek123');
 --insert into posts values (1, 1, 1, 'Lorem ipsum');
