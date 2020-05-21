@@ -55,11 +55,13 @@ colored_line_edit_style_sheet = \
 
 pretty_small_label_style_sheet = \
     "* {" \
+    + "color:rgb(164, 66, 227);\n" \
     + "font: 400 15pt \"OpenSans\";\n" \
     + "}"
 
 pretty_big_label_style_sheet = \
     "* {" \
+    + "color:rgb(164, 66, 227);\n" \
     + "font: 400 25pt \"OpenSans\";\n" \
     + "}"
 

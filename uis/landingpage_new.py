@@ -361,10 +361,10 @@ class Ui_MainWindow(object):
         self.button_create_account.setStyleSheet(button_big_blue_style_sheet)
 
         self.home_pixmap = QtGui.QPixmap("resources/home.png")
-        self.home_pixmap = self.home_pixmap.scaled(QtCore.QSize(32,32))
+        self.home_pixmap = self.home_pixmap.scaled(QtCore.QSize(36,36))
         self.icon = QtGui.QIcon(self.home_pixmap)
         self.button_home.setIcon(self.icon)
-        self.button_home.setIconSize(QtCore.QSize(32, 32))
+        self.button_home.setIconSize(QtCore.QSize(36, 36))
 
         self.pixmap = QtGui.QPixmap("resources/search.png")
         self.pixmap = self.pixmap.scaled(QtCore.QSize(32,32))
