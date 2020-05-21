@@ -5,7 +5,7 @@
 # Created by: PyQt5 UI code generator 5.13.0
 #
 # WARNING! All changes made in this file will be lost!
-
+import requests
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -65,17 +65,7 @@ class Ui_MainNotesWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
 
-        self.addFrames([['notatka 1', 'treść notatki 1', 1], ['notatka2', 'treśc notatki 2', 2],
-                        ['Kolejna notatka', 'Dzisiaj do zrobienia: 1.Nie wiem ', 3],
-                        ["notateczka", 'hmhmhmhmhmhmhmhmmhhmhmhmhmhmmhmhmmhmhmhmhmhh', 4],
-                        ['Notateczkunia', 'nononononononononononononoononononon', 5], ['notatkaaa', 'Co dzisiaj do zrobienia', 6],
-                        ['Kolejna notatka', 'notatka notatka notatka notatka notatka notatka notatka', 7],
-                        ['Kolejna notatka', 'notatka notatka notatka notatka notatka notatka notatka', 8],
-                        ['Kolejna notatka', 'notatka notatka notatka notatka notatka notatka notatka', 9],
-                        ['Kolejna notatka', 'notatka notatka notatka notatka notatka notatka notatka', 10],
-                        ['Kolejna notatka', 'notatka notatka notatka notatka notatka notatka notatka', 11],
-                        ['Kolejna notatka', 'notatka notatka notatka notatka notatka notatka notatka', 12],
-                        ['Kolejna notatka', 'notatka notatka notatka notatka notatka notatka notatka', 13]])
+        self.addFrames()
 
         self.pushButton_Return.clicked.connect(self.clicked_return)
         self.pushButton_LogOut.clicked.connect(self.clicked_log_out)
@@ -88,8 +78,12 @@ class Ui_MainNotesWindow(object):
         self.pushButton_Return.setIconSize(QtCore.QSize(32, 32))
         self.pushButton_Return.setStyleSheet(button_with_image_style_sheet)
 
-        self.pushButton_LogOut.setStyleSheet(button_for_logging_style_sheet)
-        self.pushButton_addNewNote.setStyleSheet(button_small_blue_style_sheet )
+        self.logout_pixmap = QtGui.QPixmap("resources/logout.png")
+        self.logout_pixmap = self.logout_pixmap.scaled(QtCore.QSize(36, 36))
+        self.logout_icon = QtGui.QIcon(self.logout_pixmap)
+        self.pushButton_LogOut.setIcon(self.logout_icon)
+        self.pushButton_LogOut.setIconSize(QtCore.QSize(36, 36))
+        self.pushButton_addNewNote.setStyleSheet(button_small_blue_style_sheet)
 
         MainWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(transparent_background_style_sheet)
@@ -102,10 +96,15 @@ class Ui_MainNotesWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton_addNewNote.setText(_translate("MainWindow", "Add new note"))
-        self.pushButton_LogOut.setText(_translate("MainWindow", "LogOut"))
 
     # object = [title,text,id], objects=[object1,object2,object3,...]
-    def addFrames(self, objects):
+    def addFrames(self):
+        url = "http://localhost:86/read_notes?owner_id="
+        url += str(self.loged_in_user[0])
+
+        notes = requests.post(url).json()
+        for obj in notes:
+            print(obj)
         i = 0
         row = 0
         column = 0
@@ -116,7 +115,7 @@ class Ui_MainNotesWindow(object):
         return_pixmap_delete = return_pixmap_delete.scaled(QtCore.QSize(40, 40))
         icon_delete = QtGui.QIcon(return_pixmap_delete)
 
-        for object in objects:
+        for note in notes:
             frame = QtWidgets.QFrame(self.centralwidget)
             frame.setMinimumSize(QtCore.QSize(180, 160))
             frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -125,23 +124,23 @@ class Ui_MainNotesWindow(object):
             pushButtonFrame = QtWidgets.QPushButton(frame)
             pushButtonFrame.setGeometry(QtCore.QRect(0, 0, 180, 28))
             pushButtonFrame.setObjectName('pushButton'+str(i))
-            pushButtonFrame.setText(object[0])
+            pushButtonFrame.setText(note["title"]) #title
             pushButtonFrame.setStyleSheet(transparent_background_style_sheet)
-            pushButtonFrame.clicked.connect(lambda state, title=object[0], text=object[1], noteId=object[2]: self.clicked_single_note(title, text, noteId))
+            pushButtonFrame.clicked.connect(lambda state, title=note["title"], text=note["notes_content"], noteId=note["note_id"]: self.clicked_single_note(title, text, noteId))
             pushButtonImage = QtWidgets.QPushButton(frame)
             pushButtonImage.setGeometry(QtCore.QRect(0, 30, 180, 130))
             pushButtonImage.setIcon(icon)
             pushButtonImage.setIconSize(QtCore.QSize(100, 100))
             pushButtonImage.setStyleSheet(button_with_image_style_sheet)
             pushButtonImage.clicked.connect(
-                lambda state, title=object[0], text=object[1], noteId=object[2]: self.clicked_single_note(title, text,
+                lambda state, title=note["title"], text=note["notes_content"], noteId=note["note_id"]: self.clicked_single_note(title, text,
                                                                                                      noteId))
             pushButtonDelete = QtWidgets.QPushButton(frame)
             pushButtonDelete.setGeometry(QtCore.QRect(150, 50, 40, 40))
             pushButtonDelete.setIcon(icon_delete)
             pushButtonDelete.setIconSize(QtCore.QSize(40, 40))
             pushButtonDelete.setStyleSheet(button_with_image_style_sheet)
-            pushButtonDelete.clicked.connect(lambda state, noteId=object[2]: self.clicked_delete_note(noteId))
+            pushButtonDelete.clicked.connect(lambda state, noteId=note["note_id"]: self.clicked_delete_note(noteId))
             self.gridLayout.addWidget(frame, row, column, 1, 1)
             if column == 3:
                 column = 0

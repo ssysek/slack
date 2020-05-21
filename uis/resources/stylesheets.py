@@ -1,24 +1,24 @@
 button_for_logging_style_sheet = \
     "* {" \
-    + "background-color:rgb(1, 107, 229);\n" \
+    + "background-color:rgb(128, 45, 181);\n" \
     + "color:white;\n" \
     + "border-style:outset;\n" \
     + "font: 600 13pt \"OpenSans\";\n" \
     + "border-width:2px;\n" \
     + "border-radius:18px;\n" \
-    + "border-color:rgb(1, 107, 229);\n" \
+    + "border-color:rgb(212, 174, 252);\n" \
     + "padding: 4px 4px;\n" \
     + "}"
 
 button_big_blue_style_sheet = \
     "* {" \
-    + "background-color:rgb(1, 107, 229);\n" \
+    + "background-color:rgb(128, 45, 181);\n" \
     + "color:white;\n" \
     + "border-style:outset;\n" \
     + "font: 600 13pt \"OpenSans\";\n" \
     + "border-width:2px;\n" \
     + "border-radius:30px;\n" \
-    + "border-color:rgb(1, 107, 229);\n" \
+    + "border-color:rgb(212, 174, 252);\n" \
     + "padding: 20px 30px;\n" \
     + "}"
 
@@ -63,13 +63,13 @@ pretty_big_label_style_sheet = \
 
 button_small_blue_style_sheet = \
     "* {" \
-    + "background-color:rgb(1, 107, 229);\n" \
+    + "background-color:rgb(128, 45, 181);\n" \
     + "color:white;\n" \
     + "border-style:outset;\n" \
     + "font: 75 13pt \"OpenSans\";\n" \
     + "border-width:2px;\n" \
     + "border-radius:9px;\n" \
-    + "border-color:rgb(1, 107, 229);\n" \
+    + "border-color:rgb(212, 174, 252);\n" \
     + "padding: 2px 3px;\n" \
     + "}"
 
@@ -79,6 +79,6 @@ border_style_sheet = \
     + "font: 75 10pt \"OpenSans\";\n" \
     + "border-width:2px;\n" \
     + "border-radius:9px;\n" \
-    + "border-color:rgb(199, 181, 245);\n" \
+    + "border-color:rgb(212, 174, 252);\n" \
     + "padding: 2px 3px;\n" \
     + "}"

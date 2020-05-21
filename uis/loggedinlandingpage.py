@@ -10,6 +10,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from uis.features import Ui_FeaturesWindow
 from uis.contactpage import Ui_ContactWindow
+from uis.notesmainpage import Ui_MainNotesWindow
 from uis.registrationpage import Ui_RegistrationWindow
 from uis.chatforumpage import Ui_MainWindow as Ui_ChatWindow
 from uis.resources.stylesheets import *
@@ -309,6 +310,12 @@ class Ui_MainWindow(object):
 
     def clicked_open_notes(self):
         print("open notes")
+        self.notes_window = QtWidgets.QMainWindow()
+        self.notes_window_ui = Ui_MainNotesWindow(self, self.logged_in_user)
+        self.notes_window_ui.setupUi(self.notes_window)
+
+        self.window.hide()
+        self.notes_window.show()
 
     def clicked_open_groups(self):
         print("open groups")
