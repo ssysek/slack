@@ -129,7 +129,7 @@ class MyServer(BaseHTTPRequestHandler):
             add_user_to_forum(body)
             response = BytesIO()
             self.wfile.write(response.getvalue())
-            
+
         elif path == "/create_note":
             '''Body example: {"title": "druga próba",
             "notes_content": "Ziomki są na pierwszym miejscu.", "owner_id": 2}'''
