@@ -18,6 +18,7 @@ class Ui_MainWindow(object):
         self.loged_in_user = logged_in_user
         self.forums = []
         self.chats = []
+        self.users = requests.get("http://localhost:86/all_users")
 
     def setupUi(self, MainWindow):
         self.window = MainWindow
@@ -177,6 +178,8 @@ class Ui_MainWindow(object):
         if(self.lineEdit.text()!=""):
             register_request = requests.post(url,
                                              json={"owner_id": self.loged_in_user[0], "chat_id": 2, "post_content": self.lineEdit.text()})
+        self.loadMessagesFromDataBase(2)
+        self.loadMessages()
 
     def doSomething(self):
         self.forums = self.loadForumsFromDataBase()
@@ -320,8 +323,7 @@ class Ui_MainWindow(object):
         url = "http://localhost:86/get_all_posts_at_chats?chat_id="
         url +=str(chat_id)
         messages = requests.post(url)
-        users = requests.get("http://localhost:86/all_users")
-        user_ids = [(i["user_id"], str(i["user_name"]) + " " + str(i["user_surname"])) for i in users.json()]
+        user_ids = [(i["user_id"], str(i["user_name"]) + " " + str(i["user_surname"])) for i in self.users.json()]
         messages_to_print = []
         for i in messages.json():
             message_has_owner = False
