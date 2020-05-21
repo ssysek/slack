@@ -45,6 +45,7 @@ class Ui_MainNotesWindow(object):
         self.horizontalLayout.addItem(spacerItem)
         self.pushButton_addNewNote = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_addNewNote.setObjectName("pushButton_addNewNote")
+        self.pushButton_addNewNote.setMinimumSize(QtCore.QSize(200, 30))
         self.horizontalLayout.addWidget(self.pushButton_addNewNote)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
@@ -77,12 +78,15 @@ class Ui_MainNotesWindow(object):
         self.pushButton_Return.setIcon(self.icon)
         self.pushButton_Return.setIconSize(QtCore.QSize(32, 32))
         self.pushButton_Return.setStyleSheet(button_with_image_style_sheet)
+        self.pushButton_Return.setToolTip("Return")
 
         self.logout_pixmap = QtGui.QPixmap("resources/logout.png")
         self.logout_pixmap = self.logout_pixmap.scaled(QtCore.QSize(36, 36))
         self.logout_icon = QtGui.QIcon(self.logout_pixmap)
         self.pushButton_LogOut.setIcon(self.logout_icon)
         self.pushButton_LogOut.setIconSize(QtCore.QSize(36, 36))
+        self.pushButton_LogOut.setStyleSheet(button_with_image_style_sheet)
+        self.pushButton_LogOut.setToolTip("Log out")
         self.pushButton_addNewNote.setStyleSheet(button_small_blue_style_sheet)
 
         MainWindow.setStyleSheet(gradient_style_sheet)
@@ -98,13 +102,12 @@ class Ui_MainNotesWindow(object):
         self.pushButton_addNewNote.setText(_translate("MainWindow", "Add new note"))
 
     # object = [title,text,id], objects=[object1,object2,object3,...]
+    #adding notes
     def addFrames(self):
         url = "http://localhost:86/read_notes?owner_id="
         url += str(self.loged_in_user[0])
 
         notes = requests.post(url).json()
-        for obj in notes:
-            print(obj)
         i = 0
         row = 0
         column = 0
@@ -149,15 +152,11 @@ class Ui_MainNotesWindow(object):
                 column = column+1
             i = i + 1
 
-    # decide later if we get the data again and only need id for data extraction or if we get it from main page notes info
     def clicked_single_note(self, title, text, id):
         print("Go to single note")
-        # print(title)
-        # print(text)
         print(id)
         self.notes_window = QtWidgets.QMainWindow()
         self.notes_window_ui = Ui_MainNotesPageWindow(self, self.loged_in_user, title, text, id)
-        # self.notes_window_ui = Ui_MainNotesPageWindow(self, self.loged_in_user, "bla", "bla tekst", id)
         self.notes_window_ui.setupUi(self.notes_window)
 
         self.window.hide()

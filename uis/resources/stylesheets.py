@@ -30,6 +30,14 @@ button_with_image_style_sheet = \
     + "font: 200 13pt \"OpenSans\";\n" \
     + "}"
 
+button_with_image_style_sheet_colored_font = \
+    "* {" \
+    + "border-radius:25%;\n" \
+    + "background: transparent;\n" \
+    + "color:rgb(164, 66, 227);\n" \
+    + "font: 450 10pt \"OpenSans\";\n" \
+    + "}"
+
 gradient_style_sheet = \
     "* {" \
     + "border-radius:50%;\n" \
@@ -59,9 +67,21 @@ pretty_small_label_style_sheet = \
     + "font: 400 15pt \"OpenSans\";\n" \
     + "}"
 
+small_label_style_sheet = \
+    "* {" \
+    + "color:rgb(164, 66, 227);\n" \
+    + "font: 450 10pt \"OpenSans\";\n" \
+    + "}"
+
 pretty_big_label_style_sheet = \
     "* {" \
     + "color:rgb(164, 66, 227);\n" \
+    + "font: 400 25pt \"OpenSans\";\n" \
+    + "}"
+
+pretty_big_darker_label_style_sheet = \
+    "* {" \
+    + "color:rgb(126, 52, 173);\n" \
     + "font: 400 25pt \"OpenSans\";\n" \
     + "}"
 

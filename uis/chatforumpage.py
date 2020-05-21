@@ -134,7 +134,7 @@ class Ui_MainWindow(object):
         MainWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(transparent_background_style_sheet)
 
-        self.button_log_out.setStyleSheet(button_for_logging_style_sheet)
+        self.button_log_out.setStyleSheet(button_with_image_style_sheet)
         self.button_send_message.setStyleSheet(button_for_logging_style_sheet)
         self.lineEdit.setStyleSheet(colored_line_edit_style_sheet)
         self.label.setStyleSheet(pretty_small_label_style_sheet)
@@ -155,6 +155,14 @@ class Ui_MainWindow(object):
         self.button_notes.setStyleSheet(button_with_image_style_sheet)
         self.button_notes.clicked.connect(self.goToNotes)
 
+        self.logout_pixmap = QtGui.QPixmap("resources/logout.png")
+        self.logout_pixmap = self.logout_pixmap.scaled(QtCore.QSize(36, 36))
+        self.logout_icon = QtGui.QIcon(self.logout_pixmap)
+        self.button_log_out.setIcon(self.logout_icon)
+        self.button_log_out.setIconSize(QtCore.QSize(36, 36))
+        self.button_log_out.setStyleSheet(button_with_image_style_sheet)
+        self.button_log_out.setToolTip("Log out")
+
         self.button_log_out.clicked.connect(self.clicked_log_out)
         self.button_return.clicked.connect(self.clicked_return)
 
@@ -170,7 +178,6 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "Chats"))
         self.label_opened_box.setText(_translate("MainWindow", "Open chat:"))
         self.button_send_message.setText(_translate("MainWindow", "send message"))
-        self.button_log_out.setText(_translate("MainWindow", "LogOut"))
 
     def loadPrivateChatsForUser(self):
         url = "http://localhost:86/user_chats?user_id="

@@ -65,7 +65,7 @@ class Ui_LoginpageWindow(object):
         self.edit_username.setEnabled(True)
         self.edit_username.setMinimumSize(QtCore.QSize(200, 40))
         self.edit_username.setStyleSheet("font: 75 8pt \"SansSerif\";\n"
-"border-color: rgb(5, 117, 255);\n"
+"border-color: rgb(212, 174, 252);\n"
 "background-color: rgb(247, 248, 255);\n"
 "border-style:solid;\n"
 "border-width:1px;\n"
@@ -89,7 +89,7 @@ class Ui_LoginpageWindow(object):
         self.edit_password = QtWidgets.QLineEdit(self.centralwidget)
         self.edit_password.setMinimumSize(QtCore.QSize(200, 40))
         self.edit_password.setStyleSheet("font: 75 8pt \"SansSerif\";\n"
-"border-color: rgb(5, 117, 255);\n"
+"border-color: rgb(212, 174, 252);\n"
 "background-color: rgb(247, 248, 255);\n"
 "border-style:solid;\n"
 "border-width:1px;\n"
