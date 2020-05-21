@@ -14,6 +14,7 @@ from requests_on_REST.user_forums import user_forums
 from requests_on_REST.add_user_to_chat import add_user_to_chat
 from requests_on_REST.add_user_to_forum import add_user_to_forum
 from requests_on_REST.create_note import create_note
+from requests_on_REST.read_notes import read_notes
 
 
 HOST_PORT = 86
@@ -91,6 +92,24 @@ class MyServer(BaseHTTPRequestHandler):
             response = BytesIO()
             self.wfile.write(response.getvalue())
 
+        elif path == "/register":
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length)
+            self.send_response(200)
+            self.end_headers()
+            register(body)
+            response = BytesIO()
+            self.wfile.write(response.getvalue())
+
+        elif path == "/delete_user":
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length)
+            self.send_response(200)
+            self.end_headers()
+            delete_user(body)
+            response = BytesIO()
+            self.wfile.write(response.getvalue())
+
         elif path == "/add_user_to_chat":
             '''Body example: {"chat_id": "2", "permitted_user": "2"}'''
             content_length = int(self.headers['Content-Length'])
@@ -110,7 +129,7 @@ class MyServer(BaseHTTPRequestHandler):
             add_user_to_forum(body)
             response = BytesIO()
             self.wfile.write(response.getvalue())
-
+            
         elif path == "/create_note":
             '''Body example: {"title": "druga próba",
             "notes_content": "Ziomki są na pierwszym miejscu.", "owner_id": 2}'''
@@ -122,23 +141,13 @@ class MyServer(BaseHTTPRequestHandler):
             response = BytesIO()
             self.wfile.write(response.getvalue())
 
-        elif path == "/register":
-            content_length = int(self.headers['Content-Length'])
-            body = self.rfile.read(content_length)
+        elif path == "/read_notes":
+            '''example path: http://localhost:86/read_notes?owner_id=1'''
             self.send_response(200)
+            self.send_header("Content-type", "application/json")
             self.end_headers()
-            register(body)
-            response = BytesIO()
-            self.wfile.write(response.getvalue())
-
-        elif path == "/delete_user":
-            content_length = int(self.headers['Content-Length'])
-            body = self.rfile.read(content_length)
-            self.send_response(200)
-            self.end_headers()
-            delete_user(body)
-            response = BytesIO()
-            self.wfile.write(response.getvalue())
+            self.wfile.write(bytes(read_notes(qs).to_json(
+                orient='records', date_format='iso'), "utf-8"))
         else:
             self.send_response(200)
             self.send_header("Content-type", "application/json")
