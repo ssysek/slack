@@ -7,7 +7,7 @@ button_for_logging_style_sheet = \
     + "border-width:2px;\n" \
     + "border-radius:18px;\n" \
     + "border-color:rgb(212, 174, 252);\n" \
-    + "padding: 4px 4px;\n" \
+    + "padding: 6px 6px;\n" \
     + "}"
 
 button_big_blue_style_sheet = \
@@ -24,8 +24,10 @@ button_big_blue_style_sheet = \
 
 button_with_image_style_sheet = \
     "* {" \
-    + "border-radius:50%;\n" \
+    + "border-radius:25%;\n" \
     + "background: transparent;\n" \
+    + "color:white;\n" \
+    + "font: 200 13pt \"OpenSans\";\n" \
     + "}"
 
 gradient_style_sheet = \

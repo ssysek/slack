@@ -176,9 +176,9 @@ class Ui_MainWindow(object):
         url = "http://localhost:86/user_chats?user_id="
         url += str(1)
         messages = requests.post(url).json()
-        res = []
+        res = [-1, []]
         for i in messages:
-            res.append(str(i["chat_id"]))
+            res[1].append(str(i["chat_id"]))
         return res
 
     #    insert    into    posts    values(1, 1, 1, 'Lorem ipsum');
@@ -231,8 +231,14 @@ class Ui_MainWindow(object):
         nameWidget.setItemWidget(itemN, widget)
 
     def getForumWidgetButton(self, object):
-        widgetButton = QtWidgets.QPushButton(object[0])
-        widgetButton.setStyleSheet(button_small_blue_style_sheet)
+        widgetButton = QtWidgets.QPushButton()
+        widgetButton.setToolTip(object[0])
+        widgetButton_pixmap = QtGui.QPixmap("resources/groups/g1.png")
+        widgetButton_pixmap = widgetButton_pixmap.scaled(QtCore.QSize(32, 32))
+        widgetButtonicon = QtGui.QIcon(widgetButton_pixmap)
+        widgetButton.setIcon(widgetButtonicon)
+        widgetButton.setIconSize(QtCore.QSize(32, 32))
+        widgetButton.setStyleSheet(button_with_image_style_sheet)
         widgetButton.clicked.connect(lambda: self.changeChannelButtons(self.listWidget_chanells, object))
         return widgetButton
 
@@ -266,19 +272,22 @@ class Ui_MainWindow(object):
 
     def changeChannelButtons(self, nameWidget, objects):
         nameWidget.clear()
-        for object in objects[len(objects)-1]:
-            itemN = QtWidgets.QListWidgetItem()
-            widget = QtWidgets.QWidget()
-            widgetButton = self.getChannelWidgetButton(object)
-            widgetLayout = QtWidgets.QHBoxLayout()
-            widgetLayout.addWidget(widgetButton)
-            widgetLayout.addStretch()
-            widgetLayout.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
-            widget.setLayout(widgetLayout)
-            itemN.setSizeHint(widget.sizeHint())
-            # Add widget to QListWidget funList
-            nameWidget.addItem(itemN)
-            nameWidget.setItemWidget(itemN, widget)
+        try:
+            for object in objects[len(objects)-1]:
+                itemN = QtWidgets.QListWidgetItem()
+                widget = QtWidgets.QWidget()
+                widgetButton = self.getChannelWidgetButton(object)
+                widgetLayout = QtWidgets.QHBoxLayout()
+                widgetLayout.addWidget(widgetButton)
+                widgetLayout.addStretch()
+                widgetLayout.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
+                widget.setLayout(widgetLayout)
+                itemN.setSizeHint(widget.sizeHint())
+                # Add widget to QListWidget funList
+                nameWidget.addItem(itemN)
+                nameWidget.setItemWidget(itemN, widget)
+        except Exception:
+            pass
         itemN = QtWidgets.QListWidgetItem()
         widget = QtWidgets.QWidget()
         widgetButton = self.addChannelButton(objects)
@@ -293,8 +302,14 @@ class Ui_MainWindow(object):
         nameWidget.setItemWidget(itemN, widget)
 
     def getChannelWidgetButton(self, object):
-        widgetButton = QtWidgets.QPushButton(object)
-        widgetButton.setStyleSheet(button_small_blue_style_sheet)
+        widgetButton = QtWidgets.QPushButton()
+        widgetButton_pixmap = QtGui.QPixmap("resources/messages/m1.png")
+        widgetButton_pixmap = widgetButton_pixmap.scaled(QtCore.QSize(32, 32))
+        widgetButtonicon = QtGui.QIcon(widgetButton_pixmap)
+        widgetButton.setIcon(widgetButtonicon)
+        widgetButton.setIconSize(QtCore.QSize(32, 32))
+        widgetButton.setStyleSheet(button_with_image_style_sheet)
+        widgetButton.setToolTip(object)
         widgetButton.clicked.connect(lambda: self.setUpMessages(object, object))
         return widgetButton
 
@@ -314,9 +329,8 @@ class Ui_MainWindow(object):
         self.notes_window.show()
 
     def setUpMessages(self, arg, id):  # arg - name of channel, id - id channel
-
         # TODO: podmienić na konkretne channels, nie jeden statyczny
-        self.loadMessagesFromDataBase(2)
+        self.loadMessagesFromDataBase(id)
 
         self.label_opened_box.setText(arg + ":")
         self.label_opened_box.adjustSize()
