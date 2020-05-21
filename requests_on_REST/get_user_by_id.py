@@ -1,6 +1,7 @@
-import psycopg2
-from config_handler import get_property
 import pandas as pd
+import psycopg2
+
+from config_handler import get_property
 
 
 def get_user_by_id_param(params):

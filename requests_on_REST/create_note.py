@@ -1,6 +1,8 @@
-import psycopg2
-from config_handler import get_property
 import json
+
+import psycopg2
+
+from config_handler import get_property
 
 
 def create_note(body):
@@ -13,10 +15,11 @@ def create_note(body):
     cursor = connection.cursor()
     cursor.execute("""select MAX(note_id) from notes;""")
     max_id = cursor.fetchall()
-    new_id=max_id[0][0]+1
+    new_id = max_id[0][0] + 1
 
     loaded_json = json.loads(body)
     sql = """insert into notes values (%s, %s, %s, %s)"""
-    new_post = (new_id, loaded_json['title'], loaded_json['notes_content'], loaded_json['owner_id'])
+    new_post = (new_id, loaded_json['title'], loaded_json['notes_content'],
+                loaded_json['owner_id'])
     cursor.execute(sql, new_post)
     connection.commit()

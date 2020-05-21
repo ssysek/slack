@@ -1,6 +1,7 @@
-import psycopg2
-from config_handler import get_property
 import pandas as pd
+import psycopg2
+
+from config_handler import get_property
 
 
 def chats_inside_forum(params):

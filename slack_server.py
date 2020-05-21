@@ -1,21 +1,22 @@
 import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from urllib.parse import urlparse, parse_qs
 from io import BytesIO
-from requests_on_REST.delete_user import delete_user
-from requests_on_REST.get_all_users import get_all_users
-from requests_on_REST.get_user_by_id import get_user_by_id_param
-from requests_on_REST.get_all_posts_at_forum import get_all_posts_at_chat
+from urllib.parse import urlparse, parse_qs
+
 from requests_on_REST.add_new_post import add_new_post
-from requests_on_REST.register import register
-from requests_on_REST.chats_inside_forum import chats_inside_forum
-from requests_on_REST.chats_for_user_without_forums import chats_for_user_without_forums
-from requests_on_REST.user_forums import user_forums
 from requests_on_REST.add_user_to_chat import add_user_to_chat
 from requests_on_REST.add_user_to_forum import add_user_to_forum
+from requests_on_REST.chats_for_user_without_forums import \
+    chats_for_user_without_forums
+from requests_on_REST.chats_inside_forum import chats_inside_forum
 from requests_on_REST.create_note import create_note
+from requests_on_REST.delete_user import delete_user
+from requests_on_REST.get_all_posts_at_forum import get_all_posts_at_chat
+from requests_on_REST.get_all_users import get_all_users
+from requests_on_REST.get_user_by_id import get_user_by_id_param
 from requests_on_REST.read_notes import read_notes
-
+from requests_on_REST.register import register
+from requests_on_REST.user_forums import user_forums
 
 HOST_PORT = 86
 
@@ -51,7 +52,8 @@ class MyServer(BaseHTTPRequestHandler):
                 orient='records', date_format='iso'), "utf-8"))
 
         elif path == "/chats_inside_forum":
-            '''example path: http://localhost:86/chats_inside_forum?upper_forum_id=1'''
+            '''example path: http://localhost:86/chats_inside_forum
+            ?upper_forum_id=1 '''
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
@@ -67,7 +69,8 @@ class MyServer(BaseHTTPRequestHandler):
                 orient='records', date_format='iso'), "utf-8"))
 
         elif path == "/user_forums":
-            '''example path: http://localhost:86/user_forums?permitted_user=1'''
+            '''example path: http://localhost:86/user_forums?permitted_user
+            =1 '''
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
@@ -75,7 +78,8 @@ class MyServer(BaseHTTPRequestHandler):
                 orient='records', date_format='iso'), "utf-8"))
 
         elif path == "/get_all_posts_at_chats":
-            '''example path: http://localhost:86/get_all_posts_at_chats?chat_id=2'''
+            '''example path: http://localhost:86/get_all_posts_at_chats
+            ?chat_id=2 '''
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
@@ -83,7 +87,8 @@ class MyServer(BaseHTTPRequestHandler):
                 orient='records', date_format='iso'), "utf-8"))
 
         elif path == "/add_new_post":
-            '''Body example: {"owner_id": "2", "chat_id": "2", "post_content": "testowy post"}'''
+            '''Body example: {"owner_id": "2", "chat_id": "2", 
+            "post_content": "testowy post"} '''
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
             self.send_response(200)
@@ -93,6 +98,8 @@ class MyServer(BaseHTTPRequestHandler):
             self.wfile.write(response.getvalue())
 
         elif path == "/register":
+            '''Body example: {"user_name": "test123", "user_surname": 
+            "testowy", "login": "test_test", "password": "haslo12345"} '''
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
             self.send_response(200)
@@ -131,8 +138,8 @@ class MyServer(BaseHTTPRequestHandler):
             self.wfile.write(response.getvalue())
 
         elif path == "/create_note":
-            '''Body example: {"title": "druga próba",
-            "notes_content": "Ziomki są na pierwszym miejscu.", "owner_id": 2}'''
+            '''Body example: {"title": "druga próba", "notes_content": 
+            "Ziomki są na pierwszym miejscu.", "owner_id": 2} '''
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
             self.send_response(200)
@@ -170,4 +177,4 @@ def connection():
 
 
 if __name__ == '__main__':
-    connection() 
+    connection()

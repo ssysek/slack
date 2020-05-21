@@ -1,6 +1,7 @@
-from config_handler import get_property
 import pandas as pd
 import psycopg2
+
+from config_handler import get_property
 
 
 def chats_for_user_without_forums(params):
@@ -23,4 +24,3 @@ def chats_for_user_without_forums(params):
     results = pd.DataFrame(res, columns=['permitted_user', 'chat_id'])
 
     return results
-

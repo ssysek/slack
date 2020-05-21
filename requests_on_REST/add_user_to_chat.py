@@ -1,6 +1,8 @@
-import psycopg2
-from config_handler import get_property
 import json
+
+import psycopg2
+
+from config_handler import get_property
 
 
 def add_user_to_chat(body):

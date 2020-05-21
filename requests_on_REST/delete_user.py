@@ -1,7 +1,8 @@
-import psycopg2
-from config_handler import get_property
-import pandas as pd
 import json
+
+import psycopg2
+
+from config_handler import get_property
 
 
 def delete_user(body):
@@ -12,7 +13,7 @@ def delete_user(body):
                                   database=get_property('db', 'db_name'))
     print("Database connect successfully")
     cursor = connection.cursor()
-    sql=("""delete from users where user_id=%s;""")
+    sql = """delete from users where user_id=%s;"""
 
     loaded_json = json.loads(body)
     del_id = [loaded_json[0]['user_id']]
