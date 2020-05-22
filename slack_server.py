@@ -172,6 +172,8 @@ class MyServer(BaseHTTPRequestHandler):
             self.wfile.write(response.getvalue())
 
         elif path == "/update_note":
+            '''Body example: {"note_id": "5", "notes_content": 
+            "nowa tresc danej notatki"}'''
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
             self.send_response(200)
