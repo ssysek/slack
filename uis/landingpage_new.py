@@ -356,21 +356,32 @@ class Ui_MainWindow(object):
         MainWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(transparent_background_style_sheet)
         self.button_home.setStyleSheet(button_with_image_style_sheet)
-        self.button_log_in.setStyleSheet(button_for_logging_style_sheet)
+        self.button_log_in.setStyleSheet(button_with_image_style_sheet_colored_font)
         self.button_search.setStyleSheet(button_with_image_style_sheet)
         self.button_create_account.setStyleSheet(button_big_blue_style_sheet)
+        self.button_features.setStyleSheet(small_label_style_sheet)
+        self.button_contact.setStyleSheet(small_label_style_sheet)
+        self.button_about.setStyleSheet(small_label_style_sheet)
 
         self.home_pixmap = QtGui.QPixmap("resources/home.png")
-        self.home_pixmap = self.home_pixmap.scaled(QtCore.QSize(32,32))
+        self.home_pixmap = self.home_pixmap.scaled(QtCore.QSize(36,36))
         self.icon = QtGui.QIcon(self.home_pixmap)
         self.button_home.setIcon(self.icon)
-        self.button_home.setIconSize(QtCore.QSize(32, 32))
+        self.button_home.setIconSize(QtCore.QSize(36, 36))
 
         self.pixmap = QtGui.QPixmap("resources/search.png")
         self.pixmap = self.pixmap.scaled(QtCore.QSize(32,32))
         self.icon = QtGui.QIcon(self.pixmap)
         self.button_search.setIcon(self.icon)
         self.button_search.setIconSize(QtCore.QSize(32, 32))
+
+        self.login_pixmap = QtGui.QPixmap("resources/login.png")
+        self.login_pixmap = self.login_pixmap.scaled(QtCore.QSize(36, 36))
+        self.login_icon = QtGui.QIcon(self.login_pixmap)
+        self.button_log_in.setIcon(self.login_icon)
+        self.button_log_in.setIconSize(QtCore.QSize(36, 36))
+
+
 
         # tu wstawić logikę strony
         self.button_about.clicked.connect(self.clicked_about)

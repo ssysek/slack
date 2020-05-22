@@ -10,6 +10,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from uis.features import Ui_FeaturesWindow
 from uis.contactpage import Ui_ContactWindow
+from uis.notesmainpage import Ui_MainNotesWindow
 from uis.registrationpage import Ui_RegistrationWindow
 from uis.chatforumpage import Ui_MainWindow as Ui_ChatWindow
 from uis.resources.stylesheets import *
@@ -210,18 +211,30 @@ class Ui_MainWindow(object):
         MainWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(transparent_background_style_sheet)
 
-        self.button_home.setStyleSheet(button_with_image_style_sheet)
-        self.button_log_out.setStyleSheet(button_for_logging_style_sheet)
         self.button_search.setStyleSheet(button_with_image_style_sheet)
         self.butto_open_notes.setStyleSheet(button_big_blue_style_sheet)
         self.button_open_groups.setStyleSheet(button_big_blue_style_sheet)
         self.button_open_chats.setStyleSheet(button_big_blue_style_sheet)
+        self.button_features.setStyleSheet(small_label_style_sheet)
+        self.button_contact.setStyleSheet(small_label_style_sheet)
+        self.button_about.setStyleSheet(small_label_style_sheet)
+        self.label.setStyleSheet(small_label_style_sheet)
+        self.label_username.setStyleSheet(small_label_style_sheet)
+
+        self.logout_pixmap = QtGui.QPixmap("resources/logout.png")
+        self.logout_pixmap = self.logout_pixmap.scaled(QtCore.QSize(36, 36))
+        self.logout_icon = QtGui.QIcon(self.logout_pixmap)
+        self.button_log_out.setIcon(self.logout_icon)
+        self.button_log_out.setIconSize(QtCore.QSize(36, 36))
+        self.button_log_out.setStyleSheet(button_with_image_style_sheet_colored_font)
+        self.button_log_out.setText("Log out")
 
         self.home_pixmap = QtGui.QPixmap("resources/home.png")
-        self.home_pixmap = self.home_pixmap.scaled(QtCore.QSize(32,32))
+        self.home_pixmap = self.home_pixmap.scaled(QtCore.QSize(40, 40))
         self.icon = QtGui.QIcon(self.home_pixmap)
         self.button_home.setIcon(self.icon)
-        self.button_home.setIconSize(QtCore.QSize(32, 32))
+        self.button_home.setIconSize(QtCore.QSize(40, 40))
+        self.button_home.setStyleSheet(button_with_image_style_sheet)
 
         self.pixmap = QtGui.QPixmap("resources/search.png")
         self.pixmap = self.pixmap.scaled(QtCore.QSize(32,32))
@@ -248,7 +261,6 @@ class Ui_MainWindow(object):
         self.button_features.setText(_translate("MainWindow", "Features"))
         self.label.setText(_translate("MainWindow", "Hello: "))
         self.label_username.setText(_translate("MainWindow", "username"))
-        self.button_log_out.setText(_translate("MainWindow", "LogOut"))
         self.label_main_text.setText(_translate("MainWindow", "<html><head/><body><p>Communicate and </p><p>learn easier.</p></body></html>"))
         self.label_description.setText(_translate("MainWindow", "<html><head/><body><p>A web app that makes communication simpler and</p><p>work more productive.</p></body></html>"))
         self.button_open_chats.setText(_translate("MainWindow", "Open chats"))
@@ -309,6 +321,12 @@ class Ui_MainWindow(object):
 
     def clicked_open_notes(self):
         print("open notes")
+        self.notes_window = QtWidgets.QMainWindow()
+        self.notes_window_ui = Ui_MainNotesWindow(self, self.logged_in_user)
+        self.notes_window_ui.setupUi(self.notes_window)
+
+        self.window.hide()
+        self.notes_window.show()
 
     def clicked_open_groups(self):
         print("open groups")

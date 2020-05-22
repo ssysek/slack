@@ -134,7 +134,7 @@ class Ui_MainWindow(object):
         MainWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(transparent_background_style_sheet)
 
-        self.button_log_out.setStyleSheet(button_for_logging_style_sheet)
+        self.button_log_out.setStyleSheet(button_with_image_style_sheet)
         self.button_send_message.setStyleSheet(button_for_logging_style_sheet)
         self.lineEdit.setStyleSheet(colored_line_edit_style_sheet)
         self.label.setStyleSheet(pretty_small_label_style_sheet)
@@ -155,6 +155,14 @@ class Ui_MainWindow(object):
         self.button_notes.setStyleSheet(button_with_image_style_sheet)
         self.button_notes.clicked.connect(self.goToNotes)
 
+        self.logout_pixmap = QtGui.QPixmap("resources/logout.png")
+        self.logout_pixmap = self.logout_pixmap.scaled(QtCore.QSize(36, 36))
+        self.logout_icon = QtGui.QIcon(self.logout_pixmap)
+        self.button_log_out.setIcon(self.logout_icon)
+        self.button_log_out.setIconSize(QtCore.QSize(36, 36))
+        self.button_log_out.setStyleSheet(button_with_image_style_sheet)
+        self.button_log_out.setToolTip("Log out")
+
         self.button_log_out.clicked.connect(self.clicked_log_out)
         self.button_return.clicked.connect(self.clicked_return)
 
@@ -170,15 +178,14 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "Chats"))
         self.label_opened_box.setText(_translate("MainWindow", "Open chat:"))
         self.button_send_message.setText(_translate("MainWindow", "send message"))
-        self.button_log_out.setText(_translate("MainWindow", "LogOut"))
 
     def loadPrivateChatsForUser(self):
         url = "http://localhost:86/user_chats?user_id="
         url += str(1)
         messages = requests.post(url).json()
-        res = []
+        res = [-1, []]
         for i in messages:
-            res.append(str(i["chat_id"]))
+            res[1].append(str(i["chat_id"]))
         return res
 
     #    insert    into    posts    values(1, 1, 1, 'Lorem ipsum');
@@ -231,8 +238,14 @@ class Ui_MainWindow(object):
         nameWidget.setItemWidget(itemN, widget)
 
     def getForumWidgetButton(self, object):
-        widgetButton = QtWidgets.QPushButton(object[0])
-        widgetButton.setStyleSheet(button_small_blue_style_sheet)
+        widgetButton = QtWidgets.QPushButton()
+        widgetButton.setToolTip(object[0])
+        widgetButton_pixmap = QtGui.QPixmap("resources/groups/g1.png")
+        widgetButton_pixmap = widgetButton_pixmap.scaled(QtCore.QSize(32, 32))
+        widgetButtonicon = QtGui.QIcon(widgetButton_pixmap)
+        widgetButton.setIcon(widgetButtonicon)
+        widgetButton.setIconSize(QtCore.QSize(32, 32))
+        widgetButton.setStyleSheet(button_with_image_style_sheet)
         widgetButton.clicked.connect(lambda: self.changeChannelButtons(self.listWidget_chanells, object))
         return widgetButton
 
@@ -266,19 +279,22 @@ class Ui_MainWindow(object):
 
     def changeChannelButtons(self, nameWidget, objects):
         nameWidget.clear()
-        for object in objects[len(objects)-1]:
-            itemN = QtWidgets.QListWidgetItem()
-            widget = QtWidgets.QWidget()
-            widgetButton = self.getChannelWidgetButton(object)
-            widgetLayout = QtWidgets.QHBoxLayout()
-            widgetLayout.addWidget(widgetButton)
-            widgetLayout.addStretch()
-            widgetLayout.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
-            widget.setLayout(widgetLayout)
-            itemN.setSizeHint(widget.sizeHint())
-            # Add widget to QListWidget funList
-            nameWidget.addItem(itemN)
-            nameWidget.setItemWidget(itemN, widget)
+        try:
+            for object in objects[len(objects)-1]:
+                itemN = QtWidgets.QListWidgetItem()
+                widget = QtWidgets.QWidget()
+                widgetButton = self.getChannelWidgetButton(object)
+                widgetLayout = QtWidgets.QHBoxLayout()
+                widgetLayout.addWidget(widgetButton)
+                widgetLayout.addStretch()
+                widgetLayout.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
+                widget.setLayout(widgetLayout)
+                itemN.setSizeHint(widget.sizeHint())
+                # Add widget to QListWidget funList
+                nameWidget.addItem(itemN)
+                nameWidget.setItemWidget(itemN, widget)
+        except Exception:
+            pass
         itemN = QtWidgets.QListWidgetItem()
         widget = QtWidgets.QWidget()
         widgetButton = self.addChannelButton(objects)
@@ -293,8 +309,14 @@ class Ui_MainWindow(object):
         nameWidget.setItemWidget(itemN, widget)
 
     def getChannelWidgetButton(self, object):
-        widgetButton = QtWidgets.QPushButton(object)
-        widgetButton.setStyleSheet(button_small_blue_style_sheet)
+        widgetButton = QtWidgets.QPushButton()
+        widgetButton_pixmap = QtGui.QPixmap("resources/messages/m1.png")
+        widgetButton_pixmap = widgetButton_pixmap.scaled(QtCore.QSize(32, 32))
+        widgetButtonicon = QtGui.QIcon(widgetButton_pixmap)
+        widgetButton.setIcon(widgetButtonicon)
+        widgetButton.setIconSize(QtCore.QSize(32, 32))
+        widgetButton.setStyleSheet(button_with_image_style_sheet)
+        widgetButton.setToolTip(object)
         widgetButton.clicked.connect(lambda: self.setUpMessages(object, object))
         return widgetButton
 
@@ -314,9 +336,8 @@ class Ui_MainWindow(object):
         self.notes_window.show()
 
     def setUpMessages(self, arg, id):  # arg - name of channel, id - id channel
-
         # TODO: podmienić na konkretne channels, nie jeden statyczny
-        self.loadMessagesFromDataBase(2)
+        self.loadMessagesFromDataBase(id)
 
         self.label_opened_box.setText(arg + ":")
         self.label_opened_box.adjustSize()

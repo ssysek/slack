@@ -10,6 +10,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 from uis.resources.stylesheets import *
+import requests
 
 
 class Ui_MainNotesPageWindow(object):
@@ -71,6 +72,7 @@ class Ui_MainNotesPageWindow(object):
 
         self.pushButton_Return.clicked.connect(self.clicked_return)
         self.pushButton_save.clicked.connect(self.clicked_save)
+        self.pushButton_LogOut.clicked.connect(self.clicked_log_out)
 
         self.return_pixmap = QtGui.QPixmap("resources/return.png")
         self.return_pixmap = self.return_pixmap.scaled(QtCore.QSize(32, 32))
@@ -81,7 +83,11 @@ class Ui_MainNotesPageWindow(object):
         self.pushButton_Return.setStyleSheet(button_with_image_style_sheet)
         self.pushButton_save.setStyleSheet(button_for_logging_style_sheet)
 
-        self.pushButton_LogOut.setStyleSheet(button_for_logging_style_sheet)
+        self.logout_pixmap = QtGui.QPixmap("resources/logout.png")
+        self.logout_pixmap = self.logout_pixmap.scaled(QtCore.QSize(36, 36))
+        self.logout_icon = QtGui.QIcon(self.logout_pixmap)
+        self.pushButton_LogOut.setIcon(self.logout_icon)
+        self.pushButton_LogOut.setIconSize(QtCore.QSize(36, 36))
         self.lineEdit_title.setStyleSheet(border_style_sheet)
         self.textEdit_text.setStyleSheet(border_style_sheet)
 
@@ -93,13 +99,13 @@ class Ui_MainNotesPageWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.pushButton_LogOut.setText(_translate("MainWindow", "Log out"))
         self.pushButton_save.setText(_translate("MainWindow", "Save"))
         self.textEdit_text.setText(_translate("MainWindow", self.text))
         self.lineEdit_title.setText(_translate("MainWindow", self.title))
 
     def clicked_return(self):
         print("return to notes")
+        self.parent.addFrames()
         self.parent.window.show()
         self.window.hide()
 
@@ -116,11 +122,15 @@ class Ui_MainNotesPageWindow(object):
         print("Save")
         print(self.lineEdit_title.text())
         print(self.textEdit_text.toPlainText())
+        print(self.loged_in_user[0])
         #database endpoint to save
         if self.note_id==0:
             print("New note")
-            #create new note and get back id, set note_id to new note_id
-            self.note_id=1 #new_note_id
+            register_request = requests.post('http://localhost:86/create_note',
+                                             json={"title": self.lineEdit_title.text(), "notes_content":
+            self.textEdit_text.toPlainText(), "owner_id": self.loged_in_user[0]})
+            #get id from register_request
+            print("Request poszedł")
 
 
 if __name__ == "__main__":

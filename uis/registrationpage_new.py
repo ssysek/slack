@@ -13,6 +13,9 @@ from uis.loginpage_new import Ui_LoginpageWindow
 #import psycopg2
 import requests
 
+from uis.resources.stylesheets import small_label_style_sheet, pretty_small_label_style_sheet, \
+    pretty_big_label_style_sheet, pretty_big_darker_label_style_sheet, gradient_style_sheet
+
 
 class Ui_RegistrationWindow(object):
     def __init__(self, parent=None, user=None):
@@ -24,7 +27,6 @@ class Ui_RegistrationWindow(object):
         self.window = RegistrationWindow
         RegistrationWindow.resize(578, 454)
         RegistrationWindow.setAutoFillBackground(False)
-        RegistrationWindow.setStyleSheet("background-color: rgb(247, 248, 255);")
         self.centralwidget = QtWidgets.QWidget(RegistrationWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -40,13 +42,13 @@ class Ui_RegistrationWindow(object):
         self.edit_name = QtWidgets.QLineEdit(self.centralwidget)
         self.edit_name.setMinimumSize(QtCore.QSize(200, 40))
         self.edit_name.setMaximumSize(QtCore.QSize(300, 40))
-        self.edit_name.setStyleSheet("background-color:rgb(230, 230, 230);\n"
-                                     "color:rgb(188, 188, 188);\n"
+        self.edit_name.setStyleSheet("background-color:rgb(221, 222, 235);\n"
+                                     "color:black;\n"
                                      "font: 75 8pt \"SansSerif\";\n"
                                      "border-style:solid;\n"
                                      "border-width:2px;\n"
                                      "border-radius:11px;\n"
-                                     "border-color:rgb(225, 225, 225);")
+                                     "border-color:rgb(212, 174, 252);")
         self.edit_name.setText("")
         self.edit_name.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.edit_name.setObjectName("edit_name")
@@ -54,13 +56,13 @@ class Ui_RegistrationWindow(object):
         self.edit_surname = QtWidgets.QLineEdit(self.centralwidget)
         self.edit_surname.setMinimumSize(QtCore.QSize(200, 40))
         self.edit_surname.setMaximumSize(QtCore.QSize(300, 40))
-        self.edit_surname.setStyleSheet("background-color:rgb(230, 230, 230);\n"
-                                        "color:rgb(188, 188, 188);\n"
+        self.edit_surname.setStyleSheet("background-color:rgb(221, 222, 235);\n"
+                                        "color:black;\n"
                                         "font: 75 8pt \"SansSerif\";\n"
                                         "border-style:solid;\n"
                                         "border-width:2px;\n"
                                         "border-radius:11px;\n"
-                                        "border-color:rgb(225, 225, 225);\n"
+                                        "border-color:rgb(212, 174, 252);\n"
                                         "")
         self.edit_surname.setText("")
         self.edit_surname.setCursorPosition(0)
@@ -69,39 +71,39 @@ class Ui_RegistrationWindow(object):
         self.edit_email = QtWidgets.QLineEdit(self.centralwidget)
         self.edit_email.setMinimumSize(QtCore.QSize(200, 40))
         self.edit_email.setMaximumSize(QtCore.QSize(300, 40))
-        self.edit_email.setStyleSheet("background-color:rgb(230, 230, 230);\n"
-                                      "color:rgb(188, 188, 188);\n"
+        self.edit_email.setStyleSheet("background-color:rgb(221, 222, 235);\n"
+                                      "color:black;\n"
                                       "font: 75 8pt \"SansSerif\";\n"
                                       "border-style:solid;\n"
                                       "border-width:2px;\n"
                                       "border-radius:11px;\n"
-                                      "border-color:rgb(225, 225, 225);")
+                                      "border-color:rgb(212, 174, 252);")
         self.edit_email.setText("")
         self.edit_email.setObjectName("edit_email")
         self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.edit_email)
         self.edit_login = QtWidgets.QLineEdit(self.centralwidget)
         self.edit_login.setMinimumSize(QtCore.QSize(200, 40))
         self.edit_login.setMaximumSize(QtCore.QSize(300, 40))
-        self.edit_login.setStyleSheet("background-color:rgb(230, 230, 230);\n"
-                                      "color:rgb(188, 188, 188);\n"
+        self.edit_login.setStyleSheet("background-color:rgb(221, 222, 235);\n"
+                                      "color:black;\n"
                                       "font: 75 8pt \"SansSerif\";\n"
                                       "border-style:solid;\n"
                                       "border-width:2px;\n"
                                       "border-radius:11px;\n"
-                                      "border-color:rgb(225, 225, 225);")
+                                      "border-color:rgb(212, 174, 252);")
         self.edit_login.setText("")
         self.edit_login.setObjectName("edit_login")
         self.formLayout_2.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.edit_login)
         self.edit_password = QtWidgets.QLineEdit(self.centralwidget)
         self.edit_password.setMinimumSize(QtCore.QSize(200, 40))
         self.edit_password.setMaximumSize(QtCore.QSize(300, 40))
-        self.edit_password.setStyleSheet("background-color:rgb(230, 230, 230);\n"
-                                         "color:rgb(188, 188, 188);\n"
+        self.edit_password.setStyleSheet("background-color:rgb(221, 222, 235);\n"
+                                         "color:black;\n"
                                          "font: 75 8pt \"SansSerif\";\n"
                                          "border-style:solid;\n"
                                          "border-width:2px;\n"
                                          "border-radius:11px;\n"
-                                         "border-color:rgb(225, 225, 225);")
+                                         "border-color:rgb(212, 174, 252);")
         self.edit_password.setText("")
         self.edit_password.setEchoMode(QtWidgets.QLineEdit.Password)
         self.edit_password.setObjectName("edit_password")
@@ -109,13 +111,13 @@ class Ui_RegistrationWindow(object):
         self.edit_confirm_password = QtWidgets.QLineEdit(self.centralwidget)
         self.edit_confirm_password.setMinimumSize(QtCore.QSize(200, 40))
         self.edit_confirm_password.setMaximumSize(QtCore.QSize(300, 40))
-        self.edit_confirm_password.setStyleSheet("background-color:rgb(230, 230, 230);\n"
-                                                 "color:rgb(188, 188, 188);\n"
+        self.edit_confirm_password.setStyleSheet("background-color:rgb(221, 222, 235);\n"
+                                                 "color:black;\n"
                                                  "font: 75 8pt \"SansSerif\";\n"
                                                  "border-style:solid;\n"
                                                  "border-width:2px;\n"
                                                  "border-radius:11px;\n"
-                                                 "border-color:rgb(225, 225, 225);")
+                                                 "border-color:rgb(212, 174, 252);")
         self.edit_confirm_password.setText("")
         self.edit_confirm_password.setEchoMode(QtWidgets.QLineEdit.Password)
         self.edit_confirm_password.setObjectName("edit_confirm_password")
@@ -152,8 +154,7 @@ class Ui_RegistrationWindow(object):
         font.setBold(False)
         font.setItalic(False)
         font.setWeight(9)
-        self.label_registration.setFont(font)
-        self.label_registration.setStyleSheet("font: 75 16pt \"SansSerif\";")
+        self.label_registration.setStyleSheet(pretty_big_darker_label_style_sheet)
         self.label_registration.setAlignment(QtCore.Qt.AlignCenter)
         self.label_registration.setObjectName("label_registration")
         self.gridLayout_2.addWidget(self.label_registration, 0, 1, 1, 1)
@@ -167,9 +168,10 @@ class Ui_RegistrationWindow(object):
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
         self.button_cancel = QtWidgets.QPushButton(self.centralwidget)
-        self.button_cancel.setMinimumSize(QtCore.QSize(110, 23))
-        self.button_cancel.setMaximumSize(QtCore.QSize(110, 23))
+        self.button_cancel.setMinimumSize(QtCore.QSize(200, 23))
+        self.button_cancel.setMaximumSize(QtCore.QSize(200, 23))
         self.button_cancel.setStyleSheet("background: transparent;\n"
+                                         "color:rgb(164, 66, 227);\n"
                                          "font: 75 8pt \"SansSerif\";")
         self.button_cancel.setObjectName("button_cancel")
         self.gridLayout.addWidget(self.button_cancel, 1, 1, 1, 1)
@@ -180,15 +182,15 @@ class Ui_RegistrationWindow(object):
         spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout.addItem(spacerItem8, 0, 2, 1, 1)
         self.button_sign_up = QtWidgets.QPushButton(self.centralwidget)
-        self.button_sign_up.setMinimumSize(QtCore.QSize(110, 40))
-        self.button_sign_up.setMaximumSize(QtCore.QSize(110, 40))
-        self.button_sign_up.setStyleSheet("background-color:rgb(1, 107, 229);\n"
+        self.button_sign_up.setMinimumSize(QtCore.QSize(200, 50))
+        self.button_sign_up.setMaximumSize(QtCore.QSize(200, 50))
+        self.button_sign_up.setStyleSheet("background-color:rgb(128, 45, 181);\n"
                                           "color:white;\n"
-                                          "font: 75 10pt \"SansSerif\";\n"
+                                          "font: 450 13pt \"SansSerif\";\n"
                                           "border-style:outset;\n"
                                           "border-width:2px;\n"
-                                          "border-radius:10px;\n"
-                                          "border-color:white;")
+                                          "border-radius:19px;\n"
+                                          "border-color:rgb(212, 174, 252);")
         self.button_sign_up.setObjectName("button_sign_up")
         self.gridLayout.addWidget(self.button_sign_up, 0, 1, 1, 1)
         spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
@@ -211,6 +213,7 @@ class Ui_RegistrationWindow(object):
         self.statusbar = QtWidgets.QStatusBar(RegistrationWindow)
         self.statusbar.setObjectName("statusbar")
         RegistrationWindow.setStatusBar(self.statusbar)
+        RegistrationWindow.setStyleSheet(gradient_style_sheet)
 
 
         self.retranslateUi(RegistrationWindow)

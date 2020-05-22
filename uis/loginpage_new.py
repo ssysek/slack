@@ -80,7 +80,7 @@ class Ui_LoginpageWindow(object):
         self.edit_username.setEnabled(True)
         self.edit_username.setMinimumSize(QtCore.QSize(200, 40))
         self.edit_username.setStyleSheet("font: 75 8pt \"SansSerif\";\n"
-                                         "border-color: rgb(5, 117, 255);\n"
+                                         "border-color: rgb(128, 45, 181);\n"
                                          "background-color: rgb(247, 248, 255);\n"
                                          "border-style:solid;\n"
                                          "border-width:1px;\n"
@@ -104,7 +104,7 @@ class Ui_LoginpageWindow(object):
         self.edit_password = QtWidgets.QLineEdit(self.centralwidget)
         self.edit_password.setMinimumSize(QtCore.QSize(200, 40))
         self.edit_password.setStyleSheet("font: 75 8pt \"SansSerif\";\n"
-                                         "border-color: rgb(5, 117, 255);\n"
+                                         "border-color: rgb(128, 45, 181);\n"
                                          "background-color: rgb(247, 248, 255);\n"
                                          "border-style:solid;\n"
                                          "border-width:1px;\n"
@@ -115,7 +115,7 @@ class Ui_LoginpageWindow(object):
         self.label_wrong = QtWidgets.QLabel(self.centralwidget)
         self.label_wrong.setMaximumSize(QtCore.QSize(16777215, 20))
         self.label_wrong.setStyleSheet("font: 75 8pt \"SansSerif\";\n"
-                                       "color: rgb(255, 47, 57);")
+                                       "color: rgb(128, 45, 181);")
         self.label_wrong.setText("")
         self.label_wrong.setObjectName("label_wrong")
         self.verticalLayout_2.addWidget(self.label_wrong)
@@ -124,7 +124,7 @@ class Ui_LoginpageWindow(object):
         self.button_login = QtWidgets.QPushButton(self.centralwidget)
         self.button_login.setMinimumSize(QtCore.QSize(0, 40))
         self.button_login.setMaximumSize(QtCore.QSize(15000, 40))
-        self.button_login.setStyleSheet("background-color:rgb(1, 107, 229);\n"
+        self.button_login.setStyleSheet("background-color:rgb(128, 45, 181);\n"
                                         "color:white;\n"
                                         "font: 75 10pt \"SansSerif\";\n"
                                         "border-style:outset;\n"
@@ -152,7 +152,7 @@ class Ui_LoginpageWindow(object):
         self.button_sign_up.setFont(font)
         self.button_sign_up.setStyleSheet("background: transparent;\n"
                                           "text-decoration: underline;\n"
-                                          "color: rgb(0, 85, 255);\n"
+                                          "color: rgb(128, 45, 181);\n"
                                           "font: 75 8pt \"SansSerif\";")
         self.button_sign_up.setObjectName("button_sign_up")
         self.horizontalLayout.addWidget(self.button_sign_up)
