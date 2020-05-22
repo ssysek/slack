@@ -19,7 +19,8 @@ def create_note(body):
 
     loaded_json = json.loads(body)
     sql = """insert into notes values (%s, %s, %s, %s)"""
-    new_post = (new_id, loaded_json['title'], loaded_json['notes_content'],
+    new_note = (new_id, loaded_json['title'], loaded_json['notes_content'],
                 loaded_json['owner_id'])
-    cursor.execute(sql, new_post)
+    cursor.execute(sql, new_note)
     connection.commit()
+    return new_id

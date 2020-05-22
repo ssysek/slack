@@ -17,6 +17,10 @@ from requests_on_REST.get_user_by_id import get_user_by_id_param
 from requests_on_REST.read_notes import read_notes
 from requests_on_REST.register import register
 from requests_on_REST.user_forums import user_forums
+from requests_on_REST.delete_note import delete_note
+from requests_on_REST.create_chat import create_chat
+from requests_on_REST.create_forum import create_forum
+from requests_on_REST.update_note import update_note
 
 HOST_PORT = 86
 
@@ -109,6 +113,7 @@ class MyServer(BaseHTTPRequestHandler):
             self.wfile.write(response.getvalue())
 
         elif path == "/delete_user":
+            '''Body example: {"user_id": "1"}'''
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
             self.send_response(200)
@@ -155,6 +160,47 @@ class MyServer(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(bytes(read_notes(qs).to_json(
                 orient='records', date_format='iso'), "utf-8"))
+
+        elif path == "/delete_note":
+            '''Body example: {"note_id": "10"}'''
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length)
+            self.send_response(200)
+            self.end_headers()
+            delete_note(body)
+            response = BytesIO()
+            self.wfile.write(response.getvalue())
+
+        elif path == "/update_note":
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length)
+            self.send_response(200)
+            self.end_headers()
+            update_note(body)
+            response = BytesIO()
+            self.wfile.write(response.getvalue())
+
+        elif path == "/create_chat":
+            '''Body example: {"upper_forum_id": "1", "chat_name":  
+            "example chat", "image": "1"} '''
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length)
+            self.send_response(200)
+            self.end_headers()
+            create_chat(body)
+            response = BytesIO()
+            self.wfile.write(response.getvalue())
+
+        elif path == "/create_forum":
+            '''Body example: {"forum_name": "kolejne", "image": "2"} '''
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length)
+            self.send_response(200)
+            self.end_headers()
+            create_forum(body)
+            response = BytesIO()
+            self.wfile.write(response.getvalue())
+
         else:
             self.send_response(200)
             self.send_header("Content-type", "application/json")

@@ -5,7 +5,7 @@ import psycopg2
 from config_handler import get_property
 
 
-def update_note(body):
+def delete_note(body):
     connection = psycopg2.connect(user=get_property('db', 'user'),
                                   password=get_property('db', 'pass'),
                                   host=get_property('db', 'host'),
@@ -13,10 +13,11 @@ def update_note(body):
                                   database=get_property('db', 'db_name'))
     print("Database connect successfully")
     cursor = connection.cursor()
-    sql = """update notes set notes_content = %s where note_id=%s;"""
+    sql = """delete from notes where note_id=%s;"""
 
     loaded_json = json.loads(body)
-    updated_note = [loaded_json['notes_content'], loaded_json['note_id']]
-    print(updated_note)
-    cursor.execute(sql, updated_note)
+    del_id = [loaded_json['note_id']]
+    # print(del_id)
+    cursor.execute(sql, del_id)
     connection.commit()
+    return del_id
