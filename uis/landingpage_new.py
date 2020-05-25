@@ -38,6 +38,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
         self.centralwidget.setSizePolicy(sizePolicy)
         self.centralwidget.setObjectName("centralwidget")
+
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
@@ -410,7 +411,7 @@ class Ui_MainWindow(object):
     def clicked_about(self):
         print("about clicked")
         self.about_window = QtWidgets.QMainWindow()
-        self.about_window_ui = Ui_AboutWindow(self, self.loged_in_user)
+        self.about_window_ui = Ui_AboutWindow(self)
         self.about_window_ui.setupUi(self.about_window)
 
         self.about_window.show()
