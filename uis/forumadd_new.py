@@ -9,11 +9,13 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from uis.resources.stylesheets import *
+import requests
 
 class Ui_NewForumWindow(object):
-    def __init__(self, parent=None, logged_in_user = None):
+    def __init__(self, parent=None, logged_in_user = None, image = "1"):
         self.parent = parent
         self.loged_in_user = logged_in_user
+        self.image = image
 
     def setupUi(self, NewForumWindow):
         self.window = NewForumWindow
@@ -112,6 +114,8 @@ class Ui_NewForumWindow(object):
         self.label_error = QtWidgets.QLabel(self.centralwidget)
         self.label_error.setText("")
         self.label_error.setObjectName("label_error")
+        self.label_error.setStyleSheet("font: 8pt \"Sans Serif\";\n"
+                                       "color: rgb(255, 47, 57);")
         self.gridLayout.addWidget(self.label_error, 8, 1, 1, 1)
         self.label_registration = QtWidgets.QLabel(self.centralwidget)
         self.label_registration.setMinimumSize(QtCore.QSize(160, 70))
@@ -164,7 +168,6 @@ class Ui_NewForumWindow(object):
         self.statusbar.setObjectName("statusbar")
         NewForumWindow.setStatusBar(self.statusbar)
 
-
         self.button_return.clicked.connect(self.clicked_return)
         self.button_submit.clicked.connect(self.clicked_save)
         self.button_icon1.clicked.connect(self.clicked_iconFirst)
@@ -173,7 +176,7 @@ class Ui_NewForumWindow(object):
         self.button_icon4.clicked.connect(self.clicked_iconFourth)
         self.button_icon5.clicked.connect(self.clicked_iconFifth)
 
-        self.icon_image_add(self.button_icon1,"g1")
+        self.icon_image_add(self.button_icon1, "g1")
         self.icon_image_add(self.button_icon2, "g2")
         self.icon_image_add(self.button_icon3, "g3")
         self.icon_image_add(self.button_icon4, "g4")
@@ -195,22 +198,22 @@ class Ui_NewForumWindow(object):
         self.retranslateUi(NewForumWindow)
         QtCore.QMetaObject.connectSlotsByName(NewForumWindow)
 
-
     def retranslateUi(self, NewForumWindow):
         _translate = QtCore.QCoreApplication.translate
         NewForumWindow.setWindowTitle(_translate("NewForumWindow", "MainWindow"))
         self.button_logout.setText(_translate("NewForumWindow", "Log out"))
         self.button_submit.setText(_translate("NewForumWindow", "Submit"))
-        self.edit_invite.setPlaceholderText(_translate("NewForumWindow", "Invite someone"))
+        self.edit_invite.setPlaceholderText(
+            _translate("NewForumWindow", "Invite someone (separate with , and no extra spaces)"))
         self.edit_name.setPlaceholderText(_translate("NewForumWindow", "Name your forum"))
         self.label_registration.setText(_translate("NewForumWindow", "Create a forum"))
-        
+
     def icon_image_add(self, button, png_name):
         self.icon_pixmap = QtGui.QPixmap("resources/forums/" + png_name + ".png")
-        self.icon_pixmap = self.icon_pixmap.scaled(QtCore.QSize(64,64))
+        self.icon_pixmap = self.icon_pixmap.scaled(QtCore.QSize(64, 64))
         self.store_notes_icon = QtGui.QIcon(self.icon_pixmap)
         button.setIcon(self.store_notes_icon)
-        button.setIconSize(QtCore.QSize(64,64))
+        button.setIconSize(QtCore.QSize(64, 64))
 
     def set_icons(self, chosen_button):
         button_list = [self.button_icon1, self.button_icon2, self.button_icon3, self.button_icon4, self.button_icon5]
@@ -222,19 +225,23 @@ class Ui_NewForumWindow(object):
 
     def clicked_iconFirst(self):
         self.set_icons(self.button_icon1)
+        self.image = "1"
 
     def clicked_iconSecond(self):
         self.set_icons(self.button_icon2)
+        self.image = "2"
 
     def clicked_iconThird(self):
         self.set_icons(self.button_icon3)
+        self.image = "3"
 
     def clicked_iconFourth(self):
         self.set_icons(self.button_icon4)
+        self.image = "4"
 
     def clicked_iconFifth(self):
         self.set_icons(self.button_icon5)
-
+        self.image = "5"
 
     def clicked_return(self):
         self.parent.window.show()
@@ -250,10 +257,60 @@ class Ui_NewForumWindow(object):
 
     def clicked_save(self):
         print("Save")
+        name = self.edit_name.text()
+        invited = self.edit_invite.text()
+        name_ok = True
+        error_text = ""
+        self.label_error.setText(error_text)
+        invited_ids = []
+
+        if name == "":
+            error_text += "set a name"
+            self.label_error.setText(error_text)
+            name_ok = False
+
+        if invited != "":
+            invited_nicknames = invited.split(",")
+            invited_ok = True
+            all_users_request = requests.get("http://localhost:86/all_users")
+            correct_person = True
+            for person in invited_nicknames:
+                print("person i'm checking: ", person)
+                if all_users_request.json():
+                    for record in all_users_request.json():
+                        if record['login'] == person:
+                            invited_ids.append(record['user_id'])
+                            correct_person = True
+                            break
+                        else:
+                            correct_person = False
+                if correct_person==False :
+                    if error_text != "":
+                        error_text += ", "
+                    error_text += person+" not existing"
+                    self.label_error.setText(error_text)
+                    invited_ok = False
+                    break
+
+        if name_ok and invited_ok:
+            new_forum_request = requests.post('http://localhost:86/create_forum',json={"forum_name": name, "image": self.image})
+            print("Successfully added forum!")
+            if new_forum_request.json():
+                new_forum_id = str(new_forum_request.json())
+                permitted_usr = str(self.loged_in_user[0])
+                add_owner = requests.post('http://localhost:86/add_user_to_forum',json={"forum_id": new_forum_id, "permitted_user": permitted_usr})
+                for invited in invited_ids:
+                    requests.post('http://localhost:86/add_user_to_forum',json={"forum_id": new_forum_id, "permitted_user": invited})
+                    print("One invited added - id: ",invited )
+                self.parent.window.show()
+                self.window.hide()
+            else:
+                print("no json from adding forum")
 
 
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     NewForumWindow = QtWidgets.QMainWindow()
     ui = Ui_NewForumWindow()

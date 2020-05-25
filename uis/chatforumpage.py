@@ -10,6 +10,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from uis.resources.stylesheets import *
 
 from uis.notesmainpage import Ui_MainNotesWindow
+from uis.forumadd_new import Ui_NewForumWindow
 
 
 class Ui_MainWindow(object):
@@ -261,7 +262,7 @@ class Ui_MainWindow(object):
             nameWidget.setItemWidget(itemN, widget)
         itemN = QtWidgets.QListWidgetItem()
         widget = QtWidgets.QWidget()
-        widgetButton = self.addButton(objects)
+        widgetButton = self.addForumButton()
         widgetLayout = QtWidgets.QHBoxLayout()
         widgetLayout.addWidget(widgetButton)
         widgetLayout.addStretch()
@@ -271,6 +272,16 @@ class Ui_MainWindow(object):
         # Add widget to QListWidget funList
         nameWidget.addItem(itemN)
         nameWidget.setItemWidget(itemN, widget)
+
+    def clicked_newForum(self):
+        print("adding new forum")
+        self.addforum_window = QtWidgets.QMainWindow()
+        self.addforum_window_ui = Ui_NewForumWindow(self, self.loged_in_user)
+        self.addforum_window_ui.setupUi(self.addforum_window)
+
+        self.window.hide()
+        self.addforum_window.show()
+
 
     def getForumWidgetButton(self, object):
         widgetButton = QtWidgets.QPushButton()
@@ -294,6 +305,18 @@ class Ui_MainWindow(object):
         widgetButton.setStyleSheet(button_with_image_style_sheet)
 
         widgetButton.clicked.connect(lambda:self.createChannel(object))
+        return widgetButton
+
+    def addForumButton(self):
+        widgetButton = QtWidgets.QPushButton()
+        widgetButton_pixmap = QtGui.QPixmap("resources/add.png")
+        widgetButton_pixmap = widgetButton_pixmap.scaled(QtCore.QSize(32, 32))
+        widgetButtonicon = QtGui.QIcon(widgetButton_pixmap)
+        widgetButton.setIcon(widgetButtonicon)
+        widgetButton.setIconSize(QtCore.QSize(32, 32))
+        widgetButton.setStyleSheet(button_with_image_style_sheet)
+
+        widgetButton.clicked.connect(self.clicked_newForum)
         return widgetButton
 
 
