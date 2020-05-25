@@ -172,8 +172,8 @@ class MyServer(BaseHTTPRequestHandler):
             self.wfile.write(response.getvalue())
 
         elif path == "/update_note":
-            '''Body example: {"note_id": "5", "notes_content": 
-            "nowa tresc danej notatki"}'''
+            '''Body example: {"note_id": "5", "title": "nowy tytuł", 
+            "notes_content": "nowa tresc danej notatki"}'''
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
             self.send_response(200)
@@ -188,10 +188,9 @@ class MyServer(BaseHTTPRequestHandler):
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
             self.send_response(200)
+            self.send_header("Content-type", "application/json")
             self.end_headers()
-            create_chat(body)
-            response = BytesIO()
-            self.wfile.write(response.getvalue())
+            self.wfile.write(bytes(create_chat(body), "utf-8"))
 
         elif path == "/create_forum":
             '''Body example: {"forum_name": "kolejne", "image": "2"} '''

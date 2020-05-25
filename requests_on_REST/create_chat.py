@@ -23,4 +23,5 @@ def create_chat(body):
                 loaded_json['chat_name'], loaded_json['image'])
     cursor.execute(sql, new_chat)
     connection.commit()
-    return chat_id
+    return_chat_id = str(chat_id)
+    return return_chat_id

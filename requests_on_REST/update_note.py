@@ -13,10 +13,12 @@ def update_note(body):
                                   database=get_property('db', 'db_name'))
     print("Database connect successfully")
     cursor = connection.cursor()
-    sql = """update notes set notes_content = %s where note_id=%s;"""
+    sql = """update notes set title = %s, notes_content = %s \
+    where note_id=%s;"""
 
     loaded_json = json.loads(body)
-    updated_note = [loaded_json['notes_content'], loaded_json['note_id']]
+    updated_note = [loaded_json['title'], loaded_json['notes_content'],
+                    loaded_json['note_id']]
     print(updated_note)
     cursor.execute(sql, updated_note)
     connection.commit()
