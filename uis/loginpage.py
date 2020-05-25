@@ -170,9 +170,11 @@ class Ui_LoginpageWindow(object):
         self.retranslateUi(LoginpageWindow)
         QtCore.QMetaObject.connectSlotsByName(LoginpageWindow)
 
+        LoginpageWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
+
     def retranslateUi(self, LoginpageWindow):
         _translate = QtCore.QCoreApplication.translate
-        LoginpageWindow.setWindowTitle(_translate("LoginpageWindow", "MainWindow"))
+        LoginpageWindow.setWindowTitle(_translate("LoginpageWindow", "Log in"))
         self.label_title.setText(_translate("LoginpageWindow", "Sign in to your account"))
         self.label_username.setText(_translate("LoginpageWindow", "Your Nickname"))
         self.label__password.setText(_translate("LoginpageWindow", "Your Password"))

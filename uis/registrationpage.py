@@ -203,9 +203,11 @@ class Ui_RegistrationWindow(object):
         self.retranslateUi(RegistrationWindow)
         QtCore.QMetaObject.connectSlotsByName(RegistrationWindow)
 
+        RegistrationWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
+
     def retranslateUi(self, RegistrationWindow):
         _translate = QtCore.QCoreApplication.translate
-        RegistrationWindow.setWindowTitle(_translate("RegistrationWindow", "MainWindow"))
+        RegistrationWindow.setWindowTitle(_translate("RegistrationWindow", "Register"))
         self.edit_name.setPlaceholderText(_translate("RegistrationWindow", "First Name"))
         self.edit_surname.setPlaceholderText(_translate("RegistrationWindow", "Last Name"))
         self.edit_email.setPlaceholderText(_translate("RegistrationWindow", "Email"))

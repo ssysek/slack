@@ -145,6 +145,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        MainWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         MainWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(transparent_background_style_sheet)
 
@@ -203,13 +204,13 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "Forums"))
         self.label_4.setText(_translate("MainWindow", "Channels"))
         self.label_2.setText(_translate("MainWindow", "Notes"))
         self.label_3.setText(_translate("MainWindow", "Chats"))
         self.label_opened_box.setText(_translate("MainWindow", "Open chat:"))
         self.button_send_message.setText(_translate("MainWindow", "send message"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Chat"))
 
     def loadPrivateChatsForUser(self):
         url = "http://localhost:86/user_chats?user_id="

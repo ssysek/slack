@@ -142,7 +142,7 @@ class Ui_FeaturesWindow(object):
         self.retranslateUi(FeaturesWindow)
         QtCore.QMetaObject.connectSlotsByName(FeaturesWindow)
 
-
+        FeaturesWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         FeaturesWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(transparent_background_style_sheet)
 
@@ -180,7 +180,7 @@ class Ui_FeaturesWindow(object):
 
     def retranslateUi(self, FeaturesWindow):
         _translate = QtCore.QCoreApplication.translate
-        FeaturesWindow.setWindowTitle(_translate("FeaturesWindow", "MainWindow"))
+        FeaturesWindow.setWindowTitle(_translate("FeaturesWindow", "Features"))
         self.label.setText(_translate("FeaturesWindow", "<html><head/><body><p>A full ecosystem of tools</p><p>within a single web app.</p></body></html>"))
         self.label_5.setText(_translate("FeaturesWindow", "Chat with your friends"))
         self.label_7.setText(_translate("FeaturesWindow", "<html><head/><body><p>contact with them individually</p><p>or within groupchats</p></body></html>"))
