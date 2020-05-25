@@ -70,6 +70,7 @@ class Ui_MainNotesPageWindow(object):
 
         self.retranslateUi(MainWindow)
 
+        MainWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         self.pushButton_Return.clicked.connect(self.clicked_return)
         self.pushButton_save.clicked.connect(self.clicked_save)
         self.pushButton_LogOut.clicked.connect(self.clicked_log_out)
@@ -101,10 +102,10 @@ class Ui_MainNotesPageWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton_save.setText(_translate("MainWindow", "Save"))
         self.textEdit_text.setText(_translate("MainWindow", self.text))
         self.lineEdit_title.setText(_translate("MainWindow", self.title))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Note"))
 
     def clicked_return(self):
         print("return to notes")
@@ -132,8 +133,9 @@ class Ui_MainNotesPageWindow(object):
             print("New note")
             register_request = requests.post('http://localhost:86/create_note',
                                              json={"title": self.lineEdit_title.text(), "notes_content":
-            self.textEdit_text.toPlainText(), "owner_id": self.loged_in_user[0]}).text
+            self.textEdit_text.toPlainText(), "owner_id": self.loged_in_user[0]}).json()
             print(register_request)
+            print(register_request["new_id"])
             #get id from register_request
             print("Request poszedł")
         elif self.text != self.textEdit_text.toPlainText() or self.title != self.lineEdit_title.text():

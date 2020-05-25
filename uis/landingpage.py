@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
+        MainWindow.setObjectName("Talco")
         MainWindow.setEnabled(True)
         MainWindow.resize(1050, 731)
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
@@ -293,6 +293,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        MainWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         #tu wstawić logikę strony
         self.button_about.clicked.connect(self.clicked_about)
         self.button_contact.clicked.connect(self.clicked_contact)
@@ -304,7 +305,6 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.button_home.setText(_translate("MainWindow", "Home"))
         self.button_contact.setText(_translate("MainWindow", "Contact"))
         self.button_about.setText(_translate("MainWindow", "About"))
@@ -314,6 +314,7 @@ class Ui_MainWindow(object):
         self.button_create_account.setText(_translate("MainWindow", "Create a FREE account"))
         self.label_description.setText(_translate("MainWindow", "<html><head/><body><p>A web app that makes communication simpler and</p><p>work more productive.</p></body></html>"))
         self.label_main_text.setText(_translate("MainWindow", "<html><head/><body><p>Communicate and </p><p>learn easier.</p></body></html>"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Talco"))
 
     # tu wstawić logikę do klikania przycisków
     

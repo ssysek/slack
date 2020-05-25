@@ -25,7 +25,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         self.window = MainWindow
 
-        MainWindow.setObjectName("MainWindow")
+        MainWindow.setObjectName("Talco")
         MainWindow.setEnabled(True)
         MainWindow.resize(1200, 600)
         MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
@@ -208,7 +208,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-
+        MainWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         MainWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(transparent_background_style_sheet)
 
@@ -256,7 +256,6 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.button_contact.setText(_translate("MainWindow", "Contact"))
         self.button_about.setText(_translate("MainWindow", "About"))
         self.button_features.setText(_translate("MainWindow", "Features"))
@@ -267,6 +266,7 @@ class Ui_MainWindow(object):
         self.button_open_chats.setText(_translate("MainWindow", "Open chats"))
         self.button_open_groups.setText(_translate("MainWindow", "Open groups"))
         self.butto_open_notes.setText(_translate("MainWindow", "Open notes"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Talco"))
 
     def clicked_about(self):
         print("about clicked")
@@ -297,7 +297,7 @@ class Ui_MainWindow(object):
     def clicked_features(self):
         print("features")
         self.features_window = QtWidgets.QMainWindow()
-        self.features_window_ui = Ui_FeaturesWindow(self)
+        self.features_window_ui = Ui_FeaturesWindow(self,self.logged_in_user)
         self.features_window_ui.setupUi(self.features_window)
 
         self.window.hide()

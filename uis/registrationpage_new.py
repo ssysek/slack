@@ -219,6 +219,7 @@ class Ui_RegistrationWindow(object):
         self.retranslateUi(RegistrationWindow)
         QtCore.QMetaObject.connectSlotsByName(RegistrationWindow)
 
+        RegistrationWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         # tu wstawić logikę strony
         self.button_cancel.clicked.connect(self.clicked_cancel)
         self.button_sign_up.clicked.connect(self.clicked_sign_up)
@@ -226,7 +227,7 @@ class Ui_RegistrationWindow(object):
 
     def retranslateUi(self, RegistrationWindow):
         _translate = QtCore.QCoreApplication.translate
-        RegistrationWindow.setWindowTitle(_translate("RegistrationWindow", "MainWindow"))
+        RegistrationWindow.setWindowTitle(_translate("RegistrationWindow", "Register"))
         self.edit_name.setPlaceholderText(_translate("RegistrationWindow", "First Name"))
         self.edit_surname.setPlaceholderText(_translate("RegistrationWindow", "Last Name"))
         self.edit_email.setPlaceholderText(_translate("RegistrationWindow", "Email"))

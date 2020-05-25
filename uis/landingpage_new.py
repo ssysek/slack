@@ -42,7 +42,7 @@ class Ui_MainWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_3.setContentsMargins(30, -1, 0, -1)
+        self.horizontalLayout_3.setContentsMargins(0, -1, 0, -1)
         self.horizontalLayout_3.setSpacing(0)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.button_home = QtWidgets.QPushButton(self.centralwidget)
@@ -353,6 +353,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
 
+        MainWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         # stylesheets
         MainWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(transparent_background_style_sheet)
@@ -365,10 +366,10 @@ class Ui_MainWindow(object):
         self.button_about.setStyleSheet(small_label_style_sheet)
 
         self.home_pixmap = QtGui.QPixmap("resources/home.png")
-        self.home_pixmap = self.home_pixmap.scaled(QtCore.QSize(36,36))
+        self.home_pixmap = self.home_pixmap.scaled(QtCore.QSize(40, 40))
         self.icon = QtGui.QIcon(self.home_pixmap)
         self.button_home.setIcon(self.icon)
-        self.button_home.setIconSize(QtCore.QSize(36, 36))
+        self.button_home.setIconSize(QtCore.QSize(40, 40))
 
         self.pixmap = QtGui.QPixmap("resources/search.png")
         self.pixmap = self.pixmap.scaled(QtCore.QSize(32,32))
@@ -395,7 +396,6 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.button_contact.setText(_translate("MainWindow", "Contact"))
         self.button_about.setText(_translate("MainWindow", "About"))
         self.button_features.setText(_translate("MainWindow", "Features"))
@@ -403,6 +403,7 @@ class Ui_MainWindow(object):
         self.label_main_text.setText(_translate("MainWindow", "<html><head/><body><p>Communicate and </p><p>learn easier.</p></body></html>"))
         self.label_description.setText(_translate("MainWindow", "<html><head/><body><p>A web app that makes communication simpler and</p><p>work more productive.</p></body></html>"))
         self.button_create_account.setText(_translate("MainWindow", "Create a FREE account"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Talco"))
     
 
 

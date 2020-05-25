@@ -174,6 +174,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        MainWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         MainWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(button_with_image_style_sheet_colored_font)
         self.label.setStyleSheet(pretty_big_label_style_sheet)
@@ -225,7 +226,6 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "Our team:"))
         self.label_gosia.setText(_translate("MainWindow", "Gosia Barnach:"))
         self.label_gosia_img.setText(_translate("MainWindow", "TextLabel"))
@@ -245,6 +245,7 @@ class Ui_MainWindow(object):
         self.label_kuba.setText(_translate("MainWindow", "Kuba Komnata:"))
         self.label_kuba_img.setText(_translate("MainWindow", "TextLabel"))
         self.label_kuba_desc.setText(_translate("MainWindow", "Back-end developer"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "About"))
 
     def clicked_return(self):
         self.parent.window.show()

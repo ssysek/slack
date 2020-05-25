@@ -20,7 +20,7 @@ class Ui_MainNotesWindow(object):
 
     def setupUi(self, MainWindow):
         self.window = MainWindow
-        MainWindow.setObjectName("MainWindow")
+        MainWindow.setObjectName("Notes")
         MainWindow.resize(1200, 600)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
@@ -96,10 +96,12 @@ class Ui_MainNotesWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        MainWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
+
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.pushButton_addNewNote.setText(_translate("MainWindow", "Add new note"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Notes"))
 
     # object = [title,text,id], objects=[object1,object2,object3,...]
     #adding notes
