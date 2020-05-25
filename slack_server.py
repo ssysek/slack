@@ -198,10 +198,9 @@ class MyServer(BaseHTTPRequestHandler):
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
             self.send_response(200)
+            self.send_header("Content-type", "application/json")
             self.end_headers()
-            create_forum(body)
-            response = BytesIO()
-            self.wfile.write(response.getvalue())
+            self.wfile.write(bytes(create_forum(body), "utf-8"))
 
         else:
             self.send_response(200)

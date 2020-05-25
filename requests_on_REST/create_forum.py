@@ -23,4 +23,5 @@ def create_forum(body):
                  loaded_json['image'])
     cursor.execute(sql, new_forum)
     connection.commit()
-    return forum_id
+    return_forum_id = str(forum_id)
+    return return_forum_id
