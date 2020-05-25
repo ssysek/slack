@@ -37,8 +37,11 @@ class Ui_NewChatWindow(object):
                                            QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
         self.button_logout = QtWidgets.QPushButton(self.centralwidget)
-        self.button_logout.setMinimumSize(QtCore.QSize(75, 0))
-        self.button_logout.setMaximumSize(QtCore.QSize(75, 40))
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.button_logout.sizePolicy().hasHeightForWidth())
+        self.button_logout.setSizePolicy(sizePolicy)
         self.button_logout.setObjectName("button_logout")
         self.horizontalLayout_2.addWidget(self.button_logout)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
@@ -190,7 +193,17 @@ class Ui_NewChatWindow(object):
         self.button_return.setIcon(self.icon)
         self.button_return.setIconSize(QtCore.QSize(32, 32))
 
-        self.button_logout.setStyleSheet(button_for_logging_style_sheet)
+        self.button_logout.setStyleSheet(button_with_image_style_sheet)
+        self.logout_pixmap = QtGui.QPixmap("resources/logout.png")
+        self.logout_pixmap = self.logout_pixmap.scaled(QtCore.QSize(36, 36))
+        self.logout_icon = QtGui.QIcon(self.logout_pixmap)
+        self.button_logout.setIcon(self.logout_icon)
+        self.button_logout.setIconSize(QtCore.QSize(36, 36))
+        self.button_logout.setStyleSheet(button_with_image_style_sheet)
+        self.button_logout.setToolTip("Log out")
+
+        self.button_logout.clicked.connect(self.clicked_log_out)
+
 
         self.retranslateUi(NewChatWindow)
         QtCore.QMetaObject.connectSlotsByName(NewChatWindow)
@@ -198,11 +211,11 @@ class Ui_NewChatWindow(object):
     def retranslateUi(self, NewChatWindow):
         _translate = QtCore.QCoreApplication.translate
         NewChatWindow.setWindowTitle(_translate("NewChatWindow", "Add Chat"))
-        self.button_logout.setText(_translate("NewChatWindow", "Log out"))
+
         self.label_chatcreation.setText(_translate("NewChatWindow", "Create a chat room"))
         self.button_submit.setText(_translate("NewChatWindow", "Submit"))
         self.edit_name.setPlaceholderText(_translate("NewChatWindow", "Name your chat room"))
-        self.edit_invite.setPlaceholderText(_translate("NewChatWindow", "Invite someone"))
+        self.edit_invite.setPlaceholderText(_translate("NewForumWindow", "Invite someone (separate with , and no extra spaces)"))
 
     def icon_image_add(self, button, png_name):
         self.icon_pixmap = QtGui.QPixmap("resources/chats/" + png_name + ".png")
