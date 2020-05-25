@@ -13,6 +13,7 @@ from uis.contactpage import Ui_ContactWindow
 from uis.loginpage_new import Ui_LoginpageWindow
 from uis.registrationpage_new import Ui_RegistrationWindow
 from uis.loggedinlandingpage import Ui_MainWindow as Ui_LoggedInWindow
+from uis.about import Ui_MainWindow as Ui_AboutWindow
 from uis.resources.stylesheets import *
 
 QtGui.QFontDatabase.addApplicationFont(":/resources/OpenSans-Regular.ttf")
@@ -37,7 +38,6 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
         self.centralwidget.setSizePolicy(sizePolicy)
         self.centralwidget.setObjectName("centralwidget")
-
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
@@ -409,15 +409,20 @@ class Ui_MainWindow(object):
 
     def clicked_about(self):
         print("about clicked")
+        self.about_window = QtWidgets.QMainWindow()
+        self.about_window_ui = Ui_AboutWindow(self, self.loged_in_user)
+        self.about_window_ui.setupUi(self.about_window)
+
+        self.about_window.show()
+        self.window.hide()
 
     def clicked_contact(self):
         print("contact")
         self.contact_window = QtWidgets.QMainWindow()
         self.contact_window_ui = Ui_ContactWindow()
         self.contact_window_ui.setupUi(self.contact_window)
-
-        self.window.hide()
         self.contact_window.show()
+        self.window.hide()
 
     def clicked_create_account(self):
         print("create account")
@@ -433,8 +438,8 @@ class Ui_MainWindow(object):
         self.features_window_ui = Ui_FeaturesWindow(self, self.loged_in_user)
         self.features_window_ui.setupUi(self.features_window)
 
-        self.window.hide()
         self.features_window.show()
+        self.window.hide()
 
 
     def clicked_home(self):
@@ -445,7 +450,6 @@ class Ui_MainWindow(object):
         self.login_window = QtWidgets.QMainWindow()
         self.login_window_ui = Ui_LoginpageWindow(self)
         self.login_window_ui.setupUi(self.login_window)
-
 
         self.login_window.show()
 

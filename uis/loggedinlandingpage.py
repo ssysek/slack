@@ -13,6 +13,7 @@ from uis.contactpage import Ui_ContactWindow
 from uis.notesmainpage import Ui_MainNotesWindow
 from uis.registrationpage import Ui_RegistrationWindow
 from uis.chatforumpage import Ui_MainWindow as Ui_ChatWindow
+from uis.about import Ui_MainWindow as Ui_AboutWindow
 from uis.resources.stylesheets import *
 
 
@@ -267,9 +268,14 @@ class Ui_MainWindow(object):
         self.button_open_groups.setText(_translate("MainWindow", "Open groups"))
         self.butto_open_notes.setText(_translate("MainWindow", "Open notes"))
 
-
     def clicked_about(self):
         print("about clicked")
+        self.about_window = QtWidgets.QMainWindow()
+        self.about_window_ui = Ui_AboutWindow(self)
+        self.about_window_ui.setupUi(self.about_window)
+
+        self.about_window.show()
+        self.window.hide()
 
     def clicked_contact(self):
         print("contact")
