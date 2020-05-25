@@ -18,6 +18,7 @@ class Ui_MainWindow(object):
         self.loged_in_user = logged_in_user
         self.forums = []
         self.chats = []
+        self.current_chat = -1
         self.users = requests.get("http://localhost:86/all_users")
 
     def setupUi(self, MainWindow):
@@ -87,6 +88,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.addWidget(self.label_opened_box)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_4.addItem(spacerItem3)
+        self.button_refresh = QtWidgets.QPushButton(self.centralwidget)
+        self.button_refresh.setObjectName("button_refresh")
+        self.horizontalLayout_4.addWidget(self.button_refresh)
+        spacerItem4 = QtWidgets.QSpacerItem(10, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem4)
         self.button_log_out = QtWidgets.QPushButton(self.centralwidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -110,8 +116,16 @@ class Ui_MainWindow(object):
         self.button_send_message = QtWidgets.QPushButton(self.centralwidget)
         self.button_send_message.setObjectName("button_send_message")
         self.horizontalLayout_2.addWidget(self.button_send_message)
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem4)
+        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem5)
+        self.button_add_user = QtWidgets.QPushButton(self.centralwidget)
+        self.button_add_user.setObjectName("button_add_user")
+        self.horizontalLayout_2.addWidget(self.button_add_user)
+        spacerItem6 = QtWidgets.QSpacerItem(10, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem6)
+        self.button_exit_channel = QtWidgets.QPushButton(self.centralwidget)
+        self.button_exit_channel.setObjectName("button_exit_channel")
+        self.horizontalLayout_2.addWidget(self.button_exit_channel)
         self.verticalLayout_3.addLayout(self.horizontalLayout_2)
         self.verticalLayout_3.setStretch(0, 15)
         self.verticalLayout_3.setStretch(1, 1)
@@ -155,6 +169,24 @@ class Ui_MainWindow(object):
         self.button_notes.setStyleSheet(button_with_image_style_sheet)
         self.button_notes.clicked.connect(self.goToNotes)
 
+        self.button_refresh.setIcon((QtGui.QIcon('resources/refresh.png')))
+        self.button_refresh.setIconSize(QtCore.QSize(32,32))
+        self.button_refresh.setStyleSheet(button_with_image_style_sheet)
+        self.button_refresh.clicked.connect(lambda: self.refresh())
+        self.button_refresh.setToolTip("Refresh")
+
+        self.button_add_user.setIcon((QtGui.QIcon('resources/invite.png')))
+        self.button_add_user.setIconSize(QtCore.QSize(32,32))
+        self.button_add_user.setStyleSheet(button_with_image_style_sheet)
+        self.button_add_user.clicked.connect(lambda: self.refresh())
+        self.button_add_user.setToolTip("Add new contributor")
+
+        self.button_exit_channel.setIcon((QtGui.QIcon('resources/exit.png')))
+        self.button_exit_channel.setIconSize(QtCore.QSize(32,32))
+        self.button_exit_channel.setStyleSheet(button_with_image_style_sheet)
+        self.button_exit_channel.clicked.connect(lambda: self.refresh())
+        self.button_exit_channel.setToolTip("Exit from current channel")
+
         self.logout_pixmap = QtGui.QPixmap("resources/logout.png")
         self.logout_pixmap = self.logout_pixmap.scaled(QtCore.QSize(36, 36))
         self.logout_icon = QtGui.QIcon(self.logout_pixmap)
@@ -188,15 +220,19 @@ class Ui_MainWindow(object):
             res[1].append(str(i["chat_id"]))
         return res
 
+    def refresh(self):
+        self.loadMessagesFromDataBase(self.current_chat)
+        self.loadMessages()
+
     #    insert    into    posts    values(1, 1, 1, 'Lorem ipsum');
     # TODO: podmienić hard coded chat_id na aktualny chat_id
     def sendNewMessage(self):
         url = "http://localhost:86/add_new_post"
         if (self.lineEdit.text() != ""):
             register_request = requests.post(url,
-                                             json={"owner_id": self.loged_in_user[0], "chat_id": 2,
+                                             json={"owner_id": self.loged_in_user[0], "chat_id": self.current_chat,
                                                    "post_content": self.lineEdit.text()})
-        self.loadMessagesFromDataBase(2)
+        self.loadMessagesFromDataBase(self.current_chat)
         self.loadMessages()
 
     def doSomething(self):
@@ -206,8 +242,6 @@ class Ui_MainWindow(object):
         self.chats = self.loadPrivateChatsForUser()
         self.changeChannelButtons(self.listWidget_chats, self.chats)
 
-        # statycznie załadowane messages z chatu nr 1
-        self.loadMessagesFromDataBase(2)
 
     def changeForumButtons(self, nameWidget, objects):
         # Create widget
@@ -322,7 +356,6 @@ class Ui_MainWindow(object):
 
     def getNotesWidgetButton(self, object):
         widgetButton = QtWidgets.QPushButton(object)
-
         widgetButton.clicked.connect(lambda: self.printSecond('1'))
         return widgetButton
 
@@ -336,9 +369,8 @@ class Ui_MainWindow(object):
         self.notes_window.show()
 
     def setUpMessages(self, arg, id):  # arg - name of channel, id - id channel
-        # TODO: podmienić na konkretne channels, nie jeden statyczny
         self.loadMessagesFromDataBase(id)
-
+        self.current_chat = id
         self.label_opened_box.setText(arg + ":")
         self.label_opened_box.adjustSize()
         self.actual_box = id
@@ -438,5 +470,4 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     ui.doSomething()
-    ui.loadMessagesFromDataBase(2)
     sys.exit(app.exec_())

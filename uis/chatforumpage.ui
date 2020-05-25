@@ -161,6 +161,29 @@
        </spacer>
       </item>
       <item>
+       <widget class="QPushButton" name="button_refresh">
+        <property name="text">
+         <string>Refresh</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Minimum</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>10</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <widget class="QPushButton" name="button_log_out">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -184,7 +207,7 @@
        <widget class="QListWidget" name="listWidget_opened_box"/>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0">
+       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="0,0,0,0,0,0">
         <item>
          <widget class="QLineEdit" name="lineEdit"/>
         </item>
@@ -210,6 +233,36 @@
            </size>
           </property>
          </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="button_add_user">
+          <property name="text">
+           <string>Add user</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Minimum</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>10</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="button_exit_channel">
+          <property name="text">
+           <string>Exit channel</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
