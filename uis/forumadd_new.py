@@ -182,6 +182,8 @@ class Ui_NewForumWindow(object):
         self.icon_image_add(self.button_icon4, "g4")
         self.icon_image_add(self.button_icon5, "g5")
 
+
+        NewForumWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         NewForumWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(transparent_background_style_sheet)
         self.button_return.setStyleSheet(button_with_image_style_sheet)
@@ -200,7 +202,7 @@ class Ui_NewForumWindow(object):
 
     def retranslateUi(self, NewForumWindow):
         _translate = QtCore.QCoreApplication.translate
-        NewForumWindow.setWindowTitle(_translate("NewForumWindow", "MainWindow"))
+        NewForumWindow.setWindowTitle(_translate("NewForumWindow", "Add Forum"))
         self.button_logout.setText(_translate("NewForumWindow", "Log out"))
         self.button_submit.setText(_translate("NewForumWindow", "Submit"))
         self.edit_invite.setPlaceholderText(

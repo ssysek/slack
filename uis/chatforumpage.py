@@ -11,7 +11,7 @@ from uis.resources.stylesheets import *
 
 from uis.notesmainpage import Ui_MainNotesWindow
 from uis.forumadd_new import Ui_NewForumWindow
-
+from uis.chatadd_new import Ui_NewChatWindow
 
 class Ui_MainWindow(object):
     def __init__(self, parent=None, logged_in_user = None):
@@ -319,6 +319,27 @@ class Ui_MainWindow(object):
         widgetButton.clicked.connect(self.clicked_newForum)
         return widgetButton
 
+    def addChatButton(self):
+        widgetButton = QtWidgets.QPushButton()
+        widgetButton_pixmap = QtGui.QPixmap("resources/add.png")
+        widgetButton_pixmap = widgetButton_pixmap.scaled(QtCore.QSize(32, 32))
+        widgetButtonicon = QtGui.QIcon(widgetButton_pixmap)
+        widgetButton.setIcon(widgetButtonicon)
+        widgetButton.setIconSize(QtCore.QSize(32, 32))
+        widgetButton.setStyleSheet(button_with_image_style_sheet)
+
+        widgetButton.clicked.connect(self.clickednewChat)
+        return widgetButton
+
+    def clickednewChat(self):
+        print("adding new chat")
+        self.addchat_window = QtWidgets.QMainWindow()
+        self.addchat_window_ui = Ui_NewChatWindow(self, self.loged_in_user)
+        self.addchat_window_ui.setupUi(self.addchat_window)
+
+        self.window.hide()
+        self.addchat_window.show()
+
 
     def addChannelButton(self, object):
         widgetButton = QtWidgets.QPushButton()
@@ -355,7 +376,7 @@ class Ui_MainWindow(object):
             pass
         itemN = QtWidgets.QListWidgetItem()
         widget = QtWidgets.QWidget()
-        widgetButton = self.addChannelButton(objects)
+        widgetButton = self.addChatButton()
         widgetLayout = QtWidgets.QHBoxLayout()
         widgetLayout.addWidget(widgetButton)
         widgetLayout.addStretch()
