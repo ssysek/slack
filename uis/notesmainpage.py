@@ -118,6 +118,9 @@ class Ui_MainNotesWindow(object):
         return_pixmap_delete = return_pixmap_delete.scaled(QtCore.QSize(40, 40))
         icon_delete = QtGui.QIcon(return_pixmap_delete)
 
+        for i in reversed(range(self.gridLayout.count())):
+            self.gridLayout.itemAt(i).widget().setParent(None)
+
         for note in notes:
             frame = QtWidgets.QFrame(self.centralwidget)
             frame.setMinimumSize(QtCore.QSize(180, 160))
@@ -182,6 +185,8 @@ class Ui_MainNotesWindow(object):
     def clicked_delete_note(self, id):
         print("Delete note")
         print(id)
+        requests.post('http://localhost:86/delete_note', json={"note_id": id})
+        self.addFrames()
 
 if __name__ == "__main__":
     import sys

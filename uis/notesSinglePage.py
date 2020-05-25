@@ -73,6 +73,9 @@ class Ui_MainNotesPageWindow(object):
         self.pushButton_Return.clicked.connect(self.clicked_return)
         self.pushButton_save.clicked.connect(self.clicked_save)
         self.pushButton_LogOut.clicked.connect(self.clicked_log_out)
+        self.pushButton_LogOut.setFocusPolicy(QtCore.Qt.ClickFocus)
+        shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+S"), self.textEdit_text)
+        shortcut.activated.connect(self.clicked_save)
 
         self.return_pixmap = QtGui.QPixmap("resources/return.png")
         self.return_pixmap = self.return_pixmap.scaled(QtCore.QSize(32, 32))
@@ -123,14 +126,22 @@ class Ui_MainNotesPageWindow(object):
         print(self.lineEdit_title.text())
         print(self.textEdit_text.toPlainText())
         print(self.loged_in_user[0])
+        print(self.note_id)
         #database endpoint to save
-        if self.note_id==0:
+        if self.note_id == 0:
             print("New note")
             register_request = requests.post('http://localhost:86/create_note',
                                              json={"title": self.lineEdit_title.text(), "notes_content":
-            self.textEdit_text.toPlainText(), "owner_id": self.loged_in_user[0]})
+            self.textEdit_text.toPlainText(), "owner_id": self.loged_in_user[0]}).text
+            print(register_request)
             #get id from register_request
             print("Request poszedł")
+        elif self.text != self.textEdit_text.toPlainText() or self.title != self.lineEdit_title.text():
+            print("Update note")
+            register_request = requests.post('http://localhost:86/update_note',
+                                             json={"note_id": self.note_id, "notes_content":
+            self.textEdit_text.toPlainText()})
+            print("Request upadate poszedł")
 
 
 if __name__ == "__main__":
