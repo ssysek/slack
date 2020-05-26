@@ -401,6 +401,8 @@ class Ui_MainWindow(object):
         nameWidget.addItem(itemN)
         nameWidget.setItemWidget(itemN, widget)
 
+
+#TODO: self.channel_icons podmienić na zgadzające się z bazą
     def getChannelWidgetButton(self, channel_info):
         """
         Creates button for channel and connects it to setup current messages viewer to show its content
@@ -409,7 +411,7 @@ class Ui_MainWindow(object):
         """
         object = channel_info[1]
         widgetButton = QtWidgets.QPushButton()
-        widgetButton_pixmap = QtGui.QPixmap("resources/messages/m1.png")
+        widgetButton_pixmap = QtGui.QPixmap(self.channel_icons[3])
         widgetButton_pixmap = widgetButton_pixmap.scaled(QtCore.QSize(32, 32))
         widgetButtonicon = QtGui.QIcon(widgetButton_pixmap)
         widgetButton.setIcon(widgetButtonicon)
