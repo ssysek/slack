@@ -1,10 +1,12 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from uis.resources.stylesheets import *
+import requests
 
 class Ui_Form(object):
-    def __init__(self, parent=None, chat_id=-1):
+    def __init__(self, parent=None, chat_id=-1, forum_id=-1):
         self.parent = parent
         self.chat_id = chat_id
+        self.forum_id = forum_id
 
     def setupUi(self, Form):
         self.window = Form
@@ -61,8 +63,17 @@ class Ui_Form(object):
         self.window.hide()
 
     def clicked_add(self):
-        print("add")
-        print(self.colored_line_edit.text())
+        url = "http://localhost:86/add_user_to_chat"
+        if (self.colored_line_edit.text() != "" and self.chat_id != -1):
+            register_request = requests.post(url, json={"chat_id": str(self.chat_id), "permitted_user": self.colored_line_edit.text()})
+            if (self.forum_id != -1):
+                url = "http://localhost:86/add_user_to_forum"
+                register_request = requests.post(url, json={"forum_id": str(self.forum_id),
+                                                            "permitted_user": self.colored_line_edit.text()})
+            print("Succes")
+        else:
+            print("Fail")
+        self.window.hide()
 
 
 if __name__ == "__main__":

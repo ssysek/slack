@@ -21,6 +21,7 @@ class Ui_MainWindow(object):
         self.forums = []
         self.chats = []
         self.current_chat = -1
+        self.current_forum = -1
         self.users = requests.get("http://localhost:86/all_users")
 
     def setupUi(self, MainWindow):
@@ -218,9 +219,9 @@ class Ui_MainWindow(object):
         url = "http://localhost:86/user_chats?user_id="
         url += str(1)
         messages = requests.post(url).json()
-        res = [-1, []]
+        res = ["no_forum", -1, []]
         for i in messages:
-            res[1].append(str(i["chat_id"]))
+            res[2].append(str(i["chat_id"]))
         return res
 
     def refresh(self):
@@ -320,7 +321,7 @@ class Ui_MainWindow(object):
         widgetButton.clicked.connect(self.clicked_newForum)
         return widgetButton
 
-    def addChatButton(self):
+    def addChatButton(self, forum_id):
         widgetButton = QtWidgets.QPushButton()
         widgetButton_pixmap = QtGui.QPixmap("resources/add.png")
         widgetButton_pixmap = widgetButton_pixmap.scaled(QtCore.QSize(32, 32))
@@ -329,11 +330,14 @@ class Ui_MainWindow(object):
         widgetButton.setIconSize(QtCore.QSize(32, 32))
         widgetButton.setStyleSheet(button_with_image_style_sheet)
 
-        widgetButton.clicked.connect(self.clickednewChat)
+        widgetButton.clicked.connect(lambda: self.clickednewChat(forum_id))
         return widgetButton
 
-    def clickednewChat(self):
+    def clickednewChat(self, forum_id):
         print("adding new chat")
+        print(self.current_chat)
+        print(self.current_forum)
+        print(forum_id)
         self.addchat_window = QtWidgets.QMainWindow()
         self.addchat_window_ui = Ui_NewChatWindow(self, self.loged_in_user)
         self.addchat_window_ui.setupUi(self.addchat_window)
@@ -357,13 +361,16 @@ class Ui_MainWindow(object):
     def createChannel(self, object):
         print(object)
 
+    #[forum_name, forum_id, [forum chats id]]
     def changeChannelButtons(self, nameWidget, objects):
         nameWidget.clear()
+        self.current_forum = objects[1]
         try:
             for object in objects[len(objects)-1]:
                 itemN = QtWidgets.QListWidgetItem()
                 widget = QtWidgets.QWidget()
-                widgetButton = self.getChannelWidgetButton(object)
+                chanel_info = [objects[1], object]
+                widgetButton = self.getChannelWidgetButton(chanel_info)
                 widgetLayout = QtWidgets.QHBoxLayout()
                 widgetLayout.addWidget(widgetButton)
                 widgetLayout.addStretch()
@@ -377,7 +384,7 @@ class Ui_MainWindow(object):
             pass
         itemN = QtWidgets.QListWidgetItem()
         widget = QtWidgets.QWidget()
-        widgetButton = self.addChatButton()
+        widgetButton = self.addChatButton(objects[1])
         widgetLayout = QtWidgets.QHBoxLayout()
         widgetLayout.addWidget(widgetButton)
         widgetLayout.addStretch()
@@ -388,7 +395,9 @@ class Ui_MainWindow(object):
         nameWidget.addItem(itemN)
         nameWidget.setItemWidget(itemN, widget)
 
-    def getChannelWidgetButton(self, object):
+    # channel_info: [forum_id, channel_id]
+    def getChannelWidgetButton(self, channel_info):
+        object = channel_info[1]
         widgetButton = QtWidgets.QPushButton()
         widgetButton_pixmap = QtGui.QPixmap("resources/messages/m1.png")
         widgetButton_pixmap = widgetButton_pixmap.scaled(QtCore.QSize(32, 32))
@@ -397,7 +406,7 @@ class Ui_MainWindow(object):
         widgetButton.setIconSize(QtCore.QSize(32, 32))
         widgetButton.setStyleSheet(button_with_image_style_sheet)
         widgetButton.setToolTip(object)
-        widgetButton.clicked.connect(lambda: self.setUpMessages(object, object))
+        widgetButton.clicked.connect(lambda: self.setUpMessages(channel_info))
         return widgetButton
 
     def getNotesWidgetButton(self, object):
@@ -414,12 +423,14 @@ class Ui_MainWindow(object):
         self.window.hide()
         self.notes_window.show()
 
-    def setUpMessages(self, arg, id):  # arg - name of channel, id - id channel
-        self.loadMessagesFromDataBase(id)
-        self.current_chat = id
-        self.label_opened_box.setText(arg + ":")
+    # channel_info: [forum_id, channel_id]
+    def setUpMessages(self, channel_info):  # arg - name of channel, id - id channel
+        self.current_forum = channel_info[0]
+        self.loadMessagesFromDataBase(channel_info[1])
+        self.current_chat = channel_info[1]
+        self.label_opened_box.setText(channel_info[1] + ":")
         self.label_opened_box.adjustSize()
-        self.actual_box = id
+        self.actual_box = channel_info[1]
         try:
             self.button_send_message.clicked.disconnect()
         except \
@@ -506,12 +517,14 @@ class Ui_MainWindow(object):
             res.append(str(i["chat_id"]))
         return res
 
+#TODO: podpiąć do wychodzenia z bazy, nie ma jeszcze endpointa
     def clicked_exit_channel(self):
-        pass
+        print(self.loged_in_user)
+        print(self.current_chat)
 
     def clicked_add_user(self):
         self.adduser_window = QtWidgets.QWidget()
-        self.adduser_window_ui = Ui_Add_New_User(self, self.current_chat)
+        self.adduser_window_ui = Ui_Add_New_User(self, self.current_chat, self.current_forum)
         self.adduser_window_ui.setupUi(self.adduser_window)
         self.adduser_window.show()
 
