@@ -12,6 +12,7 @@ from uis.resources.stylesheets import *
 from uis.notesmainpage import Ui_MainNotesWindow
 from uis.forumadd_new import Ui_NewForumWindow
 from uis.chatadd_new import Ui_NewChatWindow
+from uis.add_new_user_form import Ui_Form as Ui_Add_New_User
 
 class Ui_MainWindow(object):
     def __init__(self, parent=None, logged_in_user = None):
@@ -174,19 +175,16 @@ class Ui_MainWindow(object):
         self.button_refresh.setIcon((QtGui.QIcon('resources/refresh.png')))
         self.button_refresh.setIconSize(QtCore.QSize(32,32))
         self.button_refresh.setStyleSheet(button_with_image_style_sheet)
-        self.button_refresh.clicked.connect(lambda: self.refresh())
         self.button_refresh.setToolTip("Refresh")
 
         self.button_add_user.setIcon((QtGui.QIcon('resources/invite.png')))
         self.button_add_user.setIconSize(QtCore.QSize(32,32))
         self.button_add_user.setStyleSheet(button_with_image_style_sheet)
-        self.button_add_user.clicked.connect(lambda: self.refresh())
         self.button_add_user.setToolTip("Add new contributor")
 
         self.button_exit_channel.setIcon((QtGui.QIcon('resources/exit.png')))
         self.button_exit_channel.setIconSize(QtCore.QSize(32,32))
         self.button_exit_channel.setStyleSheet(button_with_image_style_sheet)
-        self.button_exit_channel.clicked.connect(lambda: self.refresh())
         self.button_exit_channel.setToolTip("Exit from current channel")
 
         self.logout_pixmap = QtGui.QPixmap("resources/logout.png")
@@ -199,6 +197,9 @@ class Ui_MainWindow(object):
 
         self.button_log_out.clicked.connect(self.clicked_log_out)
         self.button_return.clicked.connect(self.clicked_return)
+        self.button_exit_channel.clicked.connect(lambda: self.clicked_exit_channel())
+        self.button_add_user.clicked.connect(lambda: self.clicked_add_user())
+        self.button_refresh.clicked.connect(lambda: self.refresh())
 
         self.actual_box = None
         self.messages = []
@@ -505,6 +506,14 @@ class Ui_MainWindow(object):
             res.append(str(i["chat_id"]))
         return res
 
+    def clicked_exit_channel(self):
+        pass
+
+    def clicked_add_user(self):
+        self.adduser_window = QtWidgets.QWidget()
+        self.adduser_window_ui = Ui_Add_New_User(self, self.current_chat)
+        self.adduser_window_ui.setupUi(self.adduser_window)
+        self.adduser_window.show()
 
 if __name__ == "__main__":
     import sys
