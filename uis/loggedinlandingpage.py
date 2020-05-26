@@ -239,7 +239,6 @@ class Ui_MainWindow(object):
         self.button_home.clicked.connect(self.clicked_home)
         self.button_log_out.clicked.connect(self.clicked_log_out)
         self.button_open_chats.clicked.connect(self.clicked_open_chats)
-        self.button_open_groups.clicked.connect(self.clicked_open_groups)
         self.butto_open_notes.clicked.connect(self.clicked_open_notes)
 
     def retranslateUi(self, MainWindow):
