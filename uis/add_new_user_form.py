@@ -39,6 +39,8 @@ class Ui_Form(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
+        Form.setWindowIcon(QtGui.QIcon('resources/taco.png'))
+
         self.return_pixmap = QtGui.QPixmap("resources/return.png")
         self.return_pixmap = self.return_pixmap.scaled(QtCore.QSize(32, 32))
         self.icon = QtGui.QIcon(self.return_pixmap)
@@ -56,13 +58,14 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Add user"))
         self.colored_line_edit.setText(_translate("Form", ""))
 
     def clicked_return(self):
         self.window.hide()
 
     def clicked_add(self):
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         url = "http://localhost:86/add_user_to_chat"
         if (self.colored_line_edit.text() != "" and self.chat_id != -1):
             register_request = requests.post(url, json={"chat_id": str(self.chat_id), "permitted_user": self.colored_line_edit.text()})
@@ -74,6 +77,7 @@ class Ui_Form(object):
         else:
             print("Fail")
         self.window.hide()
+        QtWidgets.QApplication.restoreOverrideCursor()
 
 
 if __name__ == "__main__":

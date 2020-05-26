@@ -193,9 +193,9 @@ class Ui_FeaturesWindow(object):
         self.main_window = QtWidgets.QMainWindow()
         self.main_window_ui = Ui_ChatWindow(self, self.loged_in_user)
         self.main_window_ui.setupUi(self.main_window)
+        self.main_window_ui.doSomething()
         self.main_window.show()
         self.window.hide()
-        self.main_window_ui.doSomething()
 
     def clicked_return(self):
         self.parent.window.show()

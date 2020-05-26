@@ -111,7 +111,7 @@ class Ui_NewChatWindow(object):
         self.edit_name.setMinimumSize(QtCore.QSize(400, 40))
         self.edit_name.setMaximumSize(QtCore.QSize(400, 40))
         self.edit_name.setStyleSheet("background-color:rgb(230, 230, 230);\n"
-                                     "color:rgb(188, 188, 188);\n"
+                                     "color:black;\n"
                                      "font: 75 8pt \"SansSerif\";\n"
                                      "border-style:solid;\n"
                                      "border-width:2px;\n"
@@ -125,7 +125,7 @@ class Ui_NewChatWindow(object):
         self.edit_invite.setMinimumSize(QtCore.QSize(200, 40))
         self.edit_invite.setMaximumSize(QtCore.QSize(400, 40))
         self.edit_invite.setStyleSheet("background-color:rgb(230, 230, 230);\n"
-                                       "color:rgb(188, 188, 188);\n"
+                                       "color:black;\n"
                                        "font: 75 8pt \"SansSerif\";\n"
                                        "border-style:solid;\n"
                                        "border-width:2px;\n"
@@ -265,6 +265,7 @@ class Ui_NewChatWindow(object):
         self.window.hide()
 
     def clicked_save(self):
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         print("Save")
         name = self.edit_name.text()
         invited = self.edit_invite.text()
@@ -316,6 +317,7 @@ class Ui_NewChatWindow(object):
                 self.window.hide()
             else:
                 print("no json from adding chat")
+        QtWidgets.QApplication.restoreOverrideCursor()
 
 
 

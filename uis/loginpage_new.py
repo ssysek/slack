@@ -12,6 +12,8 @@ from PyQt5.QtWidgets import QApplication
 from uis.chatforumpage import Ui_MainWindow as Ui_ChatWindow
 import requests
 
+from uis.resources.stylesheets import gradient_style_sheet
+
 logged_id = -1
 logged_name = ""
 logged_surname=""
@@ -136,12 +138,12 @@ class Ui_LoginpageWindow(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.label_donthave = QtWidgets.QLabel(self.centralwidget)
-        self.label_donthave.setMaximumSize(QtCore.QSize(140, 16777215))
+        self.label_donthave.setMaximumSize(QtCore.QSize(145, 16777215))
         self.label_donthave.setStyleSheet("font: 75 8pt \"SansSerif\";")
         self.label_donthave.setObjectName("label_donthave")
         self.horizontalLayout.addWidget(self.label_donthave)
         self.button_sign_up = QtWidgets.QPushButton(self.centralwidget)
-        self.button_sign_up.setMaximumSize(QtCore.QSize(43, 16777215))
+        self.button_sign_up.setMaximumSize(QtCore.QSize(50, 16777215))
         font = QtGui.QFont()
         font.setFamily("SansSerif")
         font.setPointSize(8)
@@ -186,7 +188,9 @@ class Ui_LoginpageWindow(object):
         self.retranslateUi(LoginpageWindow)
         QtCore.QMetaObject.connectSlotsByName(LoginpageWindow)
 
+        LoginpageWindow.setStyleSheet(gradient_style_sheet)
         LoginpageWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
+        self.button_login.setAutoDefault(True)
         # tu wstawić logikę strony
         self.button_cancel.clicked.connect(self.clicked_cancel)
         self.button_login.clicked.connect(self.clicked_login)
@@ -219,6 +223,7 @@ class Ui_LoginpageWindow(object):
         self.window.hide()
 
     def clicked_login(self):
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         username = self.edit_username.text()
         password = self.edit_password.text()
         logged = False
@@ -243,6 +248,7 @@ class Ui_LoginpageWindow(object):
             self.window.hide()
         else:
             self.label_wrong.setText("wrong nickname or password")
+        QtWidgets.QApplication.restoreOverrideCursor()
 
 
 

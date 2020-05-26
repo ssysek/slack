@@ -73,6 +73,7 @@ class Ui_MainNotesPageWindow(object):
         MainWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         self.pushButton_Return.clicked.connect(self.clicked_return)
         self.pushButton_save.clicked.connect(self.clicked_save)
+        self.pushButton_save.setAutoDefault(True)
         self.pushButton_LogOut.clicked.connect(self.clicked_log_out)
         self.pushButton_LogOut.setFocusPolicy(QtCore.Qt.ClickFocus)
         shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+S"), self.textEdit_text)
@@ -123,27 +124,29 @@ class Ui_MainNotesPageWindow(object):
         self.window.hide()
 
     def clicked_save(self):
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         print("Save")
         print(self.lineEdit_title.text())
         print(self.textEdit_text.toPlainText())
         print(self.loged_in_user[0])
         print(self.note_id)
-        #database endpoint to save
+        # database endpoint to save
         if self.note_id == 0:
             print("New note")
             register_request = requests.post('http://localhost:86/create_note',
                                              json={"title": self.lineEdit_title.text(), "notes_content":
-            self.textEdit_text.toPlainText(), "owner_id": self.loged_in_user[0]}).json()
-            print(register_request)
-            print(register_request["new_id"])
-            #get id from register_request
+                                                 self.textEdit_text.toPlainText(),
+                                                   "owner_id": self.loged_in_user[0]}).json()
+            self.note_id = str(register_request)
+            # get id from register_request
             print("Request poszedł")
         elif self.text != self.textEdit_text.toPlainText() or self.title != self.lineEdit_title.text():
             print("Update note")
             register_request = requests.post('http://localhost:86/update_note',
                                              json={"note_id": self.note_id, "notes_content":
-            self.textEdit_text.toPlainText()})
+                                                 self.textEdit_text.toPlainText(), "title": self.lineEdit_title.text()})
             print("Request upadate poszedł")
+        QtWidgets.QApplication.restoreOverrideCursor()
 
 
 if __name__ == "__main__":

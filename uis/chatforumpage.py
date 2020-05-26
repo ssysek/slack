@@ -21,8 +21,10 @@ class Ui_MainWindow(object):
         self.forums = []
         self.chats = []
         self.current_chat = -1
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         self.current_forum = -1
         self.users = requests.get("http://localhost:86/all_users")
+        QtWidgets.QApplication.restoreOverrideCursor()
 
     def setupUi(self, MainWindow):
         self.window = MainWindow
@@ -231,6 +233,7 @@ class Ui_MainWindow(object):
     #    insert    into    posts    values(1, 1, 1, 'Lorem ipsum');
     # TODO: podmienić hard coded chat_id na aktualny chat_id
     def sendNewMessage(self):
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         url = "http://localhost:86/add_new_post"
         if (self.lineEdit.text() != ""):
             register_request = requests.post(url,
@@ -238,13 +241,16 @@ class Ui_MainWindow(object):
                                                    "post_content": self.lineEdit.text()})
         self.loadMessagesFromDataBase(self.current_chat)
         self.loadMessages()
+        QtWidgets.QApplication.restoreOverrideCursor()
 
     def doSomething(self):
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         self.forums = self.loadForumsFromDataBase()
         self.changeForumButtons(self.listWidget_forums, self.forums)
 
         self.chats = self.loadPrivateChatsForUser()
         self.changeChannelButtons(self.listWidget_chats, self.chats)
+        QtWidgets.QApplication.restoreOverrideCursor()
 
 
     def changeForumButtons(self, nameWidget, objects):
@@ -482,6 +488,7 @@ class Ui_MainWindow(object):
         self.window.hide()
 
     def loadMessagesFromDataBase(self, chat_id):
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         url = "http://localhost:86/get_all_posts_at_chats?chat_id="
         url += str(chat_id)
         messages = requests.post(url)
@@ -497,6 +504,7 @@ class Ui_MainWindow(object):
             if (not message_has_owner):
                 messages_to_print.append(("Unkown", i["post_content"]))
         self.messages = messages_to_print
+        QtWidgets.QApplication.restoreOverrideCursor()
 
     def loadForumsFromDataBase(self):
         url = "http://localhost:86/user_forums?permitted_user="

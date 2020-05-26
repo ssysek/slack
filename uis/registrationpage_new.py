@@ -167,6 +167,18 @@ class Ui_RegistrationWindow(object):
         self.gridLayout_3.addLayout(self.gridLayout_2, 1, 1, 1, 1)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setObjectName("gridLayout")
+        self.button_sign_up = QtWidgets.QPushButton(self.centralwidget)
+        self.button_sign_up.setMinimumSize(QtCore.QSize(200, 50))
+        self.button_sign_up.setMaximumSize(QtCore.QSize(200, 50))
+        self.button_sign_up.setStyleSheet("background-color:rgb(128, 45, 181);\n"
+                                          "color:white;\n"
+                                          "font: 450 13pt \"SansSerif\";\n"
+                                          "border-style:outset;\n"
+                                          "border-width:2px;\n"
+                                          "border-radius:19px;\n"
+                                          "border-color:rgb(212, 174, 252);")
+        self.button_sign_up.setObjectName("button_sign_up")
+        self.gridLayout.addWidget(self.button_sign_up, 0, 1, 1, 1)
         self.button_cancel = QtWidgets.QPushButton(self.centralwidget)
         self.button_cancel.setMinimumSize(QtCore.QSize(200, 23))
         self.button_cancel.setMaximumSize(QtCore.QSize(200, 23))
@@ -181,18 +193,6 @@ class Ui_RegistrationWindow(object):
         self.gridLayout.addItem(spacerItem7, 0, 0, 1, 1)
         spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout.addItem(spacerItem8, 0, 2, 1, 1)
-        self.button_sign_up = QtWidgets.QPushButton(self.centralwidget)
-        self.button_sign_up.setMinimumSize(QtCore.QSize(200, 50))
-        self.button_sign_up.setMaximumSize(QtCore.QSize(200, 50))
-        self.button_sign_up.setStyleSheet("background-color:rgb(128, 45, 181);\n"
-                                          "color:white;\n"
-                                          "font: 450 13pt \"SansSerif\";\n"
-                                          "border-style:outset;\n"
-                                          "border-width:2px;\n"
-                                          "border-radius:19px;\n"
-                                          "border-color:rgb(212, 174, 252);")
-        self.button_sign_up.setObjectName("button_sign_up")
-        self.gridLayout.addWidget(self.button_sign_up, 0, 1, 1, 1)
         spacerItem9 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout.addItem(spacerItem9, 1, 2, 1, 1)
         spacerItem10 = QtWidgets.QSpacerItem(20, 0, QtWidgets.QSizePolicy.Minimum,
@@ -221,6 +221,8 @@ class Ui_RegistrationWindow(object):
 
         RegistrationWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         # tu wstawić logikę strony
+        self.button_sign_up.setAutoDefault(True)
+        self.button_cancel.setAutoDefault(True)
         self.button_cancel.clicked.connect(self.clicked_cancel)
         self.button_sign_up.clicked.connect(self.clicked_sign_up)
 
@@ -240,6 +242,7 @@ class Ui_RegistrationWindow(object):
 
 
     def clicked_sign_up(self):
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         name = self.edit_name.text()
         surname = self.edit_surname.text()
         email = self.edit_email.text()
@@ -278,6 +281,7 @@ class Ui_RegistrationWindow(object):
             print("Success - now log in")
             self.window.hide()
             self.parent.clicked_log_in()
+        QtWidgets.QApplication.restoreOverrideCursor()
 
 
     def clicked_cancel(self):

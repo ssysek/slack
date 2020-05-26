@@ -106,6 +106,7 @@ class Ui_MainNotesWindow(object):
     # object = [title,text,id], objects=[object1,object2,object3,...]
     #adding notes
     def addFrames(self):
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         url = "http://localhost:86/read_notes?owner_id="
         url += str(self.loged_in_user[0])
 
@@ -156,6 +157,7 @@ class Ui_MainNotesWindow(object):
             else:
                 column = column+1
             i = i + 1
+        QtWidgets.QApplication.restoreOverrideCursor()
 
     def clicked_single_note(self, title, text, id):
         print("Go to single note")
@@ -185,10 +187,12 @@ class Ui_MainNotesWindow(object):
         self.window.hide()
 
     def clicked_delete_note(self, id):
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         print("Delete note")
         print(id)
         requests.post('http://localhost:86/delete_note', json={"note_id": id})
         self.addFrames()
+        QtWidgets.QApplication.restoreOverrideCursor()
 
 if __name__ == "__main__":
     import sys

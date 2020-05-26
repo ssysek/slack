@@ -39,7 +39,7 @@ class Ui_MainWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_3.setContentsMargins(-1, -1, 0, -1)
+        self.horizontalLayout_3.setContentsMargins(30, -1, 0, -1)
         self.horizontalLayout_3.setSpacing(0)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.button_home = QtWidgets.QPushButton(self.centralwidget)
@@ -98,9 +98,6 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.horizontalLayout_3)
         self.horizontalLayout_2.setSpacing(20)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.button_search = QtWidgets.QPushButton(self.centralwidget)
-        self.button_search.setObjectName("button_search")
-        self.horizontalLayout_2.addWidget(self.button_search)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setHorizontalSpacing(20)
         self.gridLayout.setVerticalSpacing(0)
@@ -212,7 +209,6 @@ class Ui_MainWindow(object):
         MainWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(transparent_background_style_sheet)
 
-        self.button_search.setStyleSheet(button_with_image_style_sheet)
         self.butto_open_notes.setStyleSheet(button_big_blue_style_sheet)
         self.button_open_groups.setStyleSheet(button_big_blue_style_sheet)
         self.button_open_chats.setStyleSheet(button_big_blue_style_sheet)
@@ -237,18 +233,10 @@ class Ui_MainWindow(object):
         self.button_home.setIconSize(QtCore.QSize(40, 40))
         self.button_home.setStyleSheet(button_with_image_style_sheet)
 
-        self.pixmap = QtGui.QPixmap("resources/search.png")
-        self.pixmap = self.pixmap.scaled(QtCore.QSize(32,32))
-        self.icon = QtGui.QIcon(self.pixmap)
-        self.button_search.setIcon(self.icon)
-        self.button_search.setIconSize(QtCore.QSize(32, 32))
-
-
         self.button_about.clicked.connect(self.clicked_about)
         self.button_contact.clicked.connect(self.clicked_contact)
         self.button_features.clicked.connect(self.clicked_features)
         self.button_home.clicked.connect(self.clicked_home)
-        self.button_search.clicked.connect(self.clicked_search)
         self.button_log_out.clicked.connect(self.clicked_log_out)
         self.button_open_chats.clicked.connect(self.clicked_open_chats)
         self.button_open_groups.clicked.connect(self.clicked_open_groups)
@@ -312,18 +300,14 @@ class Ui_MainWindow(object):
         self.window.hide()
         self.parent.window.show()
 
-    def clicked_search(self):
-        print("search")
-        self.change_username("MaciekMaciekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkMaciekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkMaciekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkMaciekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkMaciekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkMaciekkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
-
     def clicked_open_chats(self):
         print("open chats")
         self.main_window = QtWidgets.QMainWindow()
         self.main_window_ui = Ui_ChatWindow(self, self.logged_in_user)
         self.main_window_ui.setupUi(self.main_window)
+        self.main_window_ui.doSomething()
         self.main_window.show()
         self.window.hide()
-        self.main_window_ui.doSomething()
 
     def clicked_open_notes(self):
         print("open notes")
