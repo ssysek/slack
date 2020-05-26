@@ -24,3 +24,4 @@ def register(body):
                 loaded_json['login'], loaded_json['password'])
     cursor.execute(sql, new_user)
     connection.commit()
+    return str(new_id)
