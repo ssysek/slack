@@ -179,38 +179,38 @@ class Ui_MainWindow(object):
         self.centralwidget.setStyleSheet(button_with_image_style_sheet_colored_font)
         self.label.setStyleSheet(pretty_big_label_style_sheet)
 
-        self.label_ula_img.setMaximumSize(QtCore.QSize(200, 200))
+        self.label_ula_img.setMaximumSize(QtCore.QSize(180, 180))
         self.label_ula_img.setText("")
         self.label_ula_img.setPixmap(QtGui.QPixmap("resources/people/ula.jpg"))
         self.label_ula_img.setScaledContents(True)
         self.label_ula_img.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.label_kuba_img.setMaximumSize(QtCore.QSize(200, 200))
+        self.label_kuba_img.setMaximumSize(QtCore.QSize(180, 180))
         self.label_kuba_img.setText("")
         self.label_kuba_img.setPixmap(QtGui.QPixmap("resources/people/kuba.jpg"))
         self.label_kuba_img.setScaledContents(True)
         self.label_kuba_img.setAlignment(QtCore.Qt.AlignCenter)
         self.label_kuba_img.setStyleSheet("border-radius: 25%;")
 
-        self.label_maciek_s_img.setMaximumSize(QtCore.QSize(200, 200))
+        self.label_maciek_s_img.setMaximumSize(QtCore.QSize(180, 180))
         self.label_maciek_s_img.setText("")
-        self.label_maciek_s_img.setPixmap(QtGui.QPixmap("resources/groups/g4.png"))
+        self.label_maciek_s_img.setPixmap(QtGui.QPixmap("resources/people/maciek_s.jpg"))
         self.label_maciek_s_img.setScaledContents(True)
         self.label_maciek_s_img.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.label_maciek_w_img.setMaximumSize(QtCore.QSize(200, 200))
+        self.label_maciek_w_img.setMaximumSize(QtCore.QSize(180, 180))
         self.label_maciek_w_img.setText("")
         self.label_maciek_w_img.setPixmap(QtGui.QPixmap("resources/people/maciek_w.jpg"))
         self.label_maciek_w_img.setScaledContents(True)
         self.label_maciek_w_img.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.label_ewa_img.setMaximumSize(QtCore.QSize(200, 200))
+        self.label_ewa_img.setMaximumSize(QtCore.QSize(180, 180))
         self.label_ewa_img.setText("")
         self.label_ewa_img.setPixmap(QtGui.QPixmap("resources/people/ewa.jpg"))
         self.label_ewa_img.setScaledContents(True)
         self.label_ewa_img.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.label_gosia_img.setMaximumSize(QtCore.QSize(200, 200))
+        self.label_gosia_img.setMaximumSize(QtCore.QSize(180, 180))
         self.label_gosia_img.setText("")
         self.label_gosia_img.setPixmap(QtGui.QPixmap("resources/people/gosia.jpg"))
         self.label_gosia_img.setScaledContents(True)
@@ -248,6 +248,8 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "About"))
 
     def clicked_return(self):
+        """returns to last window
+        """
         self.parent.window.show()
         self.window.hide()
 
