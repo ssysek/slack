@@ -345,7 +345,7 @@ class Ui_MainWindow(object):
         print(self.current_forum)
         print(forum_id)
         self.addchat_window = QtWidgets.QMainWindow()
-        self.addchat_window_ui = Ui_NewChatWindow(self, self.loged_in_user)
+        self.addchat_window_ui = Ui_NewChatWindow(self, self.loged_in_user, forum_id)
         self.addchat_window_ui.setupUi(self.addchat_window)
 
         self.window.hide()
