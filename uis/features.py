@@ -9,6 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from uis.chatforumpage import Ui_MainWindow as Ui_ChatWindow
+from uis.mockPage import Ui_MockWindow
 from uis.notesmainpage import Ui_MainNotesWindow
 from uis.resources.stylesheets import *
 
@@ -25,6 +26,7 @@ class Ui_FeaturesWindow(object):
         self.centralwidget = QtWidgets.QWidget(FeaturesWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
+        self.gridLayout.setContentsMargins(30, -1, 30, -1)
         self.gridLayout.setObjectName("gridLayout")
         self.gridLayout_2 = QtWidgets.QGridLayout()
         self.gridLayout_2.setObjectName("gridLayout_2")
@@ -190,12 +192,19 @@ class Ui_FeaturesWindow(object):
         self.label_6.setText(_translate("FeaturesWindow", "<html><head/><body><p>keep all your important</p><p>documents in one place</p></body></html>"))
 
     def clicked_chat_with_friends(self):
-        self.main_window = QtWidgets.QMainWindow()
-        self.main_window_ui = Ui_ChatWindow(self, self.loged_in_user)
-        self.main_window_ui.setupUi(self.main_window)
-        self.main_window_ui.collectDataFromDataBase()
-        self.main_window.show()
-        self.window.hide()
+        if self.loged_in_user is not None:
+            self.main_window = QtWidgets.QMainWindow()
+            self.main_window_ui = Ui_ChatWindow(self, self.loged_in_user)
+            self.main_window_ui.setupUi(self.main_window)
+            self.main_window_ui.collectDataFromDataBase()
+            self.main_window.show()
+            self.window.hide()
+        else:
+            self.main_window = QtWidgets.QMainWindow()
+            self.main_window_ui = Ui_MockWindow(self, 'chat')
+            self.main_window_ui.setupUi(self.main_window)
+            self.main_window.show()
+            self.window.hide()
 
     def clicked_return(self):
         self.parent.window.show()
@@ -203,15 +212,29 @@ class Ui_FeaturesWindow(object):
 
     def clicked_create_groups(self):
         print("create groups")
+        # if self.loged_in_user is None:
+        self.main_window = QtWidgets.QMainWindow()
+        self.main_window_ui = Ui_MockWindow(self, 'groups')
+        self.main_window_ui.setupUi(self.main_window)
+        self.main_window.show()
+        self.window.hide()
+
 
     def clicked_store_notes(self):
         print("store notes")
-        self.notes_window = QtWidgets.QMainWindow()
-        self.notes_window_ui = Ui_MainNotesWindow(self, self.loged_in_user)
-        self.notes_window_ui.setupUi(self.notes_window)
+        if self.loged_in_user is not None:
+            self.notes_window = QtWidgets.QMainWindow()
+            self.notes_window_ui = Ui_MainNotesWindow(self, self.loged_in_user)
+            self.notes_window_ui.setupUi(self.notes_window)
 
-        self.window.hide()
-        self.notes_window.show()
+            self.window.hide()
+            self.notes_window.show()
+        else:
+            self.main_window = QtWidgets.QMainWindow()
+            self.main_window_ui = Ui_MockWindow(self, 'notes')
+            self.main_window_ui.setupUi(self.main_window)
+            self.main_window.show()
+            self.window.hide()
 
 if __name__ == "__main__":
     import sys

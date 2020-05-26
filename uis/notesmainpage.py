@@ -14,7 +14,7 @@ from uis.resources.stylesheets import *
 
 
 class Ui_MainNotesWindow(object):
-    def __init__(self, parent=None, logged_in_user=None):
+    def __init__(self, parent=None, logged_in_user=None): #init, should get parent window and logged in user id from parent window
         self.parent = parent
         self.loged_in_user = logged_in_user
 
@@ -66,12 +66,14 @@ class Ui_MainNotesWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
 
-        self.addFrames()
+        self.addFrames() #adding frames with all notes to the grid layout in the middle
 
+        #connecting buttons
         self.pushButton_Return.clicked.connect(self.clicked_return)
         self.pushButton_LogOut.clicked.connect(self.clicked_log_out)
         self.pushButton_addNewNote.clicked.connect(self.clicked_new_note)
 
+        #setting icons
         self.return_pixmap = QtGui.QPixmap("resources/return.png")
         self.return_pixmap = self.return_pixmap.scaled(QtCore.QSize(32, 32))
         self.icon = QtGui.QIcon(self.return_pixmap)
@@ -89,9 +91,9 @@ class Ui_MainNotesWindow(object):
         self.pushButton_LogOut.setToolTip("Log out")
         self.pushButton_addNewNote.setStyleSheet(button_small_blue_style_sheet)
 
+        #setting window stylesheet (background)
         MainWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(transparent_background_style_sheet)
-
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -106,14 +108,19 @@ class Ui_MainNotesWindow(object):
     # object = [title,text,id], objects=[object1,object2,object3,...]
     #adding notes
     def addFrames(self):
-        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
+        """
+        adds frames with notes to gridLayout
+        :return: void
+        """
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor) #set cursor to loading
         url = "http://localhost:86/read_notes?owner_id="
-        url += str(self.loged_in_user[0])
+        url += str(self.loged_in_user[0]) #create url with user id
 
-        notes = requests.post(url).json()
+        notes = requests.post(url).json() #send request
         i = 0
         row = 0
         column = 0
+        #get delete and note icons
         return_pixmap = QtGui.QPixmap("resources/notes/n7.png")
         return_pixmap = return_pixmap.scaled(QtCore.QSize(100, 100))
         icon = QtGui.QIcon(return_pixmap)
@@ -121,21 +128,26 @@ class Ui_MainNotesWindow(object):
         return_pixmap_delete = return_pixmap_delete.scaled(QtCore.QSize(40, 40))
         icon_delete = QtGui.QIcon(return_pixmap_delete)
 
+        #remove all frames from the gridLayout
         for i in reversed(range(self.gridLayout.count())):
             self.gridLayout.itemAt(i).widget().setParent(None)
 
+        #add notes received from server
         for note in notes:
+            #create frame with one note
             frame = QtWidgets.QFrame(self.centralwidget)
             frame.setMinimumSize(QtCore.QSize(180, 160))
             frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
             frame.setFrameShadow(QtWidgets.QFrame.Raised)
             frame.setObjectName('frame'+str(i))
+            #pushButtonFrame is button with note title that opens note when clicked
             pushButtonFrame = QtWidgets.QPushButton(frame)
             pushButtonFrame.setGeometry(QtCore.QRect(0, 0, 180, 28))
             pushButtonFrame.setObjectName('pushButton'+str(i))
             pushButtonFrame.setText(note["title"]) #title
             pushButtonFrame.setStyleSheet(transparent_background_style_sheet)
             pushButtonFrame.clicked.connect(lambda state, title=note["title"], text=note["notes_content"], noteId=note["note_id"]: self.clicked_single_note(title, text, noteId))
+            #pushButtonImage is button with note icon (the same for every note), opens note when clicked
             pushButtonImage = QtWidgets.QPushButton(frame)
             pushButtonImage.setGeometry(QtCore.QRect(0, 30, 180, 130))
             pushButtonImage.setIcon(icon)
@@ -144,24 +156,28 @@ class Ui_MainNotesWindow(object):
             pushButtonImage.clicked.connect(
                 lambda state, title=note["title"], text=note["notes_content"], noteId=note["note_id"]: self.clicked_single_note(title, text,
                                                                                                      noteId))
+            #pushButtonDelete is a button with trash icon, deletes note when clicked
             pushButtonDelete = QtWidgets.QPushButton(frame)
             pushButtonDelete.setGeometry(QtCore.QRect(150, 50, 40, 40))
             pushButtonDelete.setIcon(icon_delete)
             pushButtonDelete.setIconSize(QtCore.QSize(40, 40))
             pushButtonDelete.setStyleSheet(button_with_image_style_sheet)
             pushButtonDelete.clicked.connect(lambda state, noteId=note["note_id"]: self.clicked_delete_note(noteId))
+            #adding frame to gridLayout
             self.gridLayout.addWidget(frame, row, column, 1, 1)
-            if column == 3:
+            if column == 3: #there are 4 notes in a row, so if number is 3 we go to the next row
                 column = 0
                 row = row + 1
             else:
                 column = column+1
             i = i + 1
-        QtWidgets.QApplication.restoreOverrideCursor()
+        QtWidgets.QApplication.restoreOverrideCursor() #restore normal mouse cursor
 
     def clicked_single_note(self, title, text, id):
-        print("Go to single note")
-        print(id)
+        """
+        opens single note window and sets it's title, text and id
+        :return: void
+        """
         self.notes_window = QtWidgets.QMainWindow()
         self.notes_window_ui = Ui_MainNotesPageWindow(self, self.loged_in_user, title, text, id)
         self.notes_window_ui.setupUi(self.notes_window)
@@ -169,15 +185,26 @@ class Ui_MainNotesWindow(object):
         self.window.hide()
         self.notes_window.show()
 
-    #go to single note, set the id to 0
     def clicked_new_note(self):
+        """
+        opens single note window and sets it's id to 0
+        :return: void
+        """
         self.clicked_single_note("", "", 0)
 
     def clicked_return(self):
+        """
+        hides current windows shows parent
+        :return: void
+        """
         self.parent.window.show()
         self.window.hide()
 
     def clicked_log_out(self):
+        """
+        iterates back to the begining of program to show first window
+        :return: void
+        """
         print('log out')
         self.show_site = self.parent
         while(self.show_site.parent != None):
@@ -187,6 +214,10 @@ class Ui_MainNotesWindow(object):
         self.window.hide()
 
     def clicked_delete_note(self, id):
+        """
+        deletes note with note_id==id
+        :return: void
+        """
         QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         print("Delete note")
         print(id)
@@ -194,11 +225,3 @@ class Ui_MainNotesWindow(object):
         self.addFrames()
         QtWidgets.QApplication.restoreOverrideCursor()
 
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainNotesWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())

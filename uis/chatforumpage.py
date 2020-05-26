@@ -230,7 +230,10 @@ class Ui_MainWindow(object):
         messages = requests.post(url).json()
         res = ["no_forum", -1, []]
         for i in messages:
-            res[2].append(str(i["chat_id"]))
+            print(i)
+            res[2].append([str(i["chat_id"]), "chat name", '3'])
+                           #str(i["chat_name"]), str(i["image"])])
+            #TODO jak enpoint zadziała jak powinien odkomentować
         return res
 
     def refresh(self):
@@ -265,7 +268,7 @@ class Ui_MainWindow(object):
         """
         changes buttons for forums based on data loaded in collectDataFromDataBase()
         :param nameWidget: list widget for forum
-        :param objects: list of forum data elements containing  [forum_name, forum_id, [forum chats id]]
+        :param objects: list of forum data elements containing  [forum_name, forum_id, image, [str(chat["chat_id"]), str(chat["chat_name"]), str(chat["image"])]]
         :return:
         """
         for object in objects:
@@ -307,11 +310,11 @@ class Ui_MainWindow(object):
 #TODO: podmienić na forum icon zgadzający się z bazą
     def getForumWidgetButton(self, object):
         """creates widget for single forum button
-        :param object -- [forum name, forum id, [forum chats]]
+        :param object -- [forum name, forum id, image, [str(i["chat_id"]), str(i["chat_name"]), str(i["image"])]]
         """
         widgetButton = QtWidgets.QPushButton()
         widgetButton.setToolTip(object[0])
-        widgetButton_pixmap = QtGui.QPixmap(self.forum_icons[0])
+        widgetButton_pixmap = QtGui.QPixmap(self.forum_icons[int(object[2])-1])
         widgetButton_pixmap = widgetButton_pixmap.scaled(QtCore.QSize(32, 32))
         widgetButtonicon = QtGui.QIcon(widgetButton_pixmap)
         widgetButton.setIcon(widgetButtonicon)
@@ -367,7 +370,7 @@ class Ui_MainWindow(object):
         """
         changes buttons for channels depending on forum which is active in current moment
         :param nameWidget: list widget for private chats od forum chats
-        :param objects: list of forum data elements containing  [forum_name, forum_id, [forum chats id]]
+        :param objects: list of forum data elements containing  [forum_name, forum_id, image, [str(i["chat_id"]), str(i["chat_name"]), str(i["image"])]]
         """
         nameWidget.clear()
         self.current_forum = objects[1]
@@ -406,18 +409,17 @@ class Ui_MainWindow(object):
     def getChannelWidgetButton(self, channel_info):
         """
         Creates button for channel and connects it to setup current messages viewer to show its content
-        :param channel_info: [forum_id, channel_id]
+        :param channel_info: [forum_id, image, [str(i["chat_id"]), str(i["chat_name"]), str(i["image"])]]
         :return QtWidgets.QPushButton object
         """
-        object = channel_info[1]
         widgetButton = QtWidgets.QPushButton()
-        widgetButton_pixmap = QtGui.QPixmap(self.channel_icons[3])
+        widgetButton_pixmap = QtGui.QPixmap(self.channel_icons[int(channel_info[1][2])-1])
         widgetButton_pixmap = widgetButton_pixmap.scaled(QtCore.QSize(32, 32))
         widgetButtonicon = QtGui.QIcon(widgetButton_pixmap)
         widgetButton.setIcon(widgetButtonicon)
         widgetButton.setIconSize(QtCore.QSize(32, 32))
         widgetButton.setStyleSheet(button_with_image_style_sheet)
-        widgetButton.setToolTip(object)
+        widgetButton.setToolTip(channel_info[1][1])
         widgetButton.clicked.connect(lambda: self.setUpMessages(channel_info))
         return widgetButton
 
@@ -438,15 +440,15 @@ class Ui_MainWindow(object):
         """
         setups view of messages for chosen channel
         try except to pass on channels without content
-        :param channel_info: [forum_id, channel_id]
+        :param channel_info: [forum_id, image, [str(i["chat_id"]), str(i["chat_name"]), str(i["image"])]]
         :return: void
         """
         self.current_forum = channel_info[0]
-        self.loadMessagesFromDataBase(channel_info[1])
-        self.current_chat = channel_info[1]
-        self.label_opened_box.setText(channel_info[1] + ":")
+        self.loadMessagesFromDataBase(channel_info[1][0])
+        self.current_chat = channel_info[1][0]
+        self.label_opened_box.setText(channel_info[1][1] + ":")
         self.label_opened_box.adjustSize()
-        self.actual_box = channel_info[1]
+        self.actual_box = channel_info[1][0]
         try:
             self.button_send_message.clicked.disconnect()
         except \
@@ -545,7 +547,7 @@ class Ui_MainWindow(object):
         forums = requests.post(url).json()
         for i in forums:
             chats = self.loadChatsForForum(i["forum_id"])
-            result.append([i["forum_name"], i["forum_id"], chats])
+            result.append([i["forum_name"], i["forum_id"], i["image"], chats])
         return result
 
 
@@ -560,7 +562,7 @@ class Ui_MainWindow(object):
         message = requests.post(url).json()
         res = []
         for i in message:
-            res.append(str(i["chat_id"]))
+            res.append([str(i["chat_id"]), str(i["chat_name"]), str(i["image"])])
         return res
 
 #TODO: podpiąć do wychodzenia z bazy, nie ma jeszcze endpointa
