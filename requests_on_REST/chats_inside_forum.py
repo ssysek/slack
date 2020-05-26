@@ -14,9 +14,10 @@ def chats_inside_forum(params):
     print("Database connect successfully")
     cursor = connection.cursor()
 
-    sql = """select chat_id from chats where upper_forum_id = %s;"""
+    sql = """select chat_id, chat_name, image from chats \
+            where upper_forum_id = %s;"""
     cursor.execute(sql, [forum_id_param])
     res = cursor.fetchall()
-    results = pd.DataFrame(res, columns=['chat_id'])
+    results = pd.DataFrame(res, columns=['chat_id', 'chat_name', 'image'])
 
     return results

@@ -14,7 +14,7 @@ import requests
 
 
 class Ui_MainNotesPageWindow(object):
-    def __init__(self, parent=None, logged_in_user=None, title='Tytył', text='Tekst notatki', note_id=0):
+    def __init__(self, parent=None, logged_in_user=None, title='Tytył', text='Tekst notatki', note_id=0): #initialize page, get info from parent window
         self.parent = parent
         self.loged_in_user = logged_in_user
         self.title = title
@@ -70,14 +70,19 @@ class Ui_MainNotesPageWindow(object):
 
         self.retranslateUi(MainWindow)
 
+        #set window icon
         MainWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
+
+        #connect buttons
         self.pushButton_Return.clicked.connect(self.clicked_return)
         self.pushButton_save.clicked.connect(self.clicked_save)
+        self.pushButton_save.setAutoDefault(True)
         self.pushButton_LogOut.clicked.connect(self.clicked_log_out)
         self.pushButton_LogOut.setFocusPolicy(QtCore.Qt.ClickFocus)
         shortcut = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+S"), self.textEdit_text)
         shortcut.activated.connect(self.clicked_save)
 
+        #set icons and stylesheets
         self.return_pixmap = QtGui.QPixmap("resources/return.png")
         self.return_pixmap = self.return_pixmap.scaled(QtCore.QSize(32, 32))
         self.icon = QtGui.QIcon(self.return_pixmap)
@@ -108,13 +113,19 @@ class Ui_MainNotesPageWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Note"))
 
     def clicked_return(self):
-        print("return to notes")
+        """
+        reload notes in parent, hides current windows shows parent
+        :return: void
+        """
         self.parent.addFrames()
         self.parent.window.show()
         self.window.hide()
 
     def clicked_log_out(self):
-        print('log out')
+        """
+        iterates back to the begining of program to show first window
+        :return: void
+        """
         self.show_site = self.parent
         while(self.show_site.parent != None):
             self.show_site = self.show_site.parent
@@ -123,35 +134,30 @@ class Ui_MainNotesPageWindow(object):
         self.window.hide()
 
     def clicked_save(self):
+        """
+        saves note
+        :return: void
+        """
+        QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor) #loading cursor
         print("Save")
         print(self.lineEdit_title.text())
         print(self.textEdit_text.toPlainText())
         print(self.loged_in_user[0])
         print(self.note_id)
-        #database endpoint to save
-        if self.note_id == 0:
+        # database endpoint to save
+        if self.note_id == 0 and self.lineEdit_title.text() != "": #id == 0 means it's a new note, so we have to create it, check if we have a title
             print("New note")
             register_request = requests.post('http://localhost:86/create_note',
                                              json={"title": self.lineEdit_title.text(), "notes_content":
-            self.textEdit_text.toPlainText(), "owner_id": self.loged_in_user[0]}).json()
-            print(register_request)
-            print(register_request["new_id"])
-            #get id from register_request
+                                                 self.textEdit_text.toPlainText(),
+                                                   "owner_id": self.loged_in_user[0]}).json()
+            self.note_id = str(register_request) #get created note id from response
             print("Request poszedł")
-        elif self.text != self.textEdit_text.toPlainText() or self.title != self.lineEdit_title.text():
+        elif (self.text != self.textEdit_text.toPlainText() or self.title != self.lineEdit_title.text()) and self.lineEdit_title.text() != "":
+            #if there were some changes and title is not empty, plus it is not a new note, update it
             print("Update note")
             register_request = requests.post('http://localhost:86/update_note',
                                              json={"note_id": self.note_id, "notes_content":
-            self.textEdit_text.toPlainText()})
+                                                 self.textEdit_text.toPlainText(), "title": self.lineEdit_title.text()})
             print("Request upadate poszedł")
-
-
-if __name__ == "__main__":
-    import sys
-
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainNotesPageWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
+        QtWidgets.QApplication.restoreOverrideCursor()

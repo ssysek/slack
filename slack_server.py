@@ -147,10 +147,9 @@ class MyServer(BaseHTTPRequestHandler):
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
             self.send_response(200)
+            self.send_header("Content-type", "application/json")
             self.end_headers()
-            create_note(body)
-            response = BytesIO()
-            self.wfile.write(response.getvalue())
+            self.wfile.write(bytes(create_note(body), "utf-8"))
 
         elif path == "/read_notes":
             '''example path: http://localhost:86/read_notes?owner_id=1'''

@@ -23,5 +23,5 @@ def create_note(body):
                 loaded_json['owner_id'])
     cursor.execute(sql, new_note)
     connection.commit()
-    print(new_id)
-    return new_id
+    return_new_id = str(new_id)
+    return return_new_id

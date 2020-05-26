@@ -42,7 +42,7 @@ class Ui_MainWindow(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_3.setContentsMargins(0, -1, 0, -1)
+        self.horizontalLayout_3.setContentsMargins(30, -1, 0, -1)
         self.horizontalLayout_3.setSpacing(0)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.button_home = QtWidgets.QPushButton(self.centralwidget)
@@ -94,11 +94,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.setStretch(2, 15)
         self.horizontalLayout_3.setStretch(3, 5)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
-        self.button_search = QtWidgets.QPushButton(self.centralwidget)
-        self.button_search.setObjectName("button_search")
 
-
-        self.horizontalLayout_2.addWidget(self.button_search)
         self.gridLayout = QtWidgets.QGridLayout()
         self.gridLayout.setHorizontalSpacing(20)
         self.gridLayout.setVerticalSpacing(0)
@@ -359,7 +355,6 @@ class Ui_MainWindow(object):
         self.centralwidget.setStyleSheet(transparent_background_style_sheet)
         self.button_home.setStyleSheet(button_with_image_style_sheet)
         self.button_log_in.setStyleSheet(button_with_image_style_sheet_colored_font)
-        self.button_search.setStyleSheet(button_with_image_style_sheet)
         self.button_create_account.setStyleSheet(button_big_blue_style_sheet)
         self.button_features.setStyleSheet(small_label_style_sheet)
         self.button_contact.setStyleSheet(small_label_style_sheet)
@@ -370,12 +365,6 @@ class Ui_MainWindow(object):
         self.icon = QtGui.QIcon(self.home_pixmap)
         self.button_home.setIcon(self.icon)
         self.button_home.setIconSize(QtCore.QSize(40, 40))
-
-        self.pixmap = QtGui.QPixmap("resources/search.png")
-        self.pixmap = self.pixmap.scaled(QtCore.QSize(32,32))
-        self.icon = QtGui.QIcon(self.pixmap)
-        self.button_search.setIcon(self.icon)
-        self.button_search.setIconSize(QtCore.QSize(32, 32))
 
         self.login_pixmap = QtGui.QPixmap("resources/login.png")
         self.login_pixmap = self.login_pixmap.scaled(QtCore.QSize(36, 36))
@@ -392,7 +381,6 @@ class Ui_MainWindow(object):
         self.button_features.clicked.connect(self.clicked_features)
         self.button_home.clicked.connect(self.clicked_home)
         self.button_log_in.clicked.connect(self.clicked_log_in)
-        self.button_search.clicked.connect(self.clicked_search)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -429,7 +417,7 @@ class Ui_MainWindow(object):
     def clicked_create_account(self):
         print("create account")
         self.register_window = QtWidgets.QMainWindow()
-        self.register_window_ui = Ui_RegistrationWindow(self, self.loged_in_user)
+        self.register_window_ui = Ui_RegistrationWindow(self, None)
         self.register_window_ui.setupUi(self.register_window)
 
         self.register_window.show()
@@ -437,7 +425,7 @@ class Ui_MainWindow(object):
     def clicked_features(self):
         print("features")
         self.features_window = QtWidgets.QMainWindow()
-        self.features_window_ui = Ui_FeaturesWindow(self, self.loged_in_user)
+        self.features_window_ui = Ui_FeaturesWindow(self, None)
         self.features_window_ui.setupUi(self.features_window)
 
         self.features_window.show()
@@ -455,9 +443,6 @@ class Ui_MainWindow(object):
 
         self.login_window.show()
 
-
-    def clicked_search(self):
-        print("search")
 
     def login(self, id, name, surname):
         self.loged_in_user = (id, name, surname)

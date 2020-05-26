@@ -1,0 +1,694 @@
+{
+	"info": {
+		"_postman_id": "9d0d8fd5-dfc6-42f7-99a8-f1e8789001d0",
+		"name": "end2end",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "register Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8dcdf50a-5ea9-4103-a1ab-c0447c2db158",
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"User created\", function () {\r",
+							"    pm.expect(responseBody).to.match(/^[1-9][0-9]*$/);\r",
+							"});\r",
+							"postman.setGlobalVariable(\"userid\", responseBody);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n    {\r\n        \"user_name\": \"end2\",\r\n        \"user_surname\": \"2end\",\r\n        \"login\": \"tester\",\r\n        \"password\": \"pass\"\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:86/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "86",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "all_users Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1b1e8d11-ef33-46e5-8275-a79c52f28af3",
+						"exec": [
+							"\r",
+							"\r",
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Correct name\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"end2\");\r",
+							"});\r",
+							"pm.test(\"Correct surname\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"2end\");\r",
+							"});\r",
+							"pm.test(\"Correct login\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"tester\");\r",
+							"});\r",
+							"pm.test(\"Correct password\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"pass\");\r",
+							"});\r",
+							"pm.test(\"Correct id\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"userid\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:86/all_users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "86",
+					"path": [
+						"all_users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_forum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f449104f-483e-4e28-a40d-379205f7866d",
+						"exec": [
+							"postman.setGlobalVariable(\"forumid\", responseBody);\r",
+							"\r",
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Forum created\", function () {\r",
+							"    pm.expect(responseBody).to.match(/^[1-9][0-9]*$/);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"forum_name\": \"end2end\", \"image\": \"2\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:86/create_forum",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "86",
+					"path": [
+						"create_forum"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_user_to_forum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5cd9d7d7-fd67-4ebb-a458-4a85b4127229",
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"permitted_user\": {{userid}} , \"forum_id\": {{forumid}}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:86/add_user_to_forum",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "86",
+					"path": [
+						"add_user_to_forum"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_chat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3f51883d-7434-4fe9-97f8-1a5fea99f0a2",
+						"exec": [
+							"postman.setGlobalVariable(\"chatid\", responseBody);\r",
+							"\r",
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Forum created\", function () {\r",
+							"    pm.expect(responseBody).to.match(/^[1-9][0-9]*$/);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"upper_forum_id\": {{forumid}}, \"chat_name\":  \r\n            \"end2endchat\", \"image\": \"1\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:86/create_chat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "86",
+					"path": [
+						"create_chat"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_user_to_chat",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2c2efd4f-165b-4a57-9182-855017270c50",
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"permitted_user\": {{userid}} , \"chat_id\": {{chatid}}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:86/add_user_to_chat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "86",
+					"path": [
+						"add_user_to_chat"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "chats_inside_forum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5ffdbee1-f76e-43a8-8f12-341ad795fcd4",
+						"exec": [
+							"\r",
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Correct chat id\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"chatid\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:86/chats_inside_forum?upper_forum_id={{forumid}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "86",
+					"path": [
+						"chats_inside_forum"
+					],
+					"query": [
+						{
+							"key": "upper_forum_id",
+							"value": "{{forumid}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add_new_post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c21b06a3-5a59-478f-977e-efba8639113e",
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"owner_id\": {{userid}}, \"chat_id\": {{chatid}}, \"post_content\": \"end2endtest\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:86/add_new_post",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "86",
+					"path": [
+						"add_new_post"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_all_posts_at_chats",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1cbd15fa-80dd-4186-b783-c88ff11fd909",
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"end2endtest\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"chat_id\": 1\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:86/get_all_posts_at_chats?chat_id={{chatid}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "86",
+					"path": [
+						"get_all_posts_at_chats"
+					],
+					"query": [
+						{
+							"key": "chat_id",
+							"value": "{{chatid}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create_note",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4f62498e-1109-4692-b0e4-d0cb34ebf35e",
+						"exec": [
+							"postman.setGlobalVariable(\"noteid\", responseBody);\r",
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Note created\", function () {\r",
+							"    pm.expect(responseBody).to.match(/^[1-9][0-9]*$/);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"end2end note\", \"notes_content\": \"end2end test note\", \"owner_id\": {{userid}}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:86/create_note",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "86",
+					"path": [
+						"create_note"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read_notes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a2807160-415a-4b7d-998f-9758c3386df5",
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Correct title\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"end2end note\");\r",
+							"});\r",
+							"pm.test(\"Correct content\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"end2end test note\");\r",
+							"});\r",
+							"pm.test(\"Correct owner id\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"userid\"));\r",
+							"});\r",
+							"pm.test(\"Correct note id\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"noteid\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:86/read_notes?owner_id={{userid}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "86",
+					"path": [
+						"read_notes"
+					],
+					"query": [
+						{
+							"key": "owner_id",
+							"value": "{{userid}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update_note",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a81fceb7-b3cd-469b-b132-1fef739b4321",
+						"exec": [
+							"postman.setGlobalVariable(\"noteid\", responseBody);\r",
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"note_id\":{{noteid}}, \"title\": \"end2end edited\", \"notes_content\": \"end2end test edited\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:86/update_note",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "86",
+					"path": [
+						"update_note"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read_notes updated",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b81a4621-09c3-4161-ae1a-5c6c9a690435",
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Correct title\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"end2end edited\");\r",
+							"});\r",
+							"pm.test(\"Correct content\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"end2end test edited\");\r",
+							"});\r",
+							"pm.test(\"Correct owner id\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"userid\"));\r",
+							"});\r",
+							"pm.test(\"Correct note id\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(pm.globals.get(\"noteid\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:86/read_notes?owner_id={{userid}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "86",
+					"path": [
+						"read_notes"
+					],
+					"query": [
+						{
+							"key": "owner_id",
+							"value": "{{userid}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9b8b6438-df16-4599-889e-b1f8d37498e2",
+						"exec": [
+							"pm.test(\"Status test\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"user_id\": 19\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:86/delete_user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "86",
+					"path": [
+						"delete_user"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
