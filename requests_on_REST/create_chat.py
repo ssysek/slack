@@ -19,7 +19,9 @@ def create_chat(body):
 
     loaded_json = json.loads(body)
     sql = """insert into chats values (%s, %s, %s, %s)"""
-    new_chat = (chat_id, loaded_json['upper_forum_id'],
+    upper_forum_id = loaded_json['upper_forum_id']
+    forum_id = [None if upper_forum_id == '-1' else upper_forum_id]
+    new_chat = (chat_id, forum_id[0],
                 loaded_json['chat_name'], loaded_json['image'])
     cursor.execute(sql, new_chat)
     connection.commit()
