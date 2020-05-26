@@ -239,7 +239,6 @@ class Ui_MainWindow(object):
         self.button_home.clicked.connect(self.clicked_home)
         self.button_log_out.clicked.connect(self.clicked_log_out)
         self.button_open_chats.clicked.connect(self.clicked_open_chats)
-        self.button_open_groups.clicked.connect(self.clicked_open_groups)
         self.butto_open_notes.clicked.connect(self.clicked_open_notes)
 
     def retranslateUi(self, MainWindow):
@@ -257,7 +256,10 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Talco"))
 
     def clicked_about(self):
-        print("about clicked")
+        """
+        opens up new window with information about team
+        :return: void
+        """
         self.about_window = QtWidgets.QMainWindow()
         self.about_window_ui = Ui_AboutWindow(self)
         self.about_window_ui.setupUi(self.about_window)
@@ -266,7 +268,10 @@ class Ui_MainWindow(object):
         self.window.hide()
 
     def clicked_contact(self):
-        print("contact")
+        """
+        opens contact page
+        :return: void
+        """
         self.contact_window = QtWidgets.QMainWindow()
         self.contact_window_ui = Ui_ContactWindow()
         self.contact_window_ui.setupUi(self.contact_window)
@@ -275,7 +280,10 @@ class Ui_MainWindow(object):
         self.contact_window.show()
 
     def clicked_create_account(self):
-        print("create account")
+        """
+        opens create account page
+        :return: void
+        """
         self.register_window = QtWidgets.QMainWindow()
         self.register_window_ui = Ui_RegistrationWindow(self)
         self.register_window_ui.setupUi(self.register_window)
@@ -283,7 +291,10 @@ class Ui_MainWindow(object):
         self.register_window.show()
 
     def clicked_features(self):
-        print("features")
+        """
+        opens features page
+        :return: void
+        """
         self.features_window = QtWidgets.QMainWindow()
         self.features_window_ui = Ui_FeaturesWindow(self,self.logged_in_user)
         self.features_window_ui.setupUi(self.features_window)
@@ -293,24 +304,32 @@ class Ui_MainWindow(object):
 
 
     def clicked_home(self):
-        print("home")
-
+        pass
     def clicked_log_out(self):
-        print("logout")
+        """
+        goes back to unloged in page
+        :return: void
+        """
         self.window.hide()
         self.parent.window.show()
 
     def clicked_open_chats(self):
-        print("open chats")
+        """
+        opens chatforumpage
+        :return: void
+        """
         self.main_window = QtWidgets.QMainWindow()
         self.main_window_ui = Ui_ChatWindow(self, self.logged_in_user)
         self.main_window_ui.setupUi(self.main_window)
-        self.main_window_ui.doSomething()
+        self.main_window_ui.collectDataFromDataBase()
         self.main_window.show()
         self.window.hide()
 
     def clicked_open_notes(self):
-        print("open notes")
+        """
+        opens notespage
+        :return: void
+        """
         self.notes_window = QtWidgets.QMainWindow()
         self.notes_window_ui = Ui_MainNotesWindow(self, self.logged_in_user)
         self.notes_window_ui.setupUi(self.notes_window)
@@ -318,12 +337,14 @@ class Ui_MainWindow(object):
         self.window.hide()
         self.notes_window.show()
 
-    def clicked_open_groups(self):
-        print("open groups")
 
-    #funkcja do wywołania przez login lub register, aktualizuje label_username
     def change_username(self, name):
-        #resize label_username, żeby nie powiększało okna dla długich nazw
+        """
+            called by login or register, updates label_username
+            resize label_username, not to scale up whole window size on long names
+        :param name: new name of loged in user
+        :return: void
+        """
         self.label_username.setMaximumWidth(int(self.window.geometry().width()/4))
         self.label_username.setText(name)
 

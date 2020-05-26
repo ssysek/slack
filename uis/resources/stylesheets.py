@@ -1,3 +1,8 @@
+"""
+file containing styles for elements used in fronend
+prepared for usage in pyqt5 function: .setStyleSheet(name)
+"""
+
 button_for_logging_style_sheet = \
     "* {" \
     + "background-color:rgb(128, 45, 181);\n" \
