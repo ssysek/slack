@@ -417,7 +417,7 @@ class Ui_MainWindow(object):
     def clicked_create_account(self):
         print("create account")
         self.register_window = QtWidgets.QMainWindow()
-        self.register_window_ui = Ui_RegistrationWindow(self, self.loged_in_user)
+        self.register_window_ui = Ui_RegistrationWindow(self, None)
         self.register_window_ui.setupUi(self.register_window)
 
         self.register_window.show()
@@ -425,7 +425,7 @@ class Ui_MainWindow(object):
     def clicked_features(self):
         print("features")
         self.features_window = QtWidgets.QMainWindow()
-        self.features_window_ui = Ui_FeaturesWindow(self, self.loged_in_user)
+        self.features_window_ui = Ui_FeaturesWindow(self, None)
         self.features_window_ui.setupUi(self.features_window)
 
         self.features_window.show()
