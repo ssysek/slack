@@ -12,10 +12,11 @@ from uis.resources.stylesheets import *
 import requests
 
 class Ui_NewChatWindow(object):
-    def __init__(self, parent=None, logged_in_user = None, image = "1"):
+    def __init__(self, parent=None, logged_in_user = None, curent_forum = 1 , image = "1"):
         self.parent = parent
         self.loged_in_user = logged_in_user
         self.image = image
+        self.current_forum = curent_forum
 
     def setupUi(self, NewChatWindow):
         self.window = NewChatWindow
@@ -304,9 +305,12 @@ class Ui_NewChatWindow(object):
 
         if name_ok and invited_ok:
             # TODO upper_forum
-            new_chat_request = requests.post('http://localhost:86/create_chat',json={"upper_forum_id":"1","chat_name": name,"image": self.image})
+            connected_forum = str(self.current_forum)
+            if connected_forum == "-1":
+                connected_forum = "1"
+            new_chat_request = requests.post('http://localhost:86/create_chat',json={"upper_forum_id":connected_forum,"chat_name": name,"image": self.image})
             if new_chat_request.json():
-                print("Successfully added forum!")
+                print("Successfully added chat!")
                 new_chat_id = str(new_chat_request.json())
                 permitted_usr = str(self.loged_in_user[0])
                 add_owner = requests.post('http://localhost:86/add_user_to_chat',json={"chat_id": new_chat_id, "permitted_user": permitted_usr})
