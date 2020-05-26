@@ -412,7 +412,6 @@ class Ui_MainWindow(object):
         self.contact_window_ui = Ui_ContactWindow(self, self.loged_in_user)
         self.contact_window_ui.setupUi(self.contact_window)
         self.contact_window.show()
-        self.window.hide()
 
     def clicked_create_account(self):
         print("create account")
