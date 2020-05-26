@@ -421,7 +421,7 @@ class Ui_MainWindow(object):
     def clicked_contact(self):
         print("contact")
         self.contact_window = QtWidgets.QMainWindow()
-        self.contact_window_ui = Ui_ContactWindow()
+        self.contact_window_ui = Ui_ContactWindow(self, self.loged_in_user)
         self.contact_window_ui.setupUi(self.contact_window)
         self.contact_window.show()
         self.window.hide()
