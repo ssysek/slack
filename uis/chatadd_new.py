@@ -306,8 +306,6 @@ class Ui_NewChatWindow(object):
         if name_ok and invited_ok:
             # TODO upper_forum
             connected_forum = str(self.current_forum)
-            if connected_forum == "-1":
-                connected_forum = "1"
             new_chat_request = requests.post('http://localhost:86/create_chat',json={"upper_forum_id":connected_forum,"chat_name": name,"image": self.image})
             if new_chat_request.json():
                 print("Successfully added chat!")
