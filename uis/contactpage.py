@@ -244,8 +244,8 @@ class Ui_ContactWindow(object):
         self.textEdit_3.setPlaceholderText(_translate("MainWindow", "Subject"))
 
     def clicked_cancel(self):
+        self.parent.window.show()
         self.window.hide()
-        print("cancel")
 
     def clicked_return(self):
         self.parent.window.show()

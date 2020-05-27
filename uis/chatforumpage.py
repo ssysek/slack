@@ -230,10 +230,7 @@ class Ui_MainWindow(object):
         messages = requests.post(url).json()
         res = ["no_forum", -1, []]
         for i in messages:
-            print(i)
-            res[2].append([str(i["chat_id"]), "chat name", '3'])
-                           #str(i["chat_name"]), str(i["image"])])
-            #TODO jak enpoint zadziała jak powinien odkomentować
+            res[2].append([str(i["chat_id"]), str(i["chat_name"]), str(i["image"])])
         return res
 
     def refresh(self):
@@ -260,6 +257,7 @@ class Ui_MainWindow(object):
         self.forums = self.loadForumsFromDataBase()
         self.changeForumButtons(self.listWidget_forums, self.forums)
 
+
         self.chats = self.loadPrivateChatsForUser()
         self.changeChannelButtons(self.listWidget_chats, self.chats)
         QtWidgets.QApplication.restoreOverrideCursor()
@@ -271,6 +269,7 @@ class Ui_MainWindow(object):
         :param objects: list of forum data elements containing  [forum_name, forum_id, image, [str(chat["chat_id"]), str(chat["chat_name"]), str(chat["image"])]]
         :return:
         """
+        nameWidget.clear()
         for object in objects:
             itemN = QtWidgets.QListWidgetItem()
             widget = QtWidgets.QWidget()

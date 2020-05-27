@@ -319,6 +319,8 @@ class Ui_NewChatWindow(object):
                 self.window.hide()
             else:
                 print("no json from adding chat")
+        self.parent.collectDataFromDataBase()
+        self.parent.changeChannelButtons(self.parent.listWidget_chanells, self.parent.forums[self.parent.current_forum])
         QtWidgets.QApplication.restoreOverrideCursor()
 
 
