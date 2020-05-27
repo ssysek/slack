@@ -320,6 +320,8 @@ class Ui_NewForumWindow(object):
                 self.window.hide()
             else:
                 print("no json from adding forum")
+
+        self.parent.collectDataFromDataBase()
         QtWidgets.QApplication.restoreOverrideCursor()
 
 
