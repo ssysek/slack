@@ -449,7 +449,7 @@ class Ui_MainWindow(object):
         self.loged_in_window = QtWidgets.QMainWindow()
         self.loged_in_window_ui = Ui_LoggedInWindow(self, self.loged_in_user)
         self.loged_in_window_ui.setupUi(self.loged_in_window)
-        self.loged_in_window_ui.change_username(name)
+        self.loged_in_window_ui.change_username(name, id)
 
         self.loged_in_window.show()
         self.window.hide()

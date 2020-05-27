@@ -277,7 +277,7 @@ class Ui_NewForumWindow(object):
         error_text = ""
         self.label_error.setText(error_text)
         invited_ids = []
-
+        invited_ok = False
         if name == "":
             error_text += "set a name"
             self.label_error.setText(error_text)
@@ -305,7 +305,6 @@ class Ui_NewForumWindow(object):
                     self.label_error.setText(error_text)
                     invited_ok = False
                     break
-
         if name_ok and invited_ok:
             new_forum_request = requests.post('http://localhost:86/create_forum',json={"forum_name": name, "image": self.image})
             print("Successfully added forum!")

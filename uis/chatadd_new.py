@@ -274,6 +274,7 @@ class Ui_NewChatWindow(object):
         error_text = ""
         self.label_error.setText(error_text)
         invited_ids = []
+        invited_ok = False
 
         if name == "":
             error_text += "set a name"

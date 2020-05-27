@@ -338,7 +338,7 @@ class Ui_MainWindow(object):
         self.notes_window.show()
 
 
-    def change_username(self, name):
+    def change_username(self, name, id):
         """
             called by login or register, updates label_username
             resize label_username, not to scale up whole window size on long names
@@ -346,7 +346,7 @@ class Ui_MainWindow(object):
         :return: void
         """
         self.label_username.setMaximumWidth(int(self.window.geometry().width()/4))
-        self.label_username.setText(name)
+        self.label_username.setText(name+ "#"+str(id))
 
 if __name__ == "__main__":
     import sys
