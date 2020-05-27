@@ -411,6 +411,7 @@ class Ui_MainWindow(object):
         self.contact_window = QtWidgets.QMainWindow()
         self.contact_window_ui = Ui_ContactWindow(self, self.loged_in_user)
         self.contact_window_ui.setupUi(self.contact_window)
+        self.window.hide()
         self.contact_window.show()
 
     def clicked_create_account(self):

@@ -1,5 +1,5 @@
 """
-file containing styles for elements used in fronend
+file containing styles for elements used in frontend
 prepared for usage in pyqt5 function: .setStyleSheet(name)
 """
 
