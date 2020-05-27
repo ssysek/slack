@@ -14,13 +14,13 @@ def chats_for_user_without_forums(params):
     print("Database connect successfully")
     cursor = connection.cursor()
 
-    sql = ("""select k.chat_id, k.chat_name from chats k \
+    sql = ("""select k.chat_id, k.chat_name, k.image from chats k \
               inner join chat_permissions l \
               on k.chat_id = l.chat_id \
               where k.upper_forum_id is null and l.permitted_user = %s;;""")
     cursor.execute(sql, [user_id_param])
     res = cursor.fetchall()
 
-    results = pd.DataFrame(res, columns=['chat_id', 'chat_name'])
+    results = pd.DataFrame(res, columns=['chat_id', 'chat_name', 'image'])
 
     return results
