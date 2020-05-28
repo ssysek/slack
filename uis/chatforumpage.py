@@ -226,7 +226,7 @@ class Ui_MainWindow(object):
         """ function loading channels which have user_id assigned to
          them but thier forum_id is null"""
         url = "http://localhost:86/user_chats?user_id="
-        url += str(1)
+        url += str(self.loged_in_user[0])
         messages = requests.post(url).json()
         res = ["no_forum", -1, []]
         for i in messages:
@@ -404,7 +404,7 @@ class Ui_MainWindow(object):
         nameWidget.setItemWidget(itemN, widget)
 
 
-#TODO: self.channel_icons podmienić na zgadzające się z bazą
+
     def getChannelWidgetButton(self, channel_info):
         """
         Creates button for channel and connects it to setup current messages viewer to show its content
