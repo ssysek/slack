@@ -170,17 +170,17 @@ class Ui_NewChatWindow(object):
 
         self.button_return.clicked.connect(self.clicked_return)
         self.button_submit.clicked.connect(self.clicked_save)
-        self.button_icon1.clicked.connect(self.clicked_iconFirst)
-        self.button_icon2.clicked.connect(self.clicked_iconSecond)
-        self.button_icon3.clicked.connect(self.clicked_iconThird)
-        self.button_icon4.clicked.connect(self.clicked_iconFourth)
-        self.button_icon5.clicked.connect(self.clicked_iconFifth)
+        self.button_icon1.clicked.connect(self.clickedIconFirst)
+        self.button_icon2.clicked.connect(self.clickedIconSecond)
+        self.button_icon3.clicked.connect(self.clickedIconThird)
+        self.button_icon4.clicked.connect(self.clickedIconFourth)
+        self.button_icon5.clicked.connect(self.clickedIconFifth)
 
-        self.icon_image_add(self.button_icon1,"g1")
-        self.icon_image_add(self.button_icon2, "g2")
-        self.icon_image_add(self.button_icon3, "g3")
-        self.icon_image_add(self.button_icon4, "g4")
-        self.icon_image_add(self.button_icon5, "g5")
+        self.iconImageAdd(self.button_icon1, "g1")
+        self.iconImageAdd(self.button_icon2, "g2")
+        self.iconImageAdd(self.button_icon3, "g3")
+        self.iconImageAdd(self.button_icon4, "g4")
+        self.iconImageAdd(self.button_icon5, "g5")
 
         NewChatWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         NewChatWindow.setStyleSheet(gradient_style_sheet)
@@ -218,46 +218,63 @@ class Ui_NewChatWindow(object):
         self.edit_name.setPlaceholderText(_translate("NewChatWindow", "Name your chat room"))
         self.edit_invite.setPlaceholderText(_translate("NewForumWindow", "Invite someone (separate with , and no extra spaces)"))
 
-    def icon_image_add(self, button, png_name):
+
+    def iconImageAdd(self, button, png_name):
+        """
+        adds .png image to button
+        :param button: self.button_icon{1,2,3,4,5}
+        :param button: 1,2,3,4,5
+        """
         self.icon_pixmap = QtGui.QPixmap("resources/chats/" + png_name + ".png")
         self.icon_pixmap = self.icon_pixmap.scaled(QtCore.QSize(64,64))
         self.store_notes_icon = QtGui.QIcon(self.icon_pixmap)
         button.setIcon(self.store_notes_icon)
         button.setIconSize(QtCore.QSize(64,64))
 
-    def set_icons(self,chosen_button):
+    def setIcons(self, chosen_button):
+        """
+        sets border for icon specified in self.image and removes it from other icons
+        :param chosen_button: self.button_icon{1,2,3,4,5}
+        """
         button_list = [self.button_icon1,self.button_icon2,self.button_icon3,self.button_icon4,self.button_icon5]
         for button in button_list:
             if str(button)==str(chosen_button):
-                self.icon_image_add(button, "g"+str(button_list.index(button)+1)+"glow")
+                self.iconImageAdd(button, "g" + str(button_list.index(button) + 1) + "glow")
             else:
-                self.icon_image_add(button, "g" + str(button_list.index(button) + 1))
+                self.iconImageAdd(button, "g" + str(button_list.index(button) + 1))
 
-    def clicked_iconFirst(self):
-        self.set_icons(self.button_icon1)
+    def clickedIconFirst(self):
+        """sets image value to 1 applies border to first icon"""
+        self.setIcons(self.button_icon1)
         self.image = "1"
 
-    def clicked_iconSecond(self):
-        self.set_icons(self.button_icon2)
+    def clickedIconSecond(self):
+        """sets image value to 2 applies border to second icon"""
+        self.setIcons(self.button_icon2)
         self.image = "2"
 
-    def clicked_iconThird(self):
-        self.set_icons(self.button_icon3)
+    def clickedIconThird(self):
+        """sets image value to 3 applies border to third icon"""
+        self.setIcons(self.button_icon3)
         self.image = "3"
 
-    def clicked_iconFourth(self):
-        self.set_icons(self.button_icon4)
+    def clickedIconFourth(self):
+        """sets image value to 4 applies border to fourth icon"""
+        self.setIcons(self.button_icon4)
         self.image = "4"
 
-    def clicked_iconFifth(self):
-        self.set_icons(self.button_icon5)
+    def clickedIconFifth(self):
+        """sets image value to 5 applies border to fifth icon"""
+        self.setIcons(self.button_icon5)
         self.image = "5"
 
     def clicked_return(self):
+        """closes Add Chat window and goes back to previous one"""
         self.parent.window.show()
         self.window.hide()
 
     def clicked_log_out(self):
+        """logges user out"""
         self.show_site = self.parent
         while (self.show_site.parent != None):
             self.show_site = self.show_site.parent
@@ -266,6 +283,9 @@ class Ui_NewChatWindow(object):
         self.window.hide()
 
     def clicked_save(self):
+        """
+        checks if credentials provided by user are correct and does request calls creating chat and adding owner and invited users permissions
+        """
         QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         print("Save")
         name = self.edit_name.text()
@@ -305,7 +325,6 @@ class Ui_NewChatWindow(object):
                     break
 
         if name_ok and invited_ok:
-            # TODO upper_forum
             connected_forum = str(self.current_forum)
             new_chat_request = requests.post('http://localhost:86/create_chat',json={"upper_forum_id":connected_forum,"chat_name": name,"image": self.image})
             if new_chat_request.json():

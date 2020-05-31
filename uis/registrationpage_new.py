@@ -220,11 +220,11 @@ class Ui_RegistrationWindow(object):
         QtCore.QMetaObject.connectSlotsByName(RegistrationWindow)
 
         RegistrationWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
-        # tu wstawić logikę strony
+
         self.button_sign_up.setAutoDefault(True)
         self.button_cancel.setAutoDefault(True)
         self.button_cancel.clicked.connect(self.clicked_cancel)
-        self.button_sign_up.clicked.connect(self.clicked_sign_up)
+        self.button_sign_up.clicked.connect(self.clicked_signup)
 
 
     def retranslateUi(self, RegistrationWindow):
@@ -241,7 +241,10 @@ class Ui_RegistrationWindow(object):
         self.label_registration.setText(_translate("RegistrationWindow", "Registration"))
 
 
-    def clicked_sign_up(self):
+    def clicked_signup(self):
+        """
+        checks if credentials provided by user are correct (no empty values, unique login, correct password confirmation) and does request call for registration
+        """
         QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         name = self.edit_name.text()
         surname = self.edit_surname.text()
@@ -285,6 +288,9 @@ class Ui_RegistrationWindow(object):
 
 
     def clicked_cancel(self):
+        """
+        exits from login window
+        """
         self.window.hide()
         print("cancel")
 

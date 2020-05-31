@@ -194,7 +194,7 @@ class Ui_LoginpageWindow(object):
         # tu wstawić logikę strony
         self.button_cancel.clicked.connect(self.clicked_cancel)
         self.button_login.clicked.connect(self.clicked_login)
-        self.button_sign_up.clicked.connect(self.clicked_sign_up)
+        self.button_sign_up.clicked.connect(self.clicked_signup)
 
 
     def retranslateUi(self, LoginpageWindow):
@@ -209,11 +209,10 @@ class Ui_LoginpageWindow(object):
         self.button_cancel.setText(_translate("LoginpageWindow", "Cancel"))
 
 
-    def clicked_cancel(self):
-        self.window.hide()
-        print("cancel")
-
-    def clicked_sign_up(self):
+    def clicked_signup(self):
+        """
+        opens register window
+        """
         from uis.registrationpage_new import Ui_RegistrationWindow
         print("sign up")
         self.register_window = QtWidgets.QMainWindow()
@@ -222,7 +221,11 @@ class Ui_LoginpageWindow(object):
         self.register_window.show()
         self.window.hide()
 
+
     def clicked_login(self):
+        """
+        checks if provided by user credentials are correct and logges him in to loggedinlandingpage
+        """
         QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
         username = self.edit_username.text()
         password = self.edit_password.text()
@@ -251,6 +254,13 @@ class Ui_LoginpageWindow(object):
         QtWidgets.QApplication.restoreOverrideCursor()
 
 
+    def clicked_cancel(self):
+        """
+        exits from login window
+        """
+        self.window.hide()
+        print("cancel")
+
 
 
 if __name__ == "__main__":
@@ -261,12 +271,3 @@ if __name__ == "__main__":
     ui.setupUi(LoginpageWindow)
     LoginpageWindow.show()
     sys.exit(app.exec_())
-
-
-def list_to_string(mlist):
-    if type(mlist)==list:
-        mstring =",".join(mlist)
-        return mstring
-    else:
-        return mlist
-
