@@ -21,6 +21,8 @@ from requests_on_REST.delete_note import delete_note
 from requests_on_REST.create_chat import create_chat
 from requests_on_REST.create_forum import create_forum
 from requests_on_REST.update_note import update_note
+from requests_on_REST.delete_chat_permissions import delete_chat_permissions
+from requests_on_REST.delete_forum_permissions import delete_forum_permissions
 
 HOST_PORT = 86
 
@@ -198,6 +200,26 @@ class MyServer(BaseHTTPRequestHandler):
             self.send_header("Content-type", "application/json")
             self.end_headers()
             self.wfile.write(bytes(create_forum(body), "utf-8"))
+
+        elif path == "/delete_chat_permissions":
+            '''Body example: {"chat_id": "72", "permitted_user": "15"}'''
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length)
+            self.send_response(200)
+            self.end_headers()
+            delete_chat_permissions(body)
+            response = BytesIO()
+            self.wfile.write(response.getvalue())
+
+        elif path == "/delete_forum_permissions":
+            '''Body example: {"forum_id": "72", "permitted_user": "15"}'''
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length)
+            self.send_response(200)
+            self.end_headers()
+            delete_forum_permissions(body)
+            response = BytesIO()
+            self.wfile.write(response.getvalue())
 
         else:
             self.send_response(200)
