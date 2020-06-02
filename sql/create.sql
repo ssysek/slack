@@ -6,6 +6,7 @@ create table if not exists users
 	user_surname varchar(50),
 	password varchar(50),
 	login varchar(50) unique,
+	email varchar(60),
 	constraint user_id_pk primary key (user_id)
 );
 
