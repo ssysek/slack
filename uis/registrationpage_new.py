@@ -280,7 +280,7 @@ class Ui_RegistrationWindow(object):
             to_register = False
 
         if to_register:
-            register_request = requests.post('http://localhost:86/register', json={"user_name":name,"user_surname":surname,"login":login,"password":password})
+            register_request = requests.post('http://localhost:86/register', json={"user_name":name,"user_surname":surname,"login":login,"password":password,"email":email})
             print("Success - now log in")
             self.window.hide()
             self.parent.clicked_log_in()
