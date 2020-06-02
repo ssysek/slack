@@ -20,4 +20,4 @@ def delete_chat_permissions(body):
     del_id = [loaded_json['chat_id'], loaded_json['permitted_user']]
     cursor.execute(sql, del_id)
     connection.commit()
-    return del_id
+    return str(del_id)

@@ -21,7 +21,8 @@ def register(body):
     sql = """insert into users (user_id, user_name, user_surname, login, 
     password) values (%s,%s,%s,%s,%s) """
     new_user = (new_id, loaded_json['user_name'], loaded_json['user_surname'],
-                loaded_json['login'], loaded_json['password'])
+                loaded_json['login'], loaded_json['password'],
+                loaded_json['email'])
     cursor.execute(sql, new_user)
     connection.commit()
     return str(new_id)

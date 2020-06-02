@@ -105,7 +105,8 @@ class MyServer(BaseHTTPRequestHandler):
 
         elif path == "/register":
             '''Body example: {"user_name": "test123", "user_surname": 
-            "testowy", "login": "test_test", "password": "haslo12345"} '''
+            "testowy", "login": "test_test", "password": "haslo12345", 
+            "email": "jacek123@slack.com} '''
             content_length = int(self.headers['Content-Length'])
             body = self.rfile.read(content_length)
             self.send_response(200)
