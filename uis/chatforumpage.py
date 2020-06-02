@@ -306,7 +306,6 @@ class Ui_MainWindow(object):
         self.addforum_window.show()
 
 
-#TODO: podmienić na forum icon zgadzający się z bazą
     def getForumWidgetButton(self, object):
         """creates widget for single forum button
         :param object -- [forum name, forum id, image, [str(i["chat_id"]), str(i["chat_name"]), str(i["image"])]]
@@ -435,7 +434,7 @@ class Ui_MainWindow(object):
         self.window.hide()
         self.notes_window.show()
 
-    def setUpMessages(self, channel_info):  # arg - name of channel, id - id channel
+    def setUpMessages(self, channel_info):
         """
         setups view of messages for chosen channel
         try except to pass on channels without content
@@ -570,8 +569,21 @@ class Ui_MainWindow(object):
         removes user from permmisions for channel
         :return: void
         """
-        print(self.loged_in_user)
-        print(self.current_chat)
+        if(self.current_chat != -1):
+            requests.post('http://localhost:86/delete_chat_permissions',
+                                             json={"chat_id": str(self.current_chat),
+                                                   "permitted_user": str(self.loged_in_user[0])})
+
+            if (self.current_forum != -1):
+                self.loadChatsForForum(self.current_forum)
+            else:
+                self.loadPrivateChatsForUser()
+            self.messages.clear()
+            self.label_opened_box.setText("Open chat:")
+            self.loadMessages()
+            self.current_forum = -1
+            self.current_chat = -1
+
 
     def clicked_add_user(self):
         """
