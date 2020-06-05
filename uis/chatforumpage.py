@@ -553,11 +553,11 @@ class Ui_MainWindow(object):
         """
         loads chats from database based on selected forum
         :param forum_id: unique forum id from database
-        :return: void
+        :return: list of [chat_id, chat_name, image_number_to_display]
         """
-        url = "http://localhost:86/chats_inside_forum?upper_forum_id="
-        url += str(forum_id)
-        message = requests.post(url).json()
+        message = requests.post("http://localhost:86/user_chats_inside_forum",
+                                             json={"upper_forum_id": str(forum_id),
+                                                   "permitted_user": str(self.loged_in_user[0])})
         res = []
         for i in message:
             res.append([str(i["chat_id"]), str(i["chat_name"]), str(i["image"])])
@@ -570,20 +570,23 @@ class Ui_MainWindow(object):
         :return: void
         """
         if(self.current_chat != -1):
+            QtWidgets.QApplication.setOverrideCursor(QtCore.Qt.WaitCursor)
             requests.post('http://localhost:86/delete_chat_permissions',
                                              json={"chat_id": str(self.current_chat),
                                                    "permitted_user": str(self.loged_in_user[0])})
 
             if (self.current_forum != -1):
-                self.loadChatsForForum(self.current_forum)
+                channels = self.loadChatsForForum(self.current_forum)
+                self.changeChannelButtons(self.listWidget_chanells, channels)
             else:
-                self.loadPrivateChatsForUser()
+                self.chats = self.loadPrivateChatsForUser()
+                self.changeChannelButtons(self.listWidget_chats, self.chats)
             self.messages.clear()
             self.label_opened_box.setText("Open chat:")
             self.loadMessages()
             self.current_forum = -1
             self.current_chat = -1
-
+            QtWidgets.QApplication.restoreOverrideCursor()
 
     def clicked_add_user(self):
         """
