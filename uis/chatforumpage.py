@@ -555,9 +555,11 @@ class Ui_MainWindow(object):
         :param forum_id: unique forum id from database
         :return: list of [chat_id, chat_name, image_number_to_display]
         """
-        message = requests.post("http://localhost:86/user_chats_inside_forum",
-                                             json={"upper_forum_id": str(forum_id),
-                                                   "permitted_user": str(self.loged_in_user[0])})
+        url = "http://localhost:86/user_chats_inside_forum?forum="
+        url += str(forum_id)
+        url += "&user="
+        url += str(self.loged_in_user[0])
+        message = requests.post(url).json()
         res = []
         for i in message:
             res.append([str(i["chat_id"]), str(i["chat_name"]), str(i["image"])])
@@ -576,14 +578,14 @@ class Ui_MainWindow(object):
                                                    "permitted_user": str(self.loged_in_user[0])})
 
             if (self.current_forum != -1):
-                channels = self.loadChatsForForum(self.current_forum)
-                self.changeChannelButtons(self.listWidget_chanells, channels)
+                self.forums = self.loadForumsFromDataBase()
+                self.changeForumButtons(self.listWidget_forums, self.forums)
+                self.listWidget_chanells.clear()
             else:
                 self.chats = self.loadPrivateChatsForUser()
                 self.changeChannelButtons(self.listWidget_chats, self.chats)
             self.messages.clear()
             self.label_opened_box.setText("Open chat:")
-            self.loadMessages()
             self.current_forum = -1
             self.current_chat = -1
             QtWidgets.QApplication.restoreOverrideCursor()
