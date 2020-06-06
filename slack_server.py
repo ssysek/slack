@@ -224,15 +224,13 @@ class MyServer(BaseHTTPRequestHandler):
             self.wfile.write(response.getvalue())
 
         elif path == "/user_chats_inside_forum":
-            '''Body example: {"upper_forum_id": "72", 
-            "permitted_user": "15"}'''
-            content_length = int(self.headers['Content-Length'])
-            body = self.rfile.read(content_length)
+            '''example path: 
+            http://localhost:86/user_chats_inside_forum?forum=1&user=1'''
             self.send_response(200)
+            self.send_header("Content-type", "application/json")
             self.end_headers()
-            user_chats_inside_forum(body)
-            response = BytesIO()
-            self.wfile.write(response.getvalue())
+            self.wfile.write(bytes(user_chats_inside_forum(qs).to_json(
+                orient='records', date_format='iso'), "utf-8"))
 
         else:
             self.send_response(200)
