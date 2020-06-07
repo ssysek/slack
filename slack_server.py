@@ -24,6 +24,7 @@ from requests_on_REST.update_note import update_note
 from requests_on_REST.delete_chat_permissions import delete_chat_permissions
 from requests_on_REST.delete_forum_permissions import delete_forum_permissions
 from requests_on_REST.user_chats_inside_forum import user_chats_inside_forum
+from requests_on_REST.send_message import send_message
 
 HOST_PORT = 86
 
@@ -231,6 +232,18 @@ class MyServer(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(bytes(user_chats_inside_forum(qs).to_json(
                 orient='records', date_format='iso'), "utf-8"))
+
+        elif path == "/send_message":
+            '''Body example: {"fname": "marek", "lname": "matys", 
+            "email": "twoj_stary@polska.pl", "subject": "to jest",
+            "message": "moj kolega gej"} '''
+            content_length = int(self.headers['Content-Length'])
+            body = self.rfile.read(content_length)
+            self.send_response(200)
+            self.end_headers()
+            send_message(body)
+            response = BytesIO()
+            self.wfile.write(response.getvalue())
 
         else:
             self.send_response(200)

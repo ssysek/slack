@@ -1,5 +1,17 @@
 # slack
 
+### Running the app
+To run the app, you must clone it, to your local folder (1), enter the app folder (2), install virtual environment (3) and simply run (4).
+
+```
+1) git clone https://github.com/ssysek/slack.git
+2) cd slack
+3) make install
+4) make run
+```
+
+
+
 ### Database
 To get into database (from root):
 ```

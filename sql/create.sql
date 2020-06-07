@@ -64,6 +64,16 @@ create table if not exists notes
     constraint notes_fk foreign key (owner_id) references users(user_id)
 );
 
+create table if not exists mails
+(
+    mail_id serial,
+    fname varchar(60),
+    lname varchar(60),
+    email varchar(60),
+    subject varchar(60),
+    message varchar(600)
+);
+
 
 --insert into users values (1, 'Jan', Nowak', 'janek', 'Nowaczek123');
 --insert into posts values (1, 1, 1, 'Lorem ipsum');
