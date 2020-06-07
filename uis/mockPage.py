@@ -38,14 +38,14 @@ class Ui_MockWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        MainWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
+        MainWindow.setWindowIcon(QtGui.QIcon('../resources/taco.png'))
         if self.mock == 'notes':
             MainWindow.setStyleSheet("#MainWindow { border-image: url(resources/mocks/mockNotesMainPage.png) 0 0 0 0 stretch stretch; }")
         else:
             MainWindow.setStyleSheet("#MainWindow { border-image: url(resources/mocks/constructionPage.png) 0 0 0 0 stretch stretch; }")
 
         self.pushButton.clicked.connect(self.clicked_return)
-        self.return_pixmap = QtGui.QPixmap("resources/return.png")
+        self.return_pixmap = QtGui.QPixmap("../resources/return.png")
         self.return_pixmap = self.return_pixmap.scaled(QtCore.QSize(32, 32))
         self.icon = QtGui.QIcon(self.return_pixmap)
         self.pushButton.setIcon(self.icon)

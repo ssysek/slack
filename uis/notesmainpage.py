@@ -9,7 +9,7 @@ import requests
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from notesSinglePage import Ui_MainNotesPageWindow
+from uis.notesSinglePage import Ui_MainNotesPageWindow
 from resources.stylesheets import *
 
 
@@ -74,7 +74,7 @@ class Ui_MainNotesWindow(object):
         self.pushButton_addNewNote.clicked.connect(self.clicked_new_note)
 
         #setting icons
-        self.return_pixmap = QtGui.QPixmap("resources/return.png")
+        self.return_pixmap = QtGui.QPixmap("../resources/return.png")
         self.return_pixmap = self.return_pixmap.scaled(QtCore.QSize(32, 32))
         self.icon = QtGui.QIcon(self.return_pixmap)
         self.pushButton_Return.setIcon(self.icon)
@@ -82,7 +82,7 @@ class Ui_MainNotesWindow(object):
         self.pushButton_Return.setStyleSheet(button_with_image_style_sheet)
         self.pushButton_Return.setToolTip("Return")
 
-        self.logout_pixmap = QtGui.QPixmap("resources/logout.png")
+        self.logout_pixmap = QtGui.QPixmap("../resources/logout.png")
         self.logout_pixmap = self.logout_pixmap.scaled(QtCore.QSize(36, 36))
         self.logout_icon = QtGui.QIcon(self.logout_pixmap)
         self.pushButton_LogOut.setIcon(self.logout_icon)
@@ -98,7 +98,7 @@ class Ui_MainNotesWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        MainWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
+        MainWindow.setWindowIcon(QtGui.QIcon('../resources/taco.png'))
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -121,10 +121,10 @@ class Ui_MainNotesWindow(object):
         row = 0
         column = 0
         #get delete and note icons
-        return_pixmap = QtGui.QPixmap("resources/notes/n7.png")
+        return_pixmap = QtGui.QPixmap("../resources/notes/n7.png")
         return_pixmap = return_pixmap.scaled(QtCore.QSize(100, 100))
         icon = QtGui.QIcon(return_pixmap)
-        return_pixmap_delete = QtGui.QPixmap("resources/delete_bin.png")
+        return_pixmap_delete = QtGui.QPixmap("../resources/delete_bin.png")
         return_pixmap_delete = return_pixmap_delete.scaled(QtCore.QSize(40, 40))
         icon_delete = QtGui.QIcon(return_pixmap_delete)
 

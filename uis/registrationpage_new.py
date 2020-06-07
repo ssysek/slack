@@ -216,7 +216,7 @@ class Ui_RegistrationWindow(object):
         self.retranslateUi(RegistrationWindow)
         QtCore.QMetaObject.connectSlotsByName(RegistrationWindow)
 
-        RegistrationWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
+        RegistrationWindow.setWindowIcon(QtGui.QIcon('../resources/taco.png'))
 
         self.button_sign_up.setAutoDefault(True)
         self.button_cancel.setAutoDefault(True)

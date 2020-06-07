@@ -187,7 +187,7 @@ class Ui_LoginpageWindow(object):
         QtCore.QMetaObject.connectSlotsByName(LoginpageWindow)
 
         LoginpageWindow.setStyleSheet(gradient_style_sheet)
-        LoginpageWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
+        LoginpageWindow.setWindowIcon(QtGui.QIcon('../resources/taco.png'))
         self.button_login.setAutoDefault(True)
         # tu wstawić logikę strony
         self.button_cancel.clicked.connect(self.clicked_cancel)
@@ -211,7 +211,7 @@ class Ui_LoginpageWindow(object):
         """
         opens register window
         """
-        from registrationpage_new import Ui_RegistrationWindow
+        from uis.registrationpage_new import Ui_RegistrationWindow
         print("sign up")
         self.register_window = QtWidgets.QMainWindow()
         self.register_window_ui = Ui_RegistrationWindow(self.parent)

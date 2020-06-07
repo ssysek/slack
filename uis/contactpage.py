@@ -206,9 +206,9 @@ class Ui_ContactWindow(object):
         MainWindow.setStatusBar(self.statusbar)
         MainWindow.setStyleSheet(gradient_style_sheet)
 
-        MainWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
+        MainWindow.setWindowIcon(QtGui.QIcon('../resources/taco.png'))
 
-        self.return_pixmap = QtGui.QPixmap("resources/return.png")
+        self.return_pixmap = QtGui.QPixmap("../resources/return.png")
         self.return_pixmap = self.return_pixmap.scaled(QtCore.QSize(32, 32))
         self.icon = QtGui.QIcon(self.return_pixmap)
         self.button_return.setIcon(self.icon)
