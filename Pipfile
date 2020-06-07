@@ -8,6 +8,8 @@ verify_ssl = true
 [packages]
 pandas = "*"
 pyqt5 = "*"
+psycopg2-binary = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"
