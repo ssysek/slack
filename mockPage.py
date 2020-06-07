@@ -9,7 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from uis.resources.stylesheets import button_with_image_style_sheet
+from resources.stylesheets import button_with_image_style_sheet
 
 
 class Ui_MockWindow(object):

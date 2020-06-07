@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from uis.resources.stylesheets import *
+from resources.stylesheets import *
 
 class Ui_MainWindow(object):
     def __init__(self, parent=None):
@@ -214,20 +214,23 @@ class Ui_MainWindow(object):
 
         self.label_kuba_img.setMaximumSize(QtCore.QSize(180, 180))
         self.label_kuba_img.setText("")
-        self.label_kuba_img.setPixmap(QtGui.QPixmap("resources/people/kuba.jpg"))
+        self.label_kuba_img.setPixmap(QtGui.QPixmap(
+            "resources/people/kuba.jpg"))
         self.label_kuba_img.setScaledContents(True)
         self.label_kuba_img.setAlignment(QtCore.Qt.AlignCenter)
         self.label_kuba_img.setStyleSheet("border-radius: 25%;")
 
         self.label_maciek_s_img.setMaximumSize(QtCore.QSize(180, 180))
         self.label_maciek_s_img.setText("")
-        self.label_maciek_s_img.setPixmap(QtGui.QPixmap("resources/people/maciek_s.jpg"))
+        self.label_maciek_s_img.setPixmap(QtGui.QPixmap(
+            "resources/people/maciek_s.jpg"))
         self.label_maciek_s_img.setScaledContents(True)
         self.label_maciek_s_img.setAlignment(QtCore.Qt.AlignCenter)
 
         self.label_maciek_w_img.setMaximumSize(QtCore.QSize(180, 180))
         self.label_maciek_w_img.setText("")
-        self.label_maciek_w_img.setPixmap(QtGui.QPixmap("resources/people/maciek_w.jpg"))
+        self.label_maciek_w_img.setPixmap(QtGui.QPixmap(
+            "resources/people/maciek_w.jpg"))
         self.label_maciek_w_img.setScaledContents(True)
         self.label_maciek_w_img.setAlignment(QtCore.Qt.AlignCenter)
 
@@ -239,13 +242,15 @@ class Ui_MainWindow(object):
 
         self.label_gosia_img.setMaximumSize(QtCore.QSize(180, 180))
         self.label_gosia_img.setText("")
-        self.label_gosia_img.setPixmap(QtGui.QPixmap("resources/people/gosia.jpg"))
+        self.label_gosia_img.setPixmap(QtGui.QPixmap(
+            "resources/people/gosia.jpg"))
         self.label_gosia_img.setScaledContents(True)
         self.label_gosia_img.setAlignment(QtCore.Qt.AlignCenter)
 
         self.label_marek_img.setMaximumSize(QtCore.QSize(180, 180))
         self.label_marek_img.setText("")
-        self.label_marek_img.setPixmap(QtGui.QPixmap("resources/people/marek.jpg"))
+        self.label_marek_img.setPixmap(QtGui.QPixmap(
+            "resources/people/marek.jpg"))
         self.label_marek_img.setScaledContents(True)
         self.label_marek_img.setAlignment(QtCore.Qt.AlignCenter)
 

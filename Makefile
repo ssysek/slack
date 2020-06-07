@@ -1,6 +1,11 @@
+.PHONY: runserver
+runserver:
+	pipenv run python slack_server.py
+
 .PHONY: run
 run:
-	pipenv run python slack_server.py
+	pipenv run python landingpage_new.py
+
 
 .PHONY: install
 install:

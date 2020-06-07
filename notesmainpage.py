@@ -9,8 +9,8 @@ import requests
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from uis.notesSinglePage import Ui_MainNotesPageWindow
-from uis.resources.stylesheets import *
+from notesSinglePage import Ui_MainNotesPageWindow
+from resources.stylesheets import *
 
 
 class Ui_MainNotesWindow(object):

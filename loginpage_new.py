@@ -8,11 +8,9 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication
-from uis.chatforumpage import Ui_MainWindow as Ui_ChatWindow
 import requests
 
-from uis.resources.stylesheets import gradient_style_sheet
+from resources.stylesheets import gradient_style_sheet
 
 logged_id = -1
 logged_name = ""
@@ -213,7 +211,7 @@ class Ui_LoginpageWindow(object):
         """
         opens register window
         """
-        from uis.registrationpage_new import Ui_RegistrationWindow
+        from registrationpage_new import Ui_RegistrationWindow
         print("sign up")
         self.register_window = QtWidgets.QMainWindow()
         self.register_window_ui = Ui_RegistrationWindow(self.parent)

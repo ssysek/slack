@@ -8,13 +8,14 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from uis.features import Ui_FeaturesWindow
-from uis.contactpage import Ui_ContactWindow
-from uis.loginpage_new import Ui_LoginpageWindow
-from uis.registrationpage_new import Ui_RegistrationWindow
-from uis.loggedinlandingpage import Ui_MainWindow as Ui_LoggedInWindow
-from uis.about import Ui_MainWindow as Ui_AboutWindow
-from uis.resources.stylesheets import *
+from features import Ui_FeaturesWindow
+from contactpage import Ui_ContactWindow
+from loginpage_new import Ui_LoginpageWindow
+from registrationpage_new import Ui_RegistrationWindow
+from loggedinlandingpage import Ui_MainWindow as Ui_LoggedInWindow
+from about import Ui_MainWindow as Ui_AboutWindow
+from slack_server import connection
+from resources.stylesheets import *
 
 QtGui.QFontDatabase.addApplicationFont(":/resources/OpenSans-Regular.ttf")
 
@@ -463,3 +464,14 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+    '''
+
+def window():
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
+    sys.exit(app.exec_())'''
