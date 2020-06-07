@@ -42,7 +42,7 @@ class Ui_MockWindow(object):
         if self.mock == 'notes':
             MainWindow.setStyleSheet("#MainWindow { border-image: url(resources/mocks/mockNotesMainPage.png) 0 0 0 0 stretch stretch; }")
         else:
-            MainWindow.setStyleSheet("#MainWindow { border-image: url(resources/mocks/constructionPage.png) 0 0 0 0 stretch stretch; }")
+            MainWindow.setStyleSheet("#MainWindow { border-image: url(resources/mocks/chatForumPage.png) 0 0 0 0 stretch stretch; }")
 
         self.pushButton.clicked.connect(self.clicked_return)
         self.return_pixmap = QtGui.QPixmap("resources/return.png")
