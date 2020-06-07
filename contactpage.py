@@ -5,8 +5,7 @@
 # Created by: PyQt5 UI code generator 5.14.2
 #
 # WARNING! All changes made in this file will be lost!
-
-
+import requests
 from PyQt5 import QtCore, QtGui, QtWidgets
 from resources.stylesheets import *
 
@@ -228,6 +227,8 @@ class Ui_ContactWindow(object):
         #tutaj logika
         self.button_cancel.clicked.connect(self.clicked_cancel)
         self.button_return.clicked.connect(self.clicked_return)
+        self.button_submit.clicked.connect(self.clicked_submit)
+
 
 
 
@@ -250,6 +251,22 @@ class Ui_ContactWindow(object):
     def clicked_return(self):
         self.parent.window.show()
         self.window.hide()
+
+    def clicked_submit(self):
+        email = str(self.textEdit_2.toPlainText())
+        subject = str(self.textEdit_3.toPlainText())
+        lastName = str(self.textEdit_4.toPlainText())
+        firstName = str(self.textEdit_5.toPlainText())
+        message = str(self.textEdit_6.toPlainText())
+
+        requests.post('http://localhost:86/send_message',
+                      json={"fname": firstName, "lname": lastName, "email": email, "subject": subject, "message": message})
+        print("Wiadomość wysłana")
+        self.parent.window.show()
+        self.window.hide()
+        QtWidgets.QApplication.restoreOverrideCursor()
+
+
 
 
 if __name__ == "__main__":
