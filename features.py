@@ -8,10 +8,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from uis.chatforumpage import Ui_MainWindow as Ui_ChatWindow
-from uis.mockPage import Ui_MockWindow
-from uis.notesmainpage import Ui_MainNotesWindow
-from uis.resources.stylesheets import *
+from chatforumpage import Ui_MainWindow as Ui_ChatWindow
+from mockPage import Ui_MockWindow
+from notesmainpage import Ui_MainNotesWindow
+from resources.stylesheets import *
 
 class Ui_FeaturesWindow(object):
     def __init__(self, parent=None, user=None):

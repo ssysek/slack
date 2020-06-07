@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from uis.resources.stylesheets import *
+from resources.stylesheets import *
 import requests
 
 class Ui_Form(object):

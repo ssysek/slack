@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 #import psycopg2
 import requests
 
-from uis.resources.stylesheets import pretty_big_darker_label_style_sheet, gradient_style_sheet
+from resources.stylesheets import pretty_big_darker_label_style_sheet, gradient_style_sheet
 
 
 class Ui_RegistrationWindow(object):

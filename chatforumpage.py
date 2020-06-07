@@ -7,12 +7,12 @@
 # WARNING! All changes made in this file will be lost!
 import requests
 from PyQt5 import QtCore, QtGui, QtWidgets
-from uis.resources.stylesheets import *
+from resources.stylesheets import *
 
-from uis.notesmainpage import Ui_MainNotesWindow
-from uis.forumadd_new import Ui_NewForumWindow
-from uis.chatadd_new import Ui_NewChatWindow
-from uis.add_new_user_form import Ui_Form as Ui_Add_New_User
+from notesmainpage import Ui_MainNotesWindow
+from forumadd_new import Ui_NewForumWindow
+from chatadd_new import Ui_NewChatWindow
+from add_new_user_form import Ui_Form as Ui_Add_New_User
 
 class Ui_MainWindow(object):
     def __init__(self, parent=None, logged_in_user = None):

@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from uis.resources.stylesheets import *
+from resources.stylesheets import *
 
 
 class Ui_ContactWindow(object):
