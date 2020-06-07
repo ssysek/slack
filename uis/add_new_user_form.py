@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from resources.stylesheets import *
+from uis.resources.stylesheets import *
 import requests
 
 class Ui_Form(object):
@@ -31,7 +31,7 @@ class Ui_Form(object):
         self.button_add = QtWidgets.QPushButton(Form)
         self.button_add.setGeometry(QtCore.QRect(250, 100, 64, 64))
         self.button_add.setObjectName("button_add")
-        self.pixmap = QtGui.QPixmap("../resources/add.png")
+        self.pixmap = QtGui.QPixmap("resources/add.png")
         self.pixmap = self.pixmap.scaled(QtCore.QSize(64, 64))
         self.icon = QtGui.QIcon(self.pixmap)
         self.button_add.setIcon(self.icon)
@@ -39,9 +39,9 @@ class Ui_Form(object):
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
-        Form.setWindowIcon(QtGui.QIcon('../resources/taco.png'))
+        Form.setWindowIcon(QtGui.QIcon('resources/taco.png'))
 
-        self.return_pixmap = QtGui.QPixmap("../resources/return.png")
+        self.return_pixmap = QtGui.QPixmap("resources/return.png")
         self.return_pixmap = self.return_pixmap.scaled(QtCore.QSize(32, 32))
         self.icon = QtGui.QIcon(self.return_pixmap)
         self.button_return.setIcon(self.icon)

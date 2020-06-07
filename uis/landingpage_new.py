@@ -14,7 +14,7 @@ from uis.loginpage_new import Ui_LoginpageWindow
 from uis.registrationpage_new import Ui_RegistrationWindow
 from uis.loggedinlandingpage import Ui_MainWindow as Ui_LoggedInWindow
 from uis.about import Ui_MainWindow as Ui_AboutWindow
-from resources.stylesheets import *
+from uis.resources.stylesheets import *
 
 QtGui.QFontDatabase.addApplicationFont(":/resources/OpenSans-Regular.ttf")
 
@@ -349,7 +349,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
 
-        MainWindow.setWindowIcon(QtGui.QIcon('../resources/taco.png'))
+        MainWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         # stylesheets
         MainWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(transparent_background_style_sheet)
@@ -360,13 +360,13 @@ class Ui_MainWindow(object):
         self.button_contact.setStyleSheet(small_label_style_sheet)
         self.button_about.setStyleSheet(small_label_style_sheet)
 
-        self.home_pixmap = QtGui.QPixmap("../resources/home.png")
+        self.home_pixmap = QtGui.QPixmap("resources/home.png")
         self.home_pixmap = self.home_pixmap.scaled(QtCore.QSize(40, 40))
         self.icon = QtGui.QIcon(self.home_pixmap)
         self.button_home.setIcon(self.icon)
         self.button_home.setIconSize(QtCore.QSize(40, 40))
 
-        self.login_pixmap = QtGui.QPixmap("../resources/login.png")
+        self.login_pixmap = QtGui.QPixmap("resources/login.png")
         self.login_pixmap = self.login_pixmap.scaled(QtCore.QSize(36, 36))
         self.login_icon = QtGui.QIcon(self.login_pixmap)
         self.button_log_in.setIcon(self.login_icon)

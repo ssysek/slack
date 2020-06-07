@@ -46,7 +46,7 @@ class Ui_Form(object):
         self.image_button = QtWidgets.QPushButton(Form)
         self.image_button.setGeometry(QtCore.QRect(320, 140, 64, 64))
         self.image_button.setObjectName("image_button")
-        self.pixmap = QtGui.QPixmap("../resources/return.png")
+        self.pixmap = QtGui.QPixmap("resources/return.png")
         self.pixmap = self.pixmap.scaled(QtCore.QSize(64, 64))
         self.icon = QtGui.QIcon(self.pixmap)
         self.image_button.setIcon(self.icon)

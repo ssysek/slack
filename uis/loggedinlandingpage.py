@@ -14,7 +14,7 @@ from uis.notesmainpage import Ui_MainNotesWindow
 from uis.registrationpage_new import Ui_RegistrationWindow
 from uis.chatforumpage import Ui_MainWindow as Ui_ChatWindow
 from uis.about import Ui_MainWindow as Ui_AboutWindow
-from resources.stylesheets import *
+from uis.resources.stylesheets import *
 
 
 class Ui_MainWindow(object):
@@ -208,7 +208,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        MainWindow.setWindowIcon(QtGui.QIcon('../resources/taco.png'))
+        MainWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         MainWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(transparent_background_style_sheet)
 
@@ -220,7 +220,7 @@ class Ui_MainWindow(object):
         self.label.setStyleSheet(small_label_style_sheet)
         self.label_username.setStyleSheet(small_label_style_sheet)
 
-        self.logout_pixmap = QtGui.QPixmap("../resources/logout.png")
+        self.logout_pixmap = QtGui.QPixmap("resources/logout.png")
         self.logout_pixmap = self.logout_pixmap.scaled(QtCore.QSize(36, 36))
         self.logout_icon = QtGui.QIcon(self.logout_pixmap)
         self.button_log_out.setIcon(self.logout_icon)
@@ -228,7 +228,7 @@ class Ui_MainWindow(object):
         self.button_log_out.setStyleSheet(button_with_image_style_sheet_colored_font)
         self.button_log_out.setText("Log out")
 
-        self.home_pixmap = QtGui.QPixmap("../resources/home.png")
+        self.home_pixmap = QtGui.QPixmap("resources/home.png")
         self.home_pixmap = self.home_pixmap.scaled(QtCore.QSize(40, 40))
         self.icon = QtGui.QIcon(self.home_pixmap)
         self.button_home.setIcon(self.icon)

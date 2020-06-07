@@ -9,7 +9,7 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-from resources.stylesheets import *
+from uis.resources.stylesheets import *
 import requests
 
 
@@ -71,7 +71,7 @@ class Ui_MainNotesPageWindow(object):
         self.retranslateUi(MainWindow)
 
         #set window icon
-        MainWindow.setWindowIcon(QtGui.QIcon('../resources/taco.png'))
+        MainWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
 
         #connect buttons
         self.pushButton_Return.clicked.connect(self.clicked_return)
@@ -83,7 +83,7 @@ class Ui_MainNotesPageWindow(object):
         shortcut.activated.connect(self.clicked_save)
 
         #set icons and stylesheets
-        self.return_pixmap = QtGui.QPixmap("../resources/return.png")
+        self.return_pixmap = QtGui.QPixmap("resources/return.png")
         self.return_pixmap = self.return_pixmap.scaled(QtCore.QSize(32, 32))
         self.icon = QtGui.QIcon(self.return_pixmap)
         self.pushButton_Return.setIcon(self.icon)
@@ -92,7 +92,7 @@ class Ui_MainNotesPageWindow(object):
         self.pushButton_Return.setStyleSheet(button_with_image_style_sheet)
         self.pushButton_save.setStyleSheet(button_for_logging_style_sheet)
 
-        self.logout_pixmap = QtGui.QPixmap("../resources/logout.png")
+        self.logout_pixmap = QtGui.QPixmap("resources/logout.png")
         self.logout_pixmap = self.logout_pixmap.scaled(QtCore.QSize(36, 36))
         self.logout_icon = QtGui.QIcon(self.logout_pixmap)
         self.pushButton_LogOut.setIcon(self.logout_icon)

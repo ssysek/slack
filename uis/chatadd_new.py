@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from resources.stylesheets import *
+from uis.resources.stylesheets import *
 import requests
 
 class Ui_NewChatWindow(object):
@@ -182,20 +182,20 @@ class Ui_NewChatWindow(object):
         self.iconImageAdd(self.button_icon4, "g4")
         self.iconImageAdd(self.button_icon5, "g5")
 
-        NewChatWindow.setWindowIcon(QtGui.QIcon('../resources/taco.png'))
+        NewChatWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         NewChatWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(transparent_background_style_sheet)
         self.button_return.setStyleSheet(button_with_image_style_sheet)
         self.button_submit.setStyleSheet(button_for_logging_style_sheet)
 
-        self.return_pixmap = QtGui.QPixmap("../resources/return.png")
+        self.return_pixmap = QtGui.QPixmap("resources/return.png")
         self.return_pixmap = self.return_pixmap.scaled(QtCore.QSize(32, 32))
         self.icon = QtGui.QIcon(self.return_pixmap)
         self.button_return.setIcon(self.icon)
         self.button_return.setIconSize(QtCore.QSize(32, 32))
 
         self.button_logout.setStyleSheet(button_with_image_style_sheet)
-        self.logout_pixmap = QtGui.QPixmap("../resources/logout.png")
+        self.logout_pixmap = QtGui.QPixmap("resources/logout.png")
         self.logout_pixmap = self.logout_pixmap.scaled(QtCore.QSize(36, 36))
         self.logout_icon = QtGui.QIcon(self.logout_pixmap)
         self.button_logout.setIcon(self.logout_icon)

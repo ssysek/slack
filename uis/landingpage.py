@@ -293,7 +293,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        MainWindow.setWindowIcon(QtGui.QIcon('../resources/taco.png'))
+        MainWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         #tu wstawić logikę strony
         self.button_about.clicked.connect(self.clicked_about)
         self.button_contact.clicked.connect(self.clicked_contact)

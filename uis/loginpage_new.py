@@ -10,7 +10,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import requests
 
-from resources.stylesheets import gradient_style_sheet
+from uis.resources.stylesheets import gradient_style_sheet
 
 logged_id = -1
 logged_name = ""
@@ -187,7 +187,7 @@ class Ui_LoginpageWindow(object):
         QtCore.QMetaObject.connectSlotsByName(LoginpageWindow)
 
         LoginpageWindow.setStyleSheet(gradient_style_sheet)
-        LoginpageWindow.setWindowIcon(QtGui.QIcon('../resources/taco.png'))
+        LoginpageWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         self.button_login.setAutoDefault(True)
         # tu wstawić logikę strony
         self.button_cancel.clicked.connect(self.clicked_cancel)

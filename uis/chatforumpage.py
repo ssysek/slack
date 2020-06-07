@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 import requests
 from PyQt5 import QtCore, QtGui, QtWidgets
-from resources.stylesheets import *
+from uis.resources.stylesheets import *
 
 from uis.notesmainpage import Ui_MainNotesWindow
 from uis.forumadd_new import Ui_NewForumWindow
@@ -153,7 +153,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        MainWindow.setWindowIcon(QtGui.QIcon('../resources/taco.png'))
+        MainWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         MainWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(transparent_background_style_sheet)
 
@@ -166,35 +166,35 @@ class Ui_MainWindow(object):
         self.label_4.setStyleSheet(pretty_small_label_style_sheet)
         self.label_opened_box.setStyleSheet(pretty_big_label_style_sheet)
 
-        self.return_pixmap = QtGui.QPixmap("../resources/return.png")
+        self.return_pixmap = QtGui.QPixmap("resources/return.png")
         self.return_pixmap = self.return_pixmap.scaled(QtCore.QSize(32, 32))
         self.icon = QtGui.QIcon(self.return_pixmap)
         self.button_return.setIcon(self.icon)
         self.button_return.setIconSize(QtCore.QSize(32, 32))
         self.button_return.setStyleSheet(button_with_image_style_sheet)
 
-        self.button_notes.setIcon(QtGui.QIcon('../resources/notes.png'))
+        self.button_notes.setIcon(QtGui.QIcon('resources/notes.png'))
         self.button_notes.setIconSize(QtCore.QSize(100, 100))
         self.button_notes.setStyleSheet(button_with_image_style_sheet)
         self.button_notes.clicked.connect(self.goToNotes)
 
-        self.button_refresh.setIcon((QtGui.QIcon('../resources/refresh.png')))
+        self.button_refresh.setIcon((QtGui.QIcon('resources/refresh.png')))
         self.button_refresh.setIconSize(QtCore.QSize(32,32))
         self.button_refresh.setStyleSheet(button_with_image_style_sheet)
         self.button_refresh.setToolTip("Refresh")
 
-        self.button_add_user.setIcon((QtGui.QIcon('../resources/invite.png')))
+        self.button_add_user.setIcon((QtGui.QIcon('resources/invite.png')))
         self.button_add_user.setIconSize(QtCore.QSize(32,32))
         self.button_add_user.setStyleSheet(button_with_image_style_sheet)
         self.button_add_user.setToolTip("Add new contributor")
 
         self.button_exit_channel.setIcon((QtGui.QIcon(
-            '../resources/exit.png')))
+            'resources/exit.png')))
         self.button_exit_channel.setIconSize(QtCore.QSize(32,32))
         self.button_exit_channel.setStyleSheet(button_with_image_style_sheet)
         self.button_exit_channel.setToolTip("Exit from current channel")
 
-        self.logout_pixmap = QtGui.QPixmap("../resources/logout.png")
+        self.logout_pixmap = QtGui.QPixmap("resources/logout.png")
         self.logout_pixmap = self.logout_pixmap.scaled(QtCore.QSize(36, 36))
         self.logout_icon = QtGui.QIcon(self.logout_pixmap)
         self.button_log_out.setIcon(self.logout_icon)
@@ -325,7 +325,7 @@ class Ui_MainWindow(object):
     def addForumButton(self):
         """creates button for new window for crating new forum"""
         widgetButton = QtWidgets.QPushButton()
-        widgetButton_pixmap = QtGui.QPixmap("../resources/add.png")
+        widgetButton_pixmap = QtGui.QPixmap("resources/add.png")
         widgetButton_pixmap = widgetButton_pixmap.scaled(QtCore.QSize(32, 32))
         widgetButtonicon = QtGui.QIcon(widgetButton_pixmap)
         widgetButton.setIcon(widgetButtonicon)
@@ -339,7 +339,7 @@ class Ui_MainWindow(object):
         :param forum_id: -1 when private chat, valid id otherwise
         """
         widgetButton = QtWidgets.QPushButton()
-        widgetButton_pixmap = QtGui.QPixmap("../resources/add.png")
+        widgetButton_pixmap = QtGui.QPixmap("resources/add.png")
         widgetButton_pixmap = widgetButton_pixmap.scaled(QtCore.QSize(32, 32))
         widgetButtonicon = QtGui.QIcon(widgetButton_pixmap)
         widgetButton.setIcon(widgetButtonicon)

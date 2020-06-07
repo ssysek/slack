@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from uis.chatforumpage import Ui_MainWindow as Ui_ChatWindow
 from uis.mockPage import Ui_MockWindow
 from uis.notesmainpage import Ui_MainNotesWindow
-from resources.stylesheets import *
+from uis.resources.stylesheets import *
 
 class Ui_FeaturesWindow(object):
     def __init__(self, parent=None, user=None):
@@ -144,32 +144,32 @@ class Ui_FeaturesWindow(object):
         self.retranslateUi(FeaturesWindow)
         QtCore.QMetaObject.connectSlotsByName(FeaturesWindow)
 
-        FeaturesWindow.setWindowIcon(QtGui.QIcon('../resources/taco.png'))
+        FeaturesWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         FeaturesWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(transparent_background_style_sheet)
 
 
 
-        self.return_pixmap = QtGui.QPixmap("../resources/return.png")
+        self.return_pixmap = QtGui.QPixmap("resources/return.png")
         self.return_pixmap = self.return_pixmap.scaled(QtCore.QSize(32,32))
         self.icon = QtGui.QIcon(self.return_pixmap)
         self.button_return.setIcon(self.icon)
         self.button_return.setIconSize(QtCore.QSize(32, 32))
 
-        self.store_notes_pixmap = QtGui.QPixmap("../resources/notes.png")
+        self.store_notes_pixmap = QtGui.QPixmap("resources/notes.png")
         self.store_notes_pixmap = self.store_notes_pixmap.scaled(QtCore.QSize(64,64))
         self.store_notes_icon = QtGui.QIcon(self.store_notes_pixmap)
         self.button_store_notes.setIcon(self.store_notes_icon)
         self.button_store_notes.setIconSize(QtCore.QSize(64,64))
 
         self.chat_with_friends_pixmap = QtGui.QPixmap(
-            "../resources/messages.png")
+            "resources/messages.png")
         self.chat_with_friends_pixmap = self.chat_with_friends_pixmap.scaled(QtCore.QSize(64,64))
         self.chat_with_friends_icon = QtGui.QIcon(self.chat_with_friends_pixmap)
         self.button_chat_with_friends.setIcon(self.chat_with_friends_icon)
         self.button_chat_with_friends.setIconSize(QtCore.QSize(64,64))
 
-        self.create_groups_pixmap = QtGui.QPixmap("../resources/groups.png")
+        self.create_groups_pixmap = QtGui.QPixmap("resources/groups.png")
         self.create_groups_pixmap = self.create_groups_pixmap.scaled(QtCore.QSize(64,64))
         self.create_groups_icon = QtGui.QIcon(self.create_groups_pixmap)
         self.button_create_groups.setIcon(self.create_groups_icon)

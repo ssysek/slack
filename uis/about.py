@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from resources.stylesheets import *
+from uis.resources.stylesheets import *
 
 class Ui_MainWindow(object):
     def __init__(self, parent=None):
@@ -201,7 +201,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        MainWindow.setWindowIcon(QtGui.QIcon('../resources/taco.png'))
+        MainWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
         MainWindow.setStyleSheet(gradient_style_sheet)
         self.centralwidget.setStyleSheet(button_with_image_style_sheet_colored_font)
         self.label.setStyleSheet(pretty_big_label_style_sheet)
@@ -209,14 +209,14 @@ class Ui_MainWindow(object):
         self.label_ula_img.setMaximumSize(QtCore.QSize(180, 180))
         self.label_ula_img.setText("")
         self.label_ula_img.setPixmap(QtGui.QPixmap(
-            "../resources/people/ula.jpg"))
+            "resources/people/ula.jpg"))
         self.label_ula_img.setScaledContents(True)
         self.label_ula_img.setAlignment(QtCore.Qt.AlignCenter)
 
         self.label_kuba_img.setMaximumSize(QtCore.QSize(180, 180))
         self.label_kuba_img.setText("")
         self.label_kuba_img.setPixmap(QtGui.QPixmap(
-            "../resources/people/kuba.jpg"))
+            "resources/people/kuba.jpg"))
         self.label_kuba_img.setScaledContents(True)
         self.label_kuba_img.setAlignment(QtCore.Qt.AlignCenter)
         self.label_kuba_img.setStyleSheet("border-radius: 25%;")
@@ -224,40 +224,40 @@ class Ui_MainWindow(object):
         self.label_maciek_s_img.setMaximumSize(QtCore.QSize(180, 180))
         self.label_maciek_s_img.setText("")
         self.label_maciek_s_img.setPixmap(QtGui.QPixmap(
-            "../resources/people/maciek_s.jpg"))
+            "resources/people/maciek_s.jpg"))
         self.label_maciek_s_img.setScaledContents(True)
         self.label_maciek_s_img.setAlignment(QtCore.Qt.AlignCenter)
 
         self.label_maciek_w_img.setMaximumSize(QtCore.QSize(180, 180))
         self.label_maciek_w_img.setText("")
         self.label_maciek_w_img.setPixmap(QtGui.QPixmap(
-            "../resources/people/maciek_w.jpg"))
+            "resources/people/maciek_w.jpg"))
         self.label_maciek_w_img.setScaledContents(True)
         self.label_maciek_w_img.setAlignment(QtCore.Qt.AlignCenter)
 
         self.label_ewa_img.setMaximumSize(QtCore.QSize(180, 180))
         self.label_ewa_img.setText("")
         self.label_ewa_img.setPixmap(QtGui.QPixmap(
-            "../resources/people/ewa.jpg"))
+            "resources/people/ewa.jpg"))
         self.label_ewa_img.setScaledContents(True)
         self.label_ewa_img.setAlignment(QtCore.Qt.AlignCenter)
 
         self.label_gosia_img.setMaximumSize(QtCore.QSize(180, 180))
         self.label_gosia_img.setText("")
         self.label_gosia_img.setPixmap(QtGui.QPixmap(
-            "../resources/people/gosia.jpg"))
+            "resources/people/gosia.jpg"))
         self.label_gosia_img.setScaledContents(True)
         self.label_gosia_img.setAlignment(QtCore.Qt.AlignCenter)
 
         self.label_marek_img.setMaximumSize(QtCore.QSize(180, 180))
         self.label_marek_img.setText("")
         self.label_marek_img.setPixmap(QtGui.QPixmap(
-            "../resources/people/marek.jpg"))
+            "resources/people/marek.jpg"))
         self.label_marek_img.setScaledContents(True)
         self.label_marek_img.setAlignment(QtCore.Qt.AlignCenter)
 
 
-        self.return_pixmap = QtGui.QPixmap("../resources/return.png")
+        self.return_pixmap = QtGui.QPixmap("resources/return.png")
         self.return_pixmap = self.return_pixmap.scaled(QtCore.QSize(32,32))
         self.icon = QtGui.QIcon(self.return_pixmap)
         self.button_return.setIcon(self.icon)

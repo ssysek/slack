@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 #import psycopg2
 import requests
 
-from resources.stylesheets import pretty_big_darker_label_style_sheet, gradient_style_sheet
+from uis.resources.stylesheets import pretty_big_darker_label_style_sheet, gradient_style_sheet
 
 
 class Ui_RegistrationWindow(object):
@@ -216,7 +216,7 @@ class Ui_RegistrationWindow(object):
         self.retranslateUi(RegistrationWindow)
         QtCore.QMetaObject.connectSlotsByName(RegistrationWindow)
 
-        RegistrationWindow.setWindowIcon(QtGui.QIcon('../resources/taco.png'))
+        RegistrationWindow.setWindowIcon(QtGui.QIcon('resources/taco.png'))
 
         self.button_sign_up.setAutoDefault(True)
         self.button_cancel.setAutoDefault(True)
