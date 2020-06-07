@@ -4,7 +4,7 @@ import psycopg2
 from config_handler import get_property
 
 
-def get_user_by_id_param(params):
+def get_user_by_id(params):
     user_id_param = params['user_id'][0]
     connection = psycopg2.connect(user=get_property('db', 'user'),
                                   password=get_property('db', 'pass'),

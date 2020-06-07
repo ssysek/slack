@@ -13,7 +13,7 @@ from requests_on_REST.create_note import create_note
 from requests_on_REST.delete_user import delete_user
 from requests_on_REST.get_all_posts_at_forum import get_all_posts_at_chat
 from requests_on_REST.get_all_users import get_all_users
-from requests_on_REST.get_user_by_id import get_user_by_id_param
+from requests_on_REST.get_user_by_id import get_user_by_id
 from requests_on_REST.read_notes import read_notes
 from requests_on_REST.register import register
 from requests_on_REST.user_forums import user_forums
@@ -55,7 +55,7 @@ class MyServer(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
-            self.wfile.write(bytes(get_user_by_id_param(qs).to_json(
+            self.wfile.write(bytes(get_user_by_id(qs).to_json(
                 orient='records', date_format='iso'), "utf-8"))
 
         elif path == "/chats_inside_forum":
